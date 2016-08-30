@@ -1,4 +1,8 @@
 <?php
+ini_set('session.use_trans_sid', 0);
+
+include 'zzserver.php';
+include 'zzcookie.php';
 
 if (CONFIG_USE_HTTPS && CONFIG_USE_HTTPS_HSTS) {
     // use HTTP Strict Transport Security (HSTS) with a period of three months
@@ -9,9 +13,6 @@ if (CONFIG_USE_HTTPS && CONFIG_USE_HTTPS_HSTS) {
 header('Expires: Mon, 24 Mar 2008 00:00:00 GMT');
 header('Cache-Control: no-cache, no-store');
 
-ini_set('session.use_trans_sid', 0);
-include 'zzserver.php';
-include 'zzcookie.php';
 ob_start();
 
 // BLAETTERN ANFANG
@@ -62,6 +63,8 @@ function setTaskDone($shortName) {
 <meta http-equiv="content-style-type" content="text/css" />
 <meta name="robots" content="index,follow" />
 <link rel="stylesheet" href="/images/Refresh.php?v=234936" type="text/css" />
+<link rel="stylesheet" href="/css/emblem.css" type="text/css" />
+<link rel="stylesheet" href="/css/app.css" type="text/css" />
 <script type="text/javascript" src="/js/drop_down.js"></script>
 <link rel="stylesheet" href="/css/drop_down.css" type="text/css" />
 <link rel="icon" type="image/png" href="/images/favicon.png" />

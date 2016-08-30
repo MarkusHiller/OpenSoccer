@@ -257,7 +257,7 @@ else {
 				echo '>';
 				echo '<td class="link"><a href="/team.php?id='.$getleer3['ids'].'">'.$getleer3['name'].'</a></td>';
 				echo '<td class="link"><a href="/lig_tabelle.php?liga='.$getleer3['liga'].'">'.$getleer3['ligaName'].'</a></td>';
-				echo '<td class="link"><a href="/?newUser=1&amp;selectTeam='.$getleer3['ids'].'&amp;verify='.md5($getleer3['ids']).'" onclick="return confirm(\''._('Bist Du sicher?').'\');">'._('Team wählen').'</a></td>';
+				echo '<td class="link"><a href="/index.php?newUser=1&amp;selectTeam='.$getleer3['ids'].'&amp;verify='.md5($getleer3['ids']).'" onclick="return confirm(\''._('Bist Du sicher?').'\');">'._('Team wählen').'</a></td>';
 				echo '</tr>';
 				$counter++;
 			}
@@ -266,7 +266,7 @@ else {
 		else {
 			echo '<p>'._('Leider sind im Moment keine Jobs als Manager frei - aber es wird nicht lange dauern, dann wirst Du Dein erstes Job-Angebot bekommen. Versprochen! Schau einfach in ein paar Stunden wieder vorbei, dann wird ein Team für Dich frei sein. Man sagt, Du hättest das Zeug zum Top-Manager ...').'</p>';
 		}
-        echo '<p>'.__('Nicht genug Angebote? Du möchtest in einer anderen Liga anfangen? %s', '<a href="/?show_all=1">'._('Klicke hier, um mehr anzuzeigen!').'</a>').'</p>';
+        echo '<p>'.__('Nicht genug Angebote? Du möchtest in einer anderen Liga anfangen? %s', '<a href="/index.php?show_all=1">'._('Klicke hier, um mehr anzuzeigen!').'</a>').'</p>';
 		echo '<p>'._('Wenn Du Fragen hast, helfen wir Dir gerne im Support-Bereich oder im Chat weiter. Beides findest Du im Hauptmenü unter <i>Community</i>.').'</p>';
 	}
 }
@@ -285,7 +285,9 @@ else {
 <p><input type="submit" value="<?php echo _('Jetzt kostenlos mitspielen'); ?>" /></p>
 <p><?php echo _('Du kannst Deine Daten anschließend noch einmal prüfen, sie werden noch nicht gespeichert. Du darfst Dich nur ein einziges Mal registrieren und nur einen Verein haben.'); ?></p>
 </form>
+<h1>Dev Blog</h1>
 <?php
+include_once('devBlog/25_08_2016.html');
 if (isset($_GET['r'])) {
 	$referralID = mysql_real_escape_string(trim(strip_tags($_GET['r'])));
 	if (mb_strlen($referralID) == 32) {

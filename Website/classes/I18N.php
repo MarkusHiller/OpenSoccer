@@ -40,6 +40,10 @@ class I18N {
             throw new Exception('You must call session_start() before you can use the I18N class');
         }
 
+        if ( ! defined( 'LC_MESSAGES' ) ) {
+            define( 'LC_MESSAGES', 5 );
+        }
+
         // get the language from the preference in session or auto-detect it
         if (isset($_SESSION[self::SESSION_LANGUAGE_PREFERENCE])) {
             $language = $_SESSION[self::SESSION_LANGUAGE_PREFERENCE];

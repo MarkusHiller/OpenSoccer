@@ -1,4 +1,7 @@
-<?php include 'zz1.php'; ?>
+<?php 
+include 'zz1.php';
+require_once 'controller/emblemController.php';
+?>
 <title><?php echo _('Tabelle | Liga'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
 <style type="text/css">
 <!--
@@ -173,7 +176,7 @@ while ($sql3 = mysql_fetch_assoc($sql2)) {
 	else {
 		$tmp_liga_cache .= $counter;
 	}
-	$tmp_liga_cache .= '</td><td class="link"><a href="/team.php?id='.$sql3['ids'].'">'.$sql3['name'].' ('.number_format($sql3['aufstellung'], 1, ',', '.').')';
+	$tmp_liga_cache .= '</td><td class="link"><a href="/team.php?id='.$sql3['ids'].'"><img class="emblem-small" src="/images/emblems/'.EmblemController::getEmblemByTeamIds($sql3['ids']).'" /><span>'.$sql3['name'].' ('.number_format($sql3['aufstellung'], 1, ',', '.').')</span>';
 	if ($sql3['vorjahr_liga'] == $liga3['ids']) {
 		if ($sql3['vorjahr_platz'] == 1) { $tmp_liga_cache .= ' '._('[M]'); }
         if ($sql3['pokalrunde'] > 0) { $tmp_liga_cache .= ' [P]'; }

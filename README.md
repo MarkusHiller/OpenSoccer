@@ -1,8 +1,8 @@
-# OpenSoccer
+# OpenSoccer2
 
 Online Soccer Manager
 
-**Live demo:** [www.opensoccer.org](http://www.opensoccer.org/)
+**Live demo:** [www.opensoccer2.org](http://www.opensoccer2.org/)
 
 ## Setup
 
@@ -26,6 +26,8 @@ Online Soccer Manager
     `sudo apt-get install php5-intl`
 
  10. Make sure the directory `cache` is writable
+
+ 11. Make sure the directory `images/emblems` is writable
 
 ## Cron jobs
 
@@ -70,7 +72,7 @@ In order to provide translations for this project, please refer to our [document
 All parts of this project, except for the folder `Website/images`, have been released under the following license:
 
 ```
- Copyright (c) delight.im <info@delight.im>
+ Copyright (c) Markus Hiller <info@opensoccer2.org>
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

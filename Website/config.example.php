@@ -5,6 +5,7 @@ define('CONFIG_DATABASE_HOST', 'localhost');
 define('CONFIG_DATABASE_USERNAME', 'root');
 define('CONFIG_DATABASE_PASSWORD', '');
 define('CONFIG_DATABASE_NAME', 'ballmanager');
+define('CONFIG_TABLE_PREFIX', 'man_');
 
 // general settings
 define('CONFIG_INSTALL_DATE', '2008-09-25'); // the installation date (UTC) of this game instance in YYYY-MM-DD format (ISO 8601)

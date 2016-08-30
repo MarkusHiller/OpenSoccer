@@ -202,6 +202,13 @@ CREATE TABLE `man_cupsieger` (
   KEY `finalgegner` (`finalgegner`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE man_emblems (
+  `team` varchar(32) NOT NULL,
+  `confirmed` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`team`),
+  UNIQUE KEY `team_UNIQUE` (`team`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE `man_eloBuffer` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `teamID` varchar(32) NOT NULL,

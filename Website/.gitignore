@@ -1,3 +1,7 @@
 .idea/
 cache/*.html
 config.php
+images/emblems/*.png
+
+# reinclude exluded files
+!images/emblems/default.png

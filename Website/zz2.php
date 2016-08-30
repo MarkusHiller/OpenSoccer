@@ -7,6 +7,7 @@ function noDemoPopup() {
 </script>
 </head>
 <?php
+require_once 'controller/emblemController.php';
 if (isset($_GET['via_android'])) {
     if ($_GET['via_android'] == 1) {
         $_SESSION['via_android'] = 1;
@@ -166,6 +167,7 @@ if ($_SESSION['last_ligaTausch_check'] < $vor3Minuten) {
 <li class="menueintrag"<?php if (substr($_SERVER['SCRIPT_NAME'], 1, 4) == 'ver_') { echo ' id="current"'; } ?>><a href="/ver_finanzen.php"><?php echo _('Verein'); ?></a>
 	<ul>
 		<li><a href="/ver_finanzen.php"><?php echo _('Finanzen'); ?></a></li>
+		<li><a href="/ver_settings.php"><?php echo _('Einstellungen'); ?></a></li>
 		<li><a href="/ver_buchungen.php"><?php echo _('Buchungen'); ?></a></li>
 		<li><a href="/ver_personal.php"><?php echo _('Personal'); ?></a></li>
 		<li><a href="/ver_stadion.php"><?php echo _('Stadion'); ?></a></li>
@@ -235,6 +237,7 @@ if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') { // fuer
 	echo '<a href="/neueAccounts.php">'._('Neue Accounts').'</a>';
 	echo '<a href="/gruendeFuerLoeschung.php">'._('Gründe für Löschung').'</a>';
 	echo '<a href="/sanktionen.php">'._('Kontrollzentrum').'</a>';
+	echo '<a href="/confirmEmblems.php">'._('Wappen bestätigen').' <span class="badge">'.EmblemController::countUnconfirmedEmblems().'</span></a>';
 	echo '</div>';
 }
 

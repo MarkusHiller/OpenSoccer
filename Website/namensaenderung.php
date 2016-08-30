@@ -48,7 +48,7 @@ else {
 }
 if ($letzteAenderungVor < $changeLockDuration) { // check time limit for team name changing lock
 	$lastTeamNameChange = round($letzteAenderungVor / $changeLockUnit);
-	addInfoBox(__('Der Name Deines Vereins wurde zuletzt vor %1$d %2$d geändert. Du kannst ihn in %3$d %4$d das nächste Mal ändern.', $lastTeamNameChange, $changeLockUnitStr, intval(30-$lastTeamNameChange), $changeLockUnitStr));
+	addInfoBox(__('Der Name Deines Vereins wurde zuletzt vor %1$d %2$s geändert. Du kannst ihn in %3$d %4$s das nächste Mal ändern.', $lastTeamNameChange, $changeLockUnitStr, intval(30-$lastTeamNameChange), $changeLockUnitStr));
 	include 'zz3.php';
 	exit;
 }

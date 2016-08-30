@@ -5,6 +5,9 @@
 <?php echo CONFIG_CONTACT_PAGE_HTML; ?>
 <h1><?php echo _('Danksagungen, Quellen und Autoren') ?></h1>
 <ul>
+<li>Erste Version des Spiels: <a href="https://www.delight.im/">delight-im</a></li>
+</ul>
+<ul>
 <li><?php echo _('Design'); ?> &mdash; <a href="http://www.styleshout.com/">Styleshout</a></li>
 <li><a href="http://famfamfam.com/lab/icons/silk/">&quot;Silk Icons&quot;</a> &mdash; <a href="http://famfamfam.com/">famfamfam</a></li>
 <li><a href="http://famfamfam.com/lab/icons/flags/">&quot;Flags&quot;</a> &mdash; <a href="http://famfamfam.com/">famfamfam</a></li>

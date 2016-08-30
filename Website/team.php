@@ -1,4 +1,7 @@
-<?php include 'zz1.php'; ?>
+<?php 
+include 'zz1.php'; 
+require_once 'controller/emblemController.php';
+?>
 <?php
 if (!isset($_GET['id'])) { exit; }
 function kontoToWort($konto) {
@@ -26,6 +29,7 @@ $sql3 = mysql_fetch_assoc($sql2);
 </style>
 <?php include 'zz2.php'; ?>
 <h1><?php echo _('Team:').' '.$sql3['name']; ?></h1>
+<img class="emblem-big" src="/images/emblems/<?php echo EmblemController::getEmblemByTeamIds($clearid); ?>" />
 	<?php
 	if ($loggedin == 1 && ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin')) {
 		echo '<p style="text-align:right">';
