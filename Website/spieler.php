@@ -227,6 +227,7 @@ if ($loggedin == 1 && $sql3['team'] == $cookie_team && $sql3['leiher'] == 'keine
 					}
 					else {
 					echo '<p>'._('Transfermarkt geschlossen! Der Transfermarkt ist immer jeweils am ersten und letzten Spieltag der Hin- und Rückrunde geöffnet.').'</p>';
+					addInfoBox(__('Transfermarkt geschlossen! Der Transfermarkt ist immer jeweils am ersten und letzten Spieltag der Hin- und Rückrunde geöffnet.');
 					}
 					echo '<form action="/transfermarkt_aktion.php" method="post" accept-charset="utf-8">';
 					echo '<p><select id="aukTyp" name="typ" size="1">';
