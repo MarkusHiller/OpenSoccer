@@ -2,7 +2,7 @@
 
 Online Soccer Manager
 
-**Live demo:** [www.opensoccer2.org](http://www.opensoccer2.org/)
+**Live demo:** [www.db-cloud.de](http://www.db-cloud.de/)
 
 ## Setup
 

@@ -1,0 +1,19 @@
+<?php
+return _('Aufstellungs-Buttons zentral positioniert, Weiteren "Aufstellung speichern"-Button hinzugefügt.');
+return _('LIVE-Zentrale auf der linken Seitenleiste hinzugefügt.');
+return _('Änderungen auf der linken Seitenleiste hinzugefügt.');
+return _('Spieler gewinnen wieder bei Cup- und Liga-Spielen 1,7% bzw. 1,8% Moral hinzu, bei Pokal-Spielen 1,9% und bei Testspielen 1%.');
+return _('Bei "Nächste Spiele" in der linken Seitenleiste "Alle" klicken um zum Kalender zu gelangen.');
+return _('Bei "Top-Manager" in der linken Seitenleiste "Alle" klicken um zum Ranking zu gelangen.');
+return _('Sponsoren-Strafe bei unvollständiger Aufstellung wieder pro fehlendem Spieler auf 1 Mio. zurückgesetzt.');
+return _('Kommentare bei ausverkauftem Stadion hinzugefügt, je nach Zuschauerzahl gestaffelt.');
+return _('Testspiel-Ticketeinnahmen werden zwischen der Heim- und Gastmannschaft aufgeteilt.');
+return _('Spiele-Anordnung in der LIVE-Zentrale nach Ligen-Klasse absteigend sortiert.');
+return _('Chat-Nachrichten werden nach 10 Stunden gelöscht.');
+return _('Spielerverkauf nur jeweils am ersten und letzen Spieltag der Hin- und Rückrunde erlaubt.');
+return _('Spielerverleih jederzeit erlaubt.');
+return _('Verträge-Seite um Spalte mit Mannschaftsteil ergänzt.');
+return _('Stadion-Seite um Baustopp-Hinweis ergänzt.');
+return _('Menü für Vereins-Wappen in App hinzugefügt.');
+return _('WhatsApp-Button in App hinzugefügt um Freunde zu werben.');
+return _('Transfermarkt für Spielerverkauf an andere Vereine erweitert.');
