@@ -52,7 +52,7 @@ if ($cookie_team != '__'.$cookie_id) {
 		addInfoBox(__('Du hast für die aktuelle Saison noch keinen Vertrag mit einem Sponsor abgeschlossen. %s', '<a class="inText" href="/sponsoren.php">'._('Klicke hier, um jetzt einen Vertrag abzuschließen.').'</a>'));
 	}
 	if ($laufende_spiele3 != 0) {
-		addInfoBox(__('LIVE: %1$s-spiele von heute! %2$s', $live_scoring_spieltyp_laeuft, '<a class="inText" href="/liveZentrale.php">&raquo; '._('Zur LIVE-Zentrale').'</a>'));
+		addInfoBox(__('LIVE: %1$s-Spiele von heute! %2$s', $live_scoring_spieltyp_laeuft, '<a class="inText" href="/liveZentrale.php">&raquo; '._('Zur LIVE-Zentrale').'</a>'));
 	}
 	if ($_SESSION['mds_abgestimmt'] == FALSE) {
 		addInfoBox(__('Die Wahl zum &quot;Manager der Saison&quot; läuft! %s', '<a class="inText" href="/manager_der_saison.php">&raquo; '._('Jetzt abstimmen').'</a>'));

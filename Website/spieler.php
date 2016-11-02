@@ -212,19 +212,24 @@ if ($loggedin == 1 && $sql3['team'] == $cookie_team && $sql3['leiher'] == 'keine
 </table>
 <?php
 if ($loggedin == 1 && $sql3['team'] == $cookie_team && $sql3['leiher'] == 'keiner' && $sql3['marktwert'] > 0) {
-	if (($sql3['spiele_verein'] > 5 && $alter_in_jahren < 34) OR ($sql3['spiele'] <= 6 && $alter_in_jahren < 34)) {
+    // Transfermarkt geöffnet: Wenn Spieler älter als 34
+	if ($alter_in_jahren < 34) {
 		if ($_SESSION['transferGesperrt'] == FALSE) {
 			echo '<h1>'._('Transfermarkt').'</h1>';
 			if ($sql3['transfermarkt'] == 0) {
 				echo '<p>'._('Du kannst diesen Spieler auf dem Transfermarkt verkaufen oder ihn zur Leihgabe anbieten. Wenn Du ihn zum Verkauf anbietest, wird er direkt gegen eine Ablöse an ein anderes Team verkauft. Wenn Du den Spieler zur Leihgabe anbietest, kannst Du später noch die Angebote prüfen und entscheiden, ob Du eins davon annimmst.').'</p>';
-				if ($sql3['spiele_verein'] > 5 && $alter_in_jahren < 34) {
+					// Verkauf möglich nur an Spieltagen 1,11,12,22
+					if ((GameTime::getMatchDay() == 1) || (GameTime::getMatchDay() == 11) || (GameTime::getMatchDay() == 12) || (GameTime::getMatchDay() == 22)) {
 					echo '<form action="/transfermarkt_aktion.php" method="post" accept-charset="utf-8">';
 					echo '<p><select id="aukTyp" name="typ" size="1">';
 					echo '<option value="Kauf">'.__('Verkauf für %s €', number_format($sql3['marktwert'], 0, ',', '.')).'</option>';
 					echo '</select> <input type="hidden" name="spieler" value="'.$sql3['ids'].'" /><input type="submit" value="'._('Jetzt verkaufen').'" onclick="return'.noDemoClick($cookie_id, TRUE).' confirm(\''._('Bist Du sicher?').'\')" /></p>';
 					echo '</form>';
-				}
-				if ($sql3['spiele'] <= 6 && $alter_in_jahren < 34) { // 6er-Leihgaben-Sperre
+					}
+					else {
+					echo '<p>'._('Transfermarkt geschlossen! Der Transfermarkt ist immer jeweils am ersten und letzten Spieltag der Hin- und Rückrunde geöffnet.').'</p>';
+					addInfoBox(__('Transfermarkt geschlossen! Der Transfermarkt ist immer jeweils am ersten und letzten Spieltag der Hin- und Rückrunde geöffnet.'));
+					}
 					echo '<form action="/transfermarkt_aktion.php" method="post" accept-charset="utf-8">';
 					echo '<p><select id="aukTyp" name="typ" size="1">';
 					echo '<option value="999999">'._('zur Leihgabe (ohne Prämie)').'</option>';
@@ -237,7 +242,6 @@ if ($loggedin == 1 && $sql3['team'] == $cookie_team && $sql3['leiher'] == 'keine
 					echo '<option value="35000000">'.__('zur Leihgabe (%s Prämie p.P.)', '350.000').'</option>';
 					echo '</select> <input type="hidden" name="spieler" value="'.$sql3['ids'].'" /><input type="submit" value="'._('Anbieten zur Leihgabe').'" onclick="return'.noDemoClick($cookie_id, TRUE).' confirm(\''._('Bist Du sicher?').'\')" /></p>';
 					echo '</form>';
-				}
 			}
 			else {
 				$gcnt1 = "SELECT gebote FROM ".$prefix."transfermarkt WHERE spieler = '2fea04bd67b80c08086b7411bea92f04' LIMIT 0, 1";
@@ -258,7 +262,6 @@ if ($loggedin == 1 && $sql3['team'] == $cookie_team && $sql3['leiher'] == 'keine
 	}
 	else {
 		echo '<h1>'._('Spieler anbieten').'</h1>';
-		echo '<p>'._('Dein Spieler muss für Deinen Verein mindestens 6 Spiele absolviert haben, bevor Du ihn verkaufen kannst. Damit Du ihn verleihen kannst, darf er höchstens 6 Einsätze in der aktuellen Saison haben.').'</p>';
 		echo '<p>'._('Spieler, die über 33 Jahre alt sind, können grundsätzlich nicht mehr verkauft oder verliehen werden.').'</p>';
 	}
 }
