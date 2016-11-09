@@ -21,10 +21,10 @@ class PlayerController {
         }
 
         for ($i = 0; $i < 10; $i++) {
-            $talent = $this->getRandomStrength(8.0, 9.9);
-            $anfangsstaerke = $this->getRandomStrength(0.5, 0.9);
+            $talent = self::getRandomStrength(8.0, 9.9);
+            $anfangsstaerke = self::getRandomStrength(0.5, 0.9);
             $staerke = round(($talent * $anfangsstaerke), 1);
-            $this->createPlayer($vornamen[mt_rand(0, $vor2a)], $nachnamen[mt_rand(0, $nach2a)], $staerke, $talent, mt_rand(6205, 7665), 700000);
+            self::createPlayer($vornamen[mt_rand(0, $vor2a)], $nachnamen[mt_rand(0, $nach2a)], $staerke, $talent, mt_rand(6205, 7665), 700000);
         }
     }
 
