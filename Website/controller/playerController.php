@@ -29,7 +29,9 @@ class PlayerController {
     }
 
     private static function createPlayer($vor, $nach, $staerke, $talent, $wiealt, $gehalt) {
-        $pos = array_rand(['T', 'A', 'M', 'S'], 1);
+        $positions = ['T', 'A', 'M', 'S'];
+        $posIndex = array_rand($positions, 1);
+        $pos = $positions[$posIndex];
         $sql = "INSERT INTO " . CONFIG_TABLE_PREFIX . "spieler (vorname, nachname, staerke, talent, position, wiealt, liga, team, gehalt, vertrag, spiele_verein, jugendTeam) VALUES ('" . $vor . "', '" . $nach . "', " . $staerke . ", " . $talent . ", '" . $pos . "', " . $wiealt . ", 'frei', 'frei', " . $gehalt . ", 0, 0, '')";
         DB::query($sql, false);
         $insertedId = mysql_insert_id();
