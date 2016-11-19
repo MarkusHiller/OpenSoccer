@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . '/../utils/database.php');
 require_once(__DIR__ . '/../utils/utils.php');
+require_once(__DIR__ . '/../Logging/Log.php');
 
 /**
  * Description of ComputerManager
@@ -244,8 +245,13 @@ class ComputerManager {
         $result = DB::query($select, false);
         for ($i = 0; $i < 4; $i++) {
             $ids = mysql_result($result, $i);
-            $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "spieler SET startelf_Liga = ".($i + 7).", startelf_Pokal = ".($i + 7).", startelf_Cup = ".($i + 7)." WHERE ids = '" . $ids . "'";
-            DB::query($sql, false);
+            if ($ids != "") {
+                $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "spieler SET startelf_Liga = " . ($i + 7) . ", startelf_Pokal = " . ($i + 7) . ", startelf_Cup = " . ($i + 7) . " WHERE ids = '" . $ids . "'";
+                DB::query($sql, false);
+            } else {
+                $logMsg = "Not enough players for position A Team: ".$teamIds;
+                Log::logToFile("ComputerManager", $logMsg);
+            }
         }
     }
 
@@ -254,8 +260,13 @@ class ComputerManager {
         $result = DB::query($select, false);
         for ($i = 0; $i < 4; $i++) {
             $ids = mysql_result($result, $i);
-            $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "spieler SET startelf_Liga = ".($i + 3).", startelf_Pokal = ".($i + 3).", startelf_Cup = ".($i + 3)." WHERE ids = '" . $ids . "'";
-            DB::query($sql, false);
+            if ($ids != "") {
+                $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "spieler SET startelf_Liga = " . ($i + 3) . ", startelf_Pokal = " . ($i + 3) . ", startelf_Cup = " . ($i + 3) . " WHERE ids = '" . $ids . "'";
+                DB::query($sql, false);
+            } else {
+                $logMsg = "Not enough players for position M Team: ".$teamIds;
+                Log::logToFile("ComputerManager", $logMsg);
+            }
         }
     }
 
@@ -264,8 +275,13 @@ class ComputerManager {
         $result = DB::query($select, false);
         for ($i = 0; $i < 2; $i++) {
             $ids = mysql_result($result, $i);
-            $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "spieler SET startelf_Liga = ".($i + 1).", startelf_Pokal = ".($i + 1).", startelf_Cup = ".($i + 1)." WHERE ids = '" . $ids . "'";
-            DB::query($sql, false);
+            if ($ids != "") {
+                $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "spieler SET startelf_Liga = " . ($i + 1) . ", startelf_Pokal = " . ($i + 1) . ", startelf_Cup = " . ($i + 1) . " WHERE ids = '" . $ids . "'";
+                DB::query($sql, false);
+            } else {
+                $logMsg = "Not enough players for position S Team: ".$teamIds;
+                Log::logToFile("ComputerManager", $logMsg);
+            }
         }
     }
 

@@ -7,7 +7,7 @@ class Log {
         $time = date('H:i:s');
         $file = __DIR__ . '/' . $date . '.txt';
 
-        $logTxt = '[' . $time . '] >> ' . $err;
+        $logTxt = '[' . $time . '] >> ' . $err . ' - ' . mysql_error();
 
         file_put_contents($file, $logTxt, FILE_APPEND | LOCK_EX);
     }
