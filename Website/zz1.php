@@ -62,15 +62,15 @@ function setTaskDone($shortName) {
 <meta http-equiv="content-script-type" content="text/javascript" />
 <meta http-equiv="content-style-type" content="text/css" />
 <meta name="robots" content="index,follow" />
-<link rel="stylesheet" href="/images/Refresh.php?v=234936" type="text/css" />
-<link rel="stylesheet" href="/css/emblem.css" type="text/css" />
-<link rel="stylesheet" href="/css/app.css?v=01102016" type="text/css" />
-<script type="text/javascript" src="/js/drop_down.js"></script>
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/knockout.min.js"></script>
-<script type="text/javascript" src="/js/ko.mapping.min.js"></script>
-<script type="text/javascript" src="/js/lodash.min.js"></script>
-<script type="text/javascript" src="/js/notify.min.js"></script>
-<link rel="stylesheet" href="/css/drop_down.css" type="text/css" />
-<link rel="icon" type="image/png" href="/images/favicon.png" />
+<link rel="stylesheet" href="images/Refresh.php?v=234936" type="text/css" />
+<link rel="stylesheet" href="css/emblem.css" type="text/css" />
+<link rel="stylesheet" href="css/app.css?v=01102016" type="text/css" />
+<script type="text/javascript" src="js/drop_down.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/knockout.min.js"></script>
+<script type="text/javascript" src="js/ko.mapping.min.js"></script>
+<script type="text/javascript" src="js/lodash.min.js"></script>
+<script type="text/javascript" src="js/notify.min.js"></script>
+<link rel="stylesheet" href="css/drop_down.css" type="text/css" />
+<link rel="icon" type="image/png" href="images/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />

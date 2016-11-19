@@ -12,6 +12,7 @@ define('CONFIG_INSTALL_DATE', '2008-09-25'); // the installation date (UTC) of t
 define('CONFIG_IS_LOCAL_INSTALLATION', false); // whether this is an installation on a local computer (no remote server)
 define('CONFIG_USE_HTTPS', false); // whether to use secure connections over HTTPS (SSL/TLS)
 define('CONFIG_USE_HTTPS_HSTS', false); // whether to guarantee and force HTTPS for a long period of time
+define('CONFIG_DISABLE_LOGGING', false); // set to true if you dont want to log all actions
 
 // site information
 define('CONFIG_SITE_NAME', 'OpenSoccer');
