@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . '/../utils/database.php');
 require_once(__DIR__ . '/../utils/utils.php');
-require_once(__DIR__ . '/../Logging/Log.php');
+require_once(__DIR__ . '/../Logger/Log.php');
 
 /**
  * Description of ComputerManager
