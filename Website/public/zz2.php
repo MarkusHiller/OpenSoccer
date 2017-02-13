@@ -7,8 +7,8 @@
 </script>
 </head>
 <?php
-require_once(__DIR__.'/controller/emblemController.php');
-require_once(__DIR__.'/controller/supportController.php');
+require_once(__DIR__.'/../controller/emblemController.php');
+require_once(__DIR__.'/../controller/supportController.php');
 if (isset($_GET['via_android'])) {
     if ($_GET['via_android'] == 1) {
         $_SESSION['via_android'] = 1;
@@ -27,7 +27,7 @@ if (!isset($_SESSION['via_android'])) {
             echo ' style="display:none;"';
         }
         ?>>
-            <div class="logo_top" style="padding:12px 0;"><img src="/images/logo.png" alt="<?php echo CONFIG_SITE_NAME; ?> - <?php echo _('Online-Fußball-Manager'); ?>" title="<?php echo CONFIG_SITE_NAME; ?> - <?php echo _('Online-Fußball-Manager'); ?>" width="224" style="display:block; border:0; width:224px; height:60px; margin:0 auto;" />
+            <div class="logo_top" style="padding:12px 0;"><img src="/img/logo.png" alt="<?php echo CONFIG_SITE_NAME; ?> - <?php echo _('Online-Fußball-Manager'); ?>" title="<?php echo CONFIG_SITE_NAME; ?> - <?php echo _('Online-Fußball-Manager'); ?>" width="224" style="display:block; border:0; width:224px; height:60px; margin:0 auto;" />
                 <?php
                 $topWidget = '<h1>' . _('Top-Manager') . '</h1>';
                 $topWidget .= '<div class="left-box navBlockLinks">';
@@ -365,11 +365,11 @@ if (!isset($_SESSION['via_android'])) {
                                 if ($nxt3['team1'] == $cookie_teamname) {
                                     $nxt3_gegner = $nxt3['team2'];
                                     $nxt3_ergebnis = $nxt3['ergebnis'];
-                                    $homeGuest = '<img width="16" src="/images/house.png" style="vertical-align:middle;">';
+                                    $homeGuest = '<img width="16" src="/img/house.png" style="vertical-align:middle;">';
                                 } else {
                                     $nxt3_gegner = $nxt3['team1'];
                                     $nxt3_ergebnis = ergebnis_drehen($nxt3['ergebnis']);
-                                    $homeGuest = '<img width="16" src="/images/car.png" style="vertical-align:middle;">';
+                                    $homeGuest = '<img width="16" src="/img/car.png" style="vertical-align:middle;">';
                                 }
                                 // LIVE ODER ERGEBNIS ANFANG
                                 if ($nxt3['typ'] == $live_scoring_spieltyp_laeuft && date('d', time()) == date('d', $nxt3['datum'])) {

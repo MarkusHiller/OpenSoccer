@@ -1,0 +1,21 @@
+<h1>Login</h1>
+<div class="left-box">
+    <form ng-submit="vm.login(username, password)">
+        <p>
+            <label for="lusername">E-Mail / Username:</label>
+            <input type="text" ng-model="username" id="lusername" />
+            <label for="lpassword">Passwort:</label>
+            <input type="password" ng-model="password" id="lpassword" />
+        </p>
+        <p>
+            <input type="submit" value="Einloggen" />
+        </p>
+    </form>
+    <p>
+        <b><a href="#">Passwort vergessen?</a></b>
+    </p>
+</div>
+<h1>Demo-Account</h1>
+<div class="left-box">
+    <p><strong>Username:</strong> Demo<br /><strong>Passwort:</strong> demo</p>
+</div>

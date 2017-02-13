@@ -1,0 +1,11 @@
+<div id="sidebar">
+    <div ng-switch on="vm.isAuthenticated()">
+        <div ng-switch-when="true">
+            <div ng-include="'js/sidebar/memberbar.html'"></div>
+        </div>
+        <div ng-switch-when="false">
+            <div ng-include="'js/sidebar/nonmemberbar.html'" ng-controller="SidebarController as vm"></div>
+        </div>
+    </div>
+    <topmanager></topmanager>
+</div>

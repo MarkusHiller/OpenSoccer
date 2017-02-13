@@ -1,0 +1,17 @@
+{
+  "name": "opensoccer2",
+  "description": "A opensource footballmanager",
+  "version": "2.0.0",
+  "homepage": "https://github.com/MarkusHiller/OpenSoccer2",
+  "license": "GNU General Public License",
+  "private": false,
+  "dependencies": {
+    "angular": "1.2.x",
+    "angular-route": "1.2.x",
+    "angular-loader": "1.2.x",
+    "angular-mocks": "~1.2.x",
+    "html5-boilerplate": "~4.3.0",
+    "angular-ui-router": "~0.2.15",
+    "lodash": "~3.10.1"
+  }
+}

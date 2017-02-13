@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>OpenSoccer2</title>
+
+    <link rel="stylesheet" href="css/Refresh.php?v=234936" type="text/css" />
+    <link href="css/drop_down.css" rel="stylesheet">
+    <link href="css/emblem.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-route/angular-route.js"></script>
+    <script src="libs/lodash/lodash.js"></script>
+
+    <!-- app -->
+    <script src="js/app.module.js"></script>
+
+    <script src="js/core/core.module.js"></script>
+    <script src="js/core/config.js"></script>
+    <script src="js/core/core.route.js"></script>
+    <script src="js/repositories/accountRepository.js"></script>
+
+    <script src="js/header/header.module.js"></script>
+    <script src="js/header/header.controller.js"></script>
+    
+    <script src="js/menu/menu.module.js"></script>
+    <script src="js/menu/menu.controller.js"></script>
+
+    <script src="js/footer/footer.module.js"></script>
+    <script src="js/footer/footer.controller.js"></script>
+    
+    <script src="js/sidebar/sidebar.module.js"></script>
+    <script src="js/sidebar/sidebar.controller.js"></script>
+
+    <script src="js/home/home.module.js"></script>
+    <script src="js/home/home.controller.js"></script>
+
+    <script src="js/login/login.module.js"></script>
+    <script src="js/login/login.controller.js"></script>
+
+    <script src="js/help/help.module.js"></script>
+    <script src="js/help/help.controller.js"></script>
+
+    <script src="js/account/account.module.js"></script>
+    <script src="js/account/account.controller.js"></script>
+
+    <!-- Office -->
+    <script src="js/office/central/central.module.js"></script>
+    <script src="js/office/central/central.controller.js"></script>
+
+</head>
+
+<body ng-app="app">
+    <div id="wrap">
+        <os-header></os-header>
+        <os-menu></os-menu>
+        <div id="content-wrap">
+            <sidebar></sidebar>
+            <ng-view id="main"></ng-view>
+        </div>
+        <div id="footer"></div>
+    </div>
+    <os-footer></os-footer>
+</body>
+
+</html>

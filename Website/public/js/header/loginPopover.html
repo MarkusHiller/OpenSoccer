@@ -1,0 +1,12 @@
+<div class="popover" tabindex="-1" ng-controller="LoginController">
+    <div class="arrow"></div>
+    <div class="popover-content">
+        <form ng-submit="login(user)">
+            <input ng-model="user.email" class="col-md-12" style="margin-top: 5px;" type="text"
+                   placeholder="E-Mail-Adresse"/>
+            <input ng-model="user.password" class="col-md-12" style="margin-top: 5px;margin-bottom:10px;"
+                   type="password" placeholder="Passwort"/>
+            <button type="submit" class="btn btn-primary btn-block" ng-click="login(user)">Anmelden</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div id="menu">
+    <ul id="nav">
+        <div ng-switch on="vm.isAuthenticated()">
+            <div ng-switch-when="true">
+                <div ng-include="'js/menu/membermenu.html'" ng-controller="MenuController as vm"></div> <!-- ng-controller: not good but work for this time -->
+            </div>
+            <div ng-switch-when="false">
+                <div ng-include="'js/menu/nonmembermenu.html'" ng-controller="MenuController as vm"></div>
+            </div>
+        </div>
+    </ul>
+</div>

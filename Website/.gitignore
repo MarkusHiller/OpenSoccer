@@ -1,7 +1,10 @@
 .idea/
+.vscode/
+node_modules/
 cache/*.html
 config.php
-images/emblems/*.png
+img/emblems/*.png
+public/libs/
 
 # reinclude exluded files
 !images/emblems/default.png

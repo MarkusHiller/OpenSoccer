@@ -1,6 +1,9 @@
 <?php
 
-Router::add('/updateAufstellung', 'ApiController@updateAufstellung');
-Router::add('/takeAufstellung', 'ApiController@takeAufstellung');
+// AccountController
+Router::add('/login', 'AccountController@login', false);
 
-Router::add('/createPlayers', 'AdminController@createPlayers');
+Router::add('/updateAufstellung', 'ApiController@updateAufstellung', true);
+Router::add('/takeAufstellung', 'ApiController@takeAufstellung', true);
+
+Router::add('/createPlayers', 'AdminController@createPlayers', true);

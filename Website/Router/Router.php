@@ -4,8 +4,8 @@ class Router {
     
     protected static $_routes = array();
     
-    public static function add($url, $action) {
-        $route = new Route($action);
+    public static function add($url, $action, $ensureAuth) {
+        $route = new Route($action, $ensureAuth);
         self::$_routes[$url] = $route;
     }
     
@@ -18,6 +18,10 @@ class Router {
         }
         
         if(array_key_exists($url, self::$_routes)) {
+            //fix for json data
+            $rest_json = file_get_contents("php://input");
+            $_POST = json_decode($rest_json, true);
+
             self::$_routes[$url]->run();
             return;
         } else {

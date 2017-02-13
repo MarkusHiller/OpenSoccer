@@ -22,7 +22,7 @@ $eintraege_pro_seite = 15; // ANGEBEN DER BEITRAEGE PRO SEITE
 $start = $seite*$eintraege_pro_seite-$eintraege_pro_seite; // ERMITTELN DER STARTZAHL FÜR DIE ABFRAGE
 // BLAETTERN ENDE
 
-require_once(__DIR__.'/classes/I18N.php');
+require_once(__DIR__.'/../classes/I18N.php');
 if (isset($_GET['setLocale'])) {
     I18N::changeLanguage($_GET['setLocale']);
 }
@@ -62,7 +62,7 @@ function setTaskDone($shortName) {
 <meta http-equiv="content-script-type" content="text/javascript" />
 <meta http-equiv="content-style-type" content="text/css" />
 <meta name="robots" content="index,follow" />
-<link rel="stylesheet" href="images/Refresh.php?v=234936" type="text/css" />
+<link rel="stylesheet" href="css/Refresh.php?v=234936" type="text/css" />
 <link rel="stylesheet" href="css/emblem.css" type="text/css" />
 <link rel="stylesheet" href="css/app.css?v=01102016" type="text/css" />
 <script type="text/javascript" src="js/drop_down.js"></script>
@@ -72,5 +72,5 @@ function setTaskDone($shortName) {
 <script type="text/javascript" src="js/lodash.min.js"></script>
 <script type="text/javascript" src="js/notify.min.js"></script>
 <link rel="stylesheet" href="css/drop_down.css" type="text/css" />
-<link rel="icon" type="image/png" href="images/favicon.png" />
+<link rel="icon" type="image/png" href="img/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
