@@ -6,5 +6,7 @@ config.php
 img/emblems/*.png
 public/libs/
 
+npm-debug.log
+
 # reinclude exluded files
 !images/emblems/default.png

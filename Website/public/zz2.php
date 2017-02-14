@@ -66,7 +66,7 @@ if (!isset($_SESSION['via_android'])) {
                     <?php } else { ?>
                         <?php
                         $vor3Minuten = getTimestamp('-3 minutes');
-// PN-ANZAHL ANFANG
+// PN-ANZAHL ANFANG 
                         if (!isset($_SESSION['last_pn_check'])) {
                             $_SESSION['last_pn_check'] = 0;
                         }
@@ -177,9 +177,9 @@ if (!isset($_SESSION['via_android'])) {
                         if ($_SERVER['SCRIPT_NAME'] == '/index.php' OR $_SERVER['SCRIPT_NAME'] == '/notizen.php' OR $_SERVER['SCRIPT_NAME'] == '/protokoll.php' OR $_SERVER['SCRIPT_NAME'] == '/einstellungen.php') {
                             echo ' id="current"';
                         }
-                        ?>><a href="/"><?php echo _('Büro'); ?></a>
+                        ?>><a href="/#/central"><?php echo _('Büro'); ?></a>
                         <ul>
-                            <li><a href="/"><?php echo _('Zentrale'); ?></a></li>
+                            <li><a href="/#/central"><?php echo _('Zentrale'); ?></a></li>
     <?php if ($cookie_team != '__' . $cookie_id) { ?><li><a href="/protokoll.php"><?php echo _('Protokoll'); ?></a></li><?php } ?>
                             <li><a href="/notizen.php"><?php echo _('Notizen'); ?></a></li>
                             <li><a href="/einstellungen.php"><?php echo _('Einstellungen'); ?></a></li>
