@@ -4,7 +4,7 @@ class AccountController {
     
     public function login() {
         $resultModel = new LoginResultModel();
-        
+         
         if(!empty($_POST)) {
             $username = $_POST['username'];
             $password = md5('1'.$_POST['password'].'29');
