@@ -11,12 +11,12 @@ function MenuController($scope, $location, accRepo) {
     }
 
     this.logout = function () {
-        window.localStorage.removeItem("token");
-        $location.path("/confirmRegistration");
+        accRepo.isAuthenticated = false;
+        $location.path("/logout");
     };
 
     this.isAuthenticated = function () {
-        return localStorage.getItem("token") != undefined;
+        return accRepo.isAuthenticated;
     };
 
     this.useDemoAccount = function () {
@@ -31,7 +31,7 @@ function MenuController($scope, $location, accRepo) {
                 console.log(result.msg); //TODO:: display to users
             }
             else {
-                window.localStorage.setItem("token", result.token);
+                accRepo.isAuthenticated = true;
                 $location.path("/central");
             }
         }

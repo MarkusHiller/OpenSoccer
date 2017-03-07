@@ -253,3 +253,7 @@
         top: 15px;
     }
 }
+
+.login-error {
+    color: red;
+}

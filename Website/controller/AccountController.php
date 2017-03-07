@@ -5,10 +5,10 @@ class AccountController {
     public function login() {
         $resultModel = new LoginResultModel();
          
-        if(!empty($_POST)) {
+        if(!empty($_POST) && isset($_POST['username']) && isset($_POST['password'])) {
             $username = $_POST['username'];
             $password = md5('1'.$_POST['password'].'29');
-            
+
             $sql = "SELECT team FROM ".CONFIG_TABLE_PREFIX."users WHERE username = '$username' AND password = '$password' LIMIT 1";
             $result = DB::query($sql, true);
             $count = mysql_num_rows($result);

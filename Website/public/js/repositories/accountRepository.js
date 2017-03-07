@@ -5,6 +5,7 @@
     .factory('accountRepository', ['$http', function ($http) {
 
       var service = {
+        isAuthenticated: false,
         login: function (data, success, error) {
           $http.post('/api.php/login', data).success(success).error(error);
         },

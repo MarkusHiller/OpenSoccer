@@ -5,22 +5,30 @@ angular
 SidebarController.$inject = ['$scope', '$location', 'accountRepository'];
 /* @ngInject */
 function SidebarController($scope, $location, accRepo) {
+
+  this.hasError = false;
+
   this.isAuthenticated = function () {
-    return localStorage.getItem("token") != undefined;
+    return accRepo.isAuthenticated;
   };
-  
+
   this.login = function (username, password) {
     var self = this;
     var loginData = {
       username: username,
       password: password
     };
+
     accRepo.login(loginData, success, error);
+
     function success(result) {
       if (result.err) {
-        console.log(result.msg); //TODO:: display to users
+        self.hasError = true;
+
       } else {
-        window.localStorage.setItem("token", "blub");
+        self.hasError = false;
+        accRepo.isAuthenticated = true;
+
         if (result.hasTeam) {
           $location.path("/central");
         }
@@ -29,8 +37,9 @@ function SidebarController($scope, $location, accRepo) {
         }
       }
     }
+
     function error(error) {
     }
-  };
 
+  };
 }
