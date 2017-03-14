@@ -11,8 +11,9 @@ function MenuController($scope, $location, accRepo) {
     }
 
     this.logout = function () {
-        accRepo.isAuthenticated = false;
-        $location.path("/logout");
+        accRepo.logout(function () {
+            $location.path("/logout");
+        });
     };
 
     this.isAuthenticated = function () {

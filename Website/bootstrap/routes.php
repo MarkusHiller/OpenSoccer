@@ -2,6 +2,7 @@
 
 // AccountController
 Router::add('/login', 'AccountController@login', false);
+Router::add('/logout', 'AccountController@logout', true);
 Router::add('/getLoginState', 'AccountController@getLoginState', false);
 
 //CommonController

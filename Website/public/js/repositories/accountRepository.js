@@ -15,6 +15,11 @@
         login: function (data, success, error) {
           $http.post('/api.php/login', data).success(success).error(error);
         },
+        logout: function(callback) {
+          this.isAuthenticated = false;
+          $http.get('/api.php/logout');
+          callback();
+        },
         changePassword: function (pw, success, error) {
           $http.put(baseUrl + '/changePassword', { password: pw }).success(success).error(error);
         },
