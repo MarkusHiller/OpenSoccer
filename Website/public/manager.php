@@ -1,7 +1,7 @@
 <?php include_once(__DIR__.'/zz1.php'); ?>
 <?php
 if (!isset($_GET['id'])) { exit; }
-require_once(__DIR__.'/classes/Friendlies.php');
+require_once(__DIR__.'/../classes/Friendlies.php');
 $clearedID = mysql_real_escape_string($_GET['id']);
 $sql1 = "SELECT username, regdate, last_login, liga, team, status, infotext FROM ".$prefix."users WHERE ids = '".$clearedID."'";
 $sql2 = mysql_query($sql1);
@@ -160,11 +160,11 @@ else {
 echo '</td></tr>';
 if ($loggedin == 1) {
     if ($_GET['id'] != $cookie_id) {
-        echo '<tr><td colspan="2" class="link"><a href="/post_schreiben.php?id='.$_GET['id'].'"'.noDemoClick($cookie_id).'><img width="16" style="vertical-align: middle;" alt="email" src="/images/email_add.png"> '.__('%s jetzt eine Nachricht schicken', $sql3['username']).'</a></td></tr>';
+        echo '<tr><td colspan="2" class="link"><a href="/post_schreiben.php?id='.$_GET['id'].'"'.noDemoClick($cookie_id).'><img width="16" style="vertical-align: middle;" alt="email" src="/img/email_add.png"> '.__('%s jetzt eine Nachricht schicken', $sql3['username']).'</a></td></tr>';
         if (isset($kontakt_link)) { echo $kontakt_link; }
     }
     if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
-        echo '<tr class="odd"><td colspan="2" class="link"><a href="/sanktionen.php?profileID='.$clearedID.'"><img width="16" style="vertical-align: middle;" alt="report" src="/images/report_add.png"> '.__('Sanktion für %s festlegen', $sql3['username']).'</a></td></tr>';
+        echo '<tr class="odd"><td colspan="2" class="link"><a href="/sanktionen.php?profileID='.$clearedID.'"><img width="16" style="vertical-align: middle;" alt="report" src="/img/report_add.png"> '.__('Sanktion für %s festlegen', $sql3['username']).'</a></td></tr>';
     }
 }
 ?>

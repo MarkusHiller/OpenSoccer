@@ -28,6 +28,11 @@ class AccountController {
         echo json_encode($resultModel);
         return;
     }
+
+    public function getLoginState() {
+        echo json_encode($_SESSION['IsLoggedin']);
+        return;
+    }
     
     public function logout() {
         session_destroy();

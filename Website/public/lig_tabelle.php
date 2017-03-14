@@ -1,31 +1,8 @@
 <?php 
 include_once(__DIR__.'/zz1.php');
-require_once(__DIR__.'/controller/emblemController.php');
+require_once(__DIR__.'/../controller/emblemController.php');
 ?>
 <title><?php echo _('Tabelle | Liga'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
-<style type="text/css">
-<!--
-.team_<?php echo md5($cookie_teamname); ?> {
-	font-weight: bold;
-}
-.tabelle_meister td, .tabelle_meister a {
-	background: #79ca39;
-	color: #000;
-}
-.tabelle_pokal_sicher td, .tabelle_pokal_sicher a {
-	background: #79df39;
-	color: #000;
-}
-.tabelle_abstieg td, .tabelle_abstieg a {
-	background: #ff6a00;
-	color: #fff;
-}
-.tabelle_aufstieg td, .tabelle_aufstieg a {
-	background: #79ca39;
-	color: #000;
-}
--->
-</style>
 <?php
 if (isset($_GET['liga'])) {
     $temp_liga = mysql_real_escape_string(trim(strip_tags($_GET['liga'])));
@@ -126,7 +103,7 @@ $tmp_liga_cache .= '
 <table>
 <thead>
 <tr class="odd">
-<th scope="col"><img src="/images/flaggen/'.$liga3["isoAlpha2"].'.png" alt="" /></th>
+<th scope="col"><img src="/img/flaggen/'.$liga3["isoAlpha2"].'.png" alt="" /></th>
 <th scope="col">'._('Team').'</th>
 <th scope="col">'._('SP').'</th>';
 $tmp_liga_cache .= '<th scope="col">'._('S-U-N').'</th>';
@@ -176,7 +153,7 @@ while ($sql3 = mysql_fetch_assoc($sql2)) {
 	else {
 		$tmp_liga_cache .= $counter;
 	}
-	$tmp_liga_cache .= '</td><td class="link"><a href="/team.php?id='.$sql3['ids'].'"><img class="emblem-small" src="/images/emblems/'.EmblemController::getEmblemByTeamIds($sql3['ids']).'" /><span>'.$sql3['name'].'</span>';
+	$tmp_liga_cache .= '</td><td class="link"><a href="/team.php?id='.$sql3['ids'].'"><img class="emblem-small" src="/img/emblems/'.EmblemController::getEmblemByTeamIds($sql3['ids']).'" /><span>'.$sql3['name'].'</span>';
 	if ($sql3['vorjahr_liga'] == $liga3['ids']) {
 		if ($sql3['vorjahr_platz'] == 1) { $tmp_liga_cache .= ' '._('[M]'); }
         if ($sql3['pokalrunde'] > 0) { $tmp_liga_cache .= ' [P]'; }
