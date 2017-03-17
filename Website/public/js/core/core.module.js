@@ -2,5 +2,5 @@
   'use strict';
 
   angular
-        .module('app.core', ['ngRoute']);
+        .module('os2', ['ngRoute']);
 })();

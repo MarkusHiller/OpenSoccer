@@ -1,6 +1,4 @@
-angular.module('app.footer', [
-    'app.core'
-]).directive("osFooter", function () {
+angular.module('os2').directive("osFooter", function () {
     return {
         restrict: "E",
         controller: "FooterController",

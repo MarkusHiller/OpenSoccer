@@ -2,12 +2,14 @@
     'use strict';
 
     angular
-        .module('app.core').config(configure);
+        .module('os2').config(configure);
 
-    configure.$inject = ['$routeProvider', '$httpProvider'];
+    configure.$inject = ['$routeProvider', '$httpProvider', '$locationProvider'];
 
     /* @ngInject */
-    function configure($routeProvider, $httpProvider) {
+    function configure($routeProvider, $httpProvider, $locationProvider) {
+        $locationProvider.hashPrefix('');
+
         $routeProvider
             .when('/', {
                 templateUrl: 'js/home/home.html',
@@ -20,6 +22,18 @@
             .when('/central', {
                 templateUrl: 'js/office/central/central.html',
                 controller: 'CentralController'
+            })
+            .when('/protocol', {
+                templateUrl: 'js/office/protocol/protocol.html',
+                controller: 'ProtocolController as pc'
+            })
+            .when('/notes', {
+                templateUrl: 'js/office/notes/notes.html',
+                controller: 'NotesController as notes'
+            })
+            .when('/settings', {
+                templateUrl: 'js/office/settings/settings.html',
+                controller: 'SettingsController as vm'
             })
             .when('/help', {
                 templateUrl: 'js/help/help.html',

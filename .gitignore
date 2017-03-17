@@ -4,3 +4,5 @@ Android/.idea/
 nbproject/
 Android/projectFilesBackup/.idea/
 Website/images/emblems/
+Website/npm-debug.log.*
+Website/Logger/*.txt

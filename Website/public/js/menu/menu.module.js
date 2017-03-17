@@ -1,6 +1,4 @@
-angular.module('app.menu', [
-    'app.core'
-]).directive("osMenu", function () {
+angular.module('os2').directive("osMenu", function () {
     return {
         restrict: "E",
         controller: "MenuController as vm",

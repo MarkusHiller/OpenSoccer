@@ -23,7 +23,7 @@ class Route {
     }
     
     private function ensure_Authentification() {
-        if($this->ensureAuthentification && (!isset($_SESSION['isLoggedin']) || !$_SESSION['isLoggedin'])) {
+        if($this->ensureAuthentification && (!isset($_SESSION['IsLoggedin']) || !$_SESSION['IsLoggedin'])) {
             http_response_code(401);
             return false;
         } else {

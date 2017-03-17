@@ -1,5 +1,5 @@
 angular
-  .module('app.sidebar')
+  .module('os2')
   .controller('SidebarController', SidebarController);
 
 SidebarController.$inject = ['$scope', '$location', 'accountRepository'];
@@ -22,17 +22,16 @@ function SidebarController($scope, $location, accRepo) {
     accRepo.login(loginData, success, error);
 
     function success(result) {
-      if (result.err) {
+      if (result.data.err) {
         self.hasError = true;
 
       } else {
         self.hasError = false;
         accRepo.isAuthenticated = true;
 
-        if (result.hasTeam) {
+        if (result.data.hasTeam) {
           $location.path("/central");
-        }
-        else {
+        } else {
           $location.path("/selectTeam");
         }
       }

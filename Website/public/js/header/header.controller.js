@@ -1,5 +1,5 @@
 angular
-  .module('app.header')
+  .module('os2')
   .controller('HeaderController', HeaderController);
 
 HeaderController.$inject = ['$scope', '$location'];

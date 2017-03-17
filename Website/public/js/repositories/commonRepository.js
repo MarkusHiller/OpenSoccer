@@ -1,12 +1,12 @@
 (function () {
   'use strict';
 
-  angular.module('app.core')
+  angular.module('os2')
     .factory('commonRepository', ['$http', function ($http) {
 
       var service = {
         getTopmanager: function (success, error) {
-          $http.get('/api.php/getTopmanager').success(success).error(error);
+          $http.get('/api.php/getTopmanager').then(success, error);
         }
       };
 

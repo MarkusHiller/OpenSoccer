@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.core')
+        .module('os2')
         .run(appRun);
 
     appRun.$inject = ['$location'];

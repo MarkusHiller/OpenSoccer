@@ -1,5 +1,5 @@
 angular
-  .module('app.core')
+  .module('os2')
   .controller('TopmanagerController', TopmanagerController);
 
 TopmanagerController.$inject = ['$scope', 'commonRepository'];
@@ -15,7 +15,7 @@ function TopmanagerController($scope, commonRepo) {
     if (result.err) {
 
     } else {
-      self.manager = result.teams;
+      self.manager = result.data.teams;
     }
   }
 

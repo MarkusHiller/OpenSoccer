@@ -1,6 +1,4 @@
-angular.module('app.sidebar', [
-    'app.core'
-]).directive("sidebar", function () {
+angular.module('os2').directive("sidebar", function () {
     return {
         restrict: "E",
         controller: "SidebarController as vm",

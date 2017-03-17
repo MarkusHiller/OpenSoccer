@@ -4,9 +4,20 @@
 Router::add('/login', 'AccountController@login', false);
 Router::add('/logout', 'AccountController@logout', true);
 Router::add('/getLoginState', 'AccountController@getLoginState', false);
+Router::add('/changePassword', 'AccountController@changePassword', true);
 
 //CommonController
 Router::add('/getTopmanager', 'CommonController@getTopmanager', false);
+
+//GameController
+Router::add('/getNextMatches', 'GameController@getNextMatches', true);
+
+//OfficeController
+Router::add('/getCentralData', 'OfficeController@getCentralData', true);
+Router::add('/getProtocolData', 'OfficeController@getProtocolData', true);
+Router::add('/getNotes', 'OfficeController@getNotes', true);
+Router::add('/saveNote', 'OfficeController@saveNote', true);
+Router::add('/getSettingsData', 'OfficeController@getSettingsData', true);
 
 Router::add('/updateAufstellung', 'ApiController@updateAufstellung', true);
 Router::add('/takeAufstellung', 'ApiController@takeAufstellung', true);

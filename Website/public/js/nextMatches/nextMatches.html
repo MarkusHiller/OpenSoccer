@@ -1,0 +1,7 @@
+<h1>Nächste Spiele</h1>
+<div class="left-box navBlockLinks matchList">
+    <a href="/spielbericht.php?id={{ m.id }}" ng-repeat="m in nm.matches">
+        <img width="16" ng-src="{{ m.location == 'HOME' && '/img/house.png' || '/img/car.png' }}" style="vertical-align:middle;">
+        <span>{{ m.type.substr(0,1) }}: {{ m.team }} ({{m.result}})</span>
+    </a>
+</div>

@@ -5,4 +5,6 @@ class ResultModel {
     
     public $msg;
 
+    public $data;
+
 }

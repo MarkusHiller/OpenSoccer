@@ -1,0 +1,42 @@
+<h1>Protokoll</h1>
+<form action="/protokoll.php" method="get" accept-charset="utf-8">
+    <p>
+        <select name="filter" size="1" style="width:200px">
+            <option value="">&nbsp;-&nbsp;</option>
+            <option value="Spieler">Spieler</option>
+            <option value="Finanzen">Finanzen</option>
+            <option value="Termine">Termine</option>
+            <option value="Transfers">Transfers</option>
+            <option value="Verletzung">Verletzung</option>
+            <option value="Stadion">Stadion</option>
+            <option value="Assistenten">Assistenten</option>
+        </select>
+        <input type="submit" value="Filtern" />
+    </p>
+</form>
+<table>
+    <thead>
+        <tr class="odd">
+            <th scope="col">&nbsp;</th>
+            <th scope="col">Datum</th>
+            <th scope="col">Ereignis</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="p in pc.entries">
+            <td><img alt="{{p.typ}}" src="/img/protokoll/{{ p.typ }}.png"></td>
+            <td>{{ p.zeit }}</td>
+            <td ng-bind-html-unsafe="p.text"></td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    <strong>Hinweis:</strong> Die Ereignisse sind nach Datum geordnet, d.h. die neueste Meldung steht ganz oben.
+</p>
+<div class="pagebar">
+    <span class="this-page">Erste</span>
+    <span class="this-page">Vorherige</span>
+    <span class="this-page">1</span>
+    <span class="this-page">Nächste</span>
+    <span class="this-page">Letzte</span>
+</div>

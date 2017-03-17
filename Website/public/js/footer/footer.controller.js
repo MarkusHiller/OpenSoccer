@@ -1,5 +1,5 @@
   angular
-    .module('app.footer')
+    .module('os2')
     .controller('FooterController', FooterController);
 
   FooterController.$inject = ['$scope', '$location'];

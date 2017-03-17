@@ -1,0 +1,89 @@
+<h1>E-Mail-Adresse</h1>
+<p>Du bist mit der folgenden E-Mail-Adresse registriert:<br />{{ vm.email }}</p>
+
+<h1>Vereinsnamen ändern</h1>
+<p>
+    Du möchtest den Namen Deines Vereins ändern? Dann kannst Du das <a href="/namensaenderung.php">auf dieser Seite</a> tun!
+</p>
+<p>
+    Eine Liste mit <a href="/gesperrteTeamnamen.php">geschützten Namen</a> findest Du hier. Diese Namen darfst Du leider
+    nicht für Dein Team verwenden.
+</p>
+<h1>Managernamen ändern</h1>
+<p>
+    Du möchtest Deinen eigenen Managernamen ändern? Schreibe bitte einfach einem <a href="/wio.php#teamList">Mitglied des Support-Teams</a>    eine kurze Nachricht. Dein Name wird dann so bald wie möglich geändert, wenn er nicht gegen die <a href="/regeln.php">Regeln</a>    verstößt.
+</p>
+<p>
+    <strong>Achtung:</strong> Beim nächsten Login solltest Du Dich mit Deiner E-Mail-Adresse einloggen oder darauf achten,
+    auch den neuen Namen zu versuchen. Das Einloggen mit dem alten Managernamen ist dann nicht mehr möglich.
+</p>
+<h1>Urlaub beantragen</h1>
+<p>
+    Mit dem folgenden Formular kannst Du Urlaub beantragen. In Deiner Urlaubszeit kannst Du nicht automatisch gelöscht werden.
+    Außerdem verwaltet der Computer Deine Aufstellung und verlängert alle Spieler-Verträge, die während Deines Urlaubs auslaufen
+    würden.
+</p>
+<p>
+    <strong>Kurzurlaub (1-10 Tage):</strong> Du hast noch keinen Urlaub beantragt. Du kannst jetzt neuen Urlaub beantragen.
+</p>
+<p>
+    <strong>Langer Urlaub (11-30 Tage):</strong> Du hast noch keinen Urlaub beantragt. Du kannst jetzt neuen Urlaub beantragen.
+</p>
+<form accept-charset="utf-8">
+    <p>Beginn:</p>
+    <p>16.03.2017 (heute)</p>
+    <p>Ende:</p>
+    <select name="urlaub_ende" size="1">
+        <option value="1489767718">17.03.2017</option>
+        <option value="1489854118">18.03.2017</option>
+        <option value="1489940518">19.03.2017</option>
+        <option value="1490026918">20.03.2017</option>
+        <option value="1490113318">21.03.2017</option>
+        <option value="1490199718">22.03.2017</option>
+        <option value="1490286118">23.03.2017</option>
+        <option value="1490372518">24.03.2017</option>
+        <option value="1490458918">25.03.2017</option>
+        <option value="1490541718">26.03.2017</option>
+        <option value="1490628118">27.03.2017</option>
+        <option value="1490714518">28.03.2017</option>
+        <option value="1490800918">29.03.2017</option>
+        <option value="1490887318">30.03.2017</option>
+        <option value="1490973718">31.03.2017</option>
+        <option value="1491060118">01.04.2017</option>
+        <option value="1491146518">02.04.2017</option>
+        <option value="1491232918">03.04.2017</option>
+        <option value="1491319318">04.04.2017</option>
+        <option value="1491405718">05.04.2017</option>
+        <option value="1491492118">06.04.2017</option>
+        <option value="1491578518">07.04.2017</option>
+        <option value="1491664918">08.04.2017</option>
+        <option value="1491751318">09.04.2017</option>
+        <option value="1491837718">10.04.2017</option>
+        <option value="1491924118">11.04.2017</option>
+        <option value="1492010518">12.04.2017</option>
+        <option value="1492096918">13.04.2017</option>
+        <option value="1492183318">14.04.2017</option>
+        <option value="1492269718">15.04.2017</option>
+    </select>
+    <p>
+        <input type="submit" value="Beantragen" onclick="return confirm('Bist Du sicher?')" />
+    </p>
+</form>
+
+<h1>Passwort ändern</h1>
+<p>Mit dem folgenden Formular kannst Du Dein Passwort ändern. Dazu musst Du alle Felder ausfüllen.</p>
+<form ng-submit="vm.changePassword()" accept-charset="utf-8">
+    <p>Altes Passwort:<br /><input type="password" ng-model="vm.pwChangeModel.oldPw" size="50" /></p>
+    <p>Neues Passwort:<br /><input type="password" ng-model="vm.pwChangeModel.newPw" size="50" /></p>
+    <p>Neues Passwort (Bestätigung):<br /><input type="password" ng-model="vm.pwChangeModel.newPwConfirm" size="50" /></p>
+    <p><input type="submit" value="Passwort ändern" /></p>
+</form>
+
+<h1 id="accDel">Account löschen</h1>
+<p>Du bist Dir wirklich sicher, dass Du Deinen Account löschen möchtest? Das ist sehr schade, aber wir akzeptieren das natürlich.</p>
+<p>Wir würden uns freuen, wenn Du uns noch mitteilen würdest, was Dir hier gefallen hat und was noch nicht so gut war.</p>
+<form action="/einstellungen.php" method="post" accept-charset="utf-8">
+    <p>Das war gut:<br /><input type="text" name="accDelPlus" style="width:250px" /></p>
+    <p>Das hat mir nicht gefallen:<br /><input type="text" name="accDelMinus" style="width:250px" /></p>
+    <p><input type="submit" value="Account endgültig löschen" onclick="return confirm('Bist Du sicher?')" /></p>
+</form>

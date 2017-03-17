@@ -1,5 +1,5 @@
 angular
-    .module('app.home')
+    .module('os2')
     .controller('HomeController', HomeController);
 
 HomeController.$inject = ['$scope', '$location'];

@@ -1,5 +1,5 @@
 angular
-    .module('app.menu')
+    .module('os2')
     .controller('MenuController', MenuController);
 
 MenuController.$inject = ['$scope', '$location', 'accountRepository'];
@@ -28,8 +28,8 @@ function MenuController($scope, $location, accRepo) {
         };
         accRepo.login(loginData, success, error);
         function success(result) {
-            if (result.err) {
-                console.log(result.msg); //TODO:: display to users
+            if (result.data.err) {
+                console.log(result.data.msg); //TODO:: display to users
             }
             else {
                 accRepo.isAuthenticated = true;

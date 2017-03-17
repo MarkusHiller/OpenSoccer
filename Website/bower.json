@@ -6,12 +6,13 @@
   "license": "GNU General Public License",
   "private": false,
   "dependencies": {
-    "angular": "1.2.x",
-    "angular-route": "1.2.x",
-    "angular-loader": "1.2.x",
-    "angular-mocks": "~1.2.x",
+    "angular": "^1.6.x",
+    "angular-route": "1.6.x",
+    "angular-loader": "1.6.x",
+    "angular-mocks": "~1.6.x",
     "html5-boilerplate": "~4.3.0",
     "angular-ui-router": "~0.2.15",
-    "lodash": "~3.10.1"
+    "lodash": "~3.10.1",
+    "angular-sanitize": "^1.6.x"
   }
 }

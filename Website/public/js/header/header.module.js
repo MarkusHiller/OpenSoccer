@@ -1,6 +1,4 @@
-angular.module('app.header', [
-    'app.core'
-]).directive("osHeader", function () {
+angular.module('os2').directive("osHeader", function () {
     return {
         restrict: "E",
         controller: "HeaderController",
