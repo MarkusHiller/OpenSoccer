@@ -17,9 +17,9 @@ class DB {
             LOG::logToErrFile($query . "\n");
         }
         
-        if($closeConnection) {
-            static::close();
-        }
+        // if($closeConnection) {
+        //     static::close();
+        // }
         
         return $result;
     }

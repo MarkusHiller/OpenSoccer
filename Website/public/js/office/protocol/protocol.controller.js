@@ -1,6 +1,6 @@
 angular
     .module('os2')
-    .controller('ProtocolController', [ProtocolController]);
+    .controller('ProtocolController', ProtocolController);
 
 ProtocolController.$inject = ['$scope', '$location', 'officeRepository'];
 /* @ngInject */
@@ -13,7 +13,7 @@ function ProtocolController($scope, $location, $officeRepo) {
     $officeRepo.getProtocolData(success, error);
 
     function success(result) {
-        if (result.err) {
+        if (result.data.err) {
 
         } else {
             self.entries = result.data.data;

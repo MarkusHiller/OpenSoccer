@@ -5,6 +5,9 @@ Router::add('/login', 'AccountController@login', false);
 Router::add('/logout', 'AccountController@logout', true);
 Router::add('/getLoginState', 'AccountController@getLoginState', false);
 Router::add('/changePassword', 'AccountController@changePassword', true);
+Router::add('/checkDataForRegistration', 'AccountController@checkDataForRegistration', false);
+Router::add('/registerUser', 'AccountController@registerUser', false);
+Router::add('/changeTeam', 'AccountController@changeTeam', true);
 
 //CommonController
 Router::add('/getTopmanager', 'CommonController@getTopmanager', false);
@@ -18,6 +21,10 @@ Router::add('/getProtocolData', 'OfficeController@getProtocolData', true);
 Router::add('/getNotes', 'OfficeController@getNotes', true);
 Router::add('/saveNote', 'OfficeController@saveNote', true);
 Router::add('/getSettingsData', 'OfficeController@getSettingsData', true);
+
+//TeamController
+Router::add('/getSelectableTeams', 'TeamController@getSelectableTeams', true);
+
 
 Router::add('/updateAufstellung', 'ApiController@updateAufstellung', true);
 Router::add('/takeAufstellung', 'ApiController@takeAufstellung', true);

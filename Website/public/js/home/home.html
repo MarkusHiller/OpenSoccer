@@ -1,25 +1,52 @@
-<h1>Kostenloser Online-Fußball-Manager</h1>
-<p>
-    <strong>Du bist der Trainer. Du bist der Manager. Du hast alles in der Hand!</strong>
-</p>
-<p>
-    + Übernimm Deinen eigenen Fußballklub!<br /> + jeden Tag 1 bis 4 Spiele (Liga + Pokal)<br /> + einfach im Browser managen
-    &mdash; keine Installation<br /> + garantiert kostenlos &mdash; auch in Zukunft<br /> + keine Premium-Accounts &mdash;
-    gleiche Chancen für alle<br />+ schneller Einstieg<br /> + langfristiger Spielspaß<br /> + tolle Community<br /> + wenig
-    Zeitaufwand
-    <br /> + LIVE-Spiele &mdash; spannend bis zum Ende<br /> + Urlaubsvertretung durch den Computer (10-30 Tage)</p>
-<h1>Jetzt registrieren</h1>
-<div class="imtext">
+<div ng-if="!vm.showConfirmRegister">
+    <h1>Kostenloser Online-Fußball-Manager</h1>
     <p>
-        <label for="reg_benutzername">Dein gewünschter Managername:</label>
-        <input type="text" id="reg_benutzername" ng-model="vm.rUsername" style="width:200px" />
-        <label for="reg_email">Deine E-Mail-Adresse:</label>
-        <input type="text" id="reg_email" ng-model="vm.rEmail" style="width:200px" />
+        <strong>Du bist der Trainer. Du bist der Manager. Du hast alles in der Hand!</strong>
     </p>
     <p>
-        <button ng-click="vm.checkDataForRegistration()">Jetzt kostenlos mitspielen</button>
+        + Übernimm Deinen eigenen Fußballklub!<br /> + jeden Tag 1 bis 4 Spiele (Liga + Pokal)<br /> + einfach im Browser
+        managen &mdash; keine Installation<br /> + garantiert kostenlos &mdash; auch in Zukunft<br /> + keine Premium-Accounts
+        &mdash; gleiche Chancen für alle<br />+ schneller Einstieg<br /> + langfristiger Spielspaß<br /> + tolle Community<br
+        /> + wenig Zeitaufwand
+        <br /> + LIVE-Spiele &mdash; spannend bis zum Ende<br /> + Urlaubsvertretung durch den Computer (10-30 Tage)
     </p>
-    <p>Du kannst Deine Daten anschließend noch einmal prüfen, sie werden noch nicht gespeichert. Du darfst Dich nur ein einziges
-        Mal registrieren und nur einen Verein haben.
-    </p>
+    <h1>Jetzt registrieren</h1>
+    <form class="imtext" ng-submit="vm.checkDataForRegistration()">
+        <p>
+            <label for="reg_benutzername">Dein gewünschter Managername:</label>
+            <input type="text" id="reg_benutzername" ng-model="vm.reg.username" style="width:200px" />
+            <label for="reg_email">Deine E-Mail-Adresse:</label>
+            <input type="text" id="reg_email" ng-model="vm.reg.email" style="width:200px" />
+        </p>
+        <p class="error" ng-show="vm.hasError">{{ vm.errorMsg }}</p>
+        <p>
+            <input type="submit" value="Jetzt kostenlos mitspielen">
+        </p>
+        <p>
+            Du kannst Deine Daten anschließend noch einmal prüfen, sie werden noch nicht gespeichert. Du darfst Dich nur ein einziges
+            Mal registrieren und nur einen Verein haben.
+        </p>
+    </form>
+</div>
+<div ng-if="vm.showConfirmRegister">
+    <h1>Registrierung - Daten prüfen</h1>
+    <div class="imtext">
+        <p>
+            Ich möchte als <strong>{{ vm.reg.username }}</strong> mitspielen. Das Spiel ist zu 100% kostenlos. Meine E-Mail-Adresse
+            ist <strong>{{ vm.reg.email }}</strong>. An diese Adresse soll mir jetzt gleich ein Passwort zugeschickt werden,
+            mit dem ich mich dann einloggen kann.
+        </p>
+        <p>
+            Die <a target="_blank" href="/regeln.php#datenschutz">Datenschutzrichtlinien</a> und die <a target="_blank" href="/regeln.php#regeln">Regeln</a>            des Spiels habe ich gelesen und ich akzeptiere diese.
+        </p>
+        <p>
+            Dein Team und die Liga kannst Du Dir beim ersten Login frei aussuchen.
+        </p>
+        <p>
+            <button ng-click="vm.registerUser()">Jetzt mit diesen Daten registrieren</button>
+        </p>
+        <p>
+            Du kannst die Registrierung an dieser Stelle noch <a ng-href="#" ng-click="vm.cancelRegistration()">abbrechen</a>. Deine Daten wurden noch nicht gespeichert.
+        </p>
+    </div>
 </div>

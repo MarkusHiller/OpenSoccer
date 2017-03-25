@@ -3,7 +3,7 @@
 <?php include_once(__DIR__.'/zz2.php'); ?>
 <?php if ($loggedin == 1) { ?>
 <?php
-require_once(__DIR__.'/../controller/teamController.php');
+require_once(__DIR__.'/../controller/TeamController.php');
 if (isset($_POST['accDelPlus']) && isset($_POST['accDelMinus']) && $cookie_id != CONFIG_DEMO_USER) {
 	$accDelPlus = mysql_real_escape_string(trim(strip_tags($_POST['accDelPlus'])));
 	$accDelMinus = mysql_real_escape_string(trim(strip_tags($_POST['accDelMinus'])));

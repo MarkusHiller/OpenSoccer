@@ -13,11 +13,17 @@
         $routeProvider
             .when('/', {
                 templateUrl: 'js/home/home.html',
-                controller: 'HomeController'
+                controller: 'HomeController as vm'
             })
-            .when('/login', {
-                templateUrl: 'js/login/login.html',
-                controller: 'LoginController'
+            .when('/registrationSuccess', {
+                templateUrl: 'js/home/registrationSuccess.html'
+            })
+            .when('/registrationFailed', {
+                templateUrl: 'js/home/registrationFailed.html'
+            })
+            .when('/selectTeam', {
+                templateUrl: 'js/selectTeam/selectTeam.html',
+                controller: 'SelectTeamController as vm'
             })
             .when('/central', {
                 templateUrl: 'js/office/central/central.html',
@@ -25,7 +31,7 @@
             })
             .when('/protocol', {
                 templateUrl: 'js/office/protocol/protocol.html',
-                controller: 'ProtocolController as pc'
+                controller: 'ProtocolController as vm'
             })
             .when('/notes', {
                 templateUrl: 'js/office/notes/notes.html',

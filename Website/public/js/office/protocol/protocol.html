@@ -23,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="p in pc.entries">
+        <tr ng-repeat="p in vm.entries">
             <td><img alt="{{p.typ}}" src="/img/protokoll/{{ p.typ }}.png"></td>
             <td>{{ p.zeit }}</td>
             <td ng-bind-html-unsafe="p.text"></td>

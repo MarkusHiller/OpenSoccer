@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../utils/database.php');
+require_once(__DIR__ . '/../Helpers/database.php');
 
 class SupportController {
 

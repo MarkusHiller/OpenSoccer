@@ -1,7 +1,7 @@
 <?php
 
 class Utils {
-
+    
     public static function Chance_Percent($chance, $universe = 100) {
         $chance = abs(intval($chance));
         $universe = abs(intval($universe));
@@ -10,11 +10,11 @@ class Utils {
         }
         return false;
     }
-
+    
     public static function endOfDay($stempel) {
         return mktime(23, 59, 59, date('m', $stempel), date('d', $stempel), date('Y', $stempel));
     }
-
+    
     public static function getTimestamp($shift = '', $startTime = -1) {
         if ($startTime == -1) {
             $dateTime = new DateTime(); // construct DateTime object with current time
@@ -28,7 +28,7 @@ class Utils {
         }
         return $dateTime->format('U'); // return the UNIX timestamp
     }
-
+    
     public static function setTaskDone($shortName) {
         $teamIds = $_SESSION['team'];
         $userId = $_SESSION['userid'];
@@ -45,5 +45,24 @@ class Utils {
             return FALSE;
         }
     }
-
+    
+    public static function getUserIP() {
+        if (isset($_SERVER['REMOTE_ADDR'])) {
+            return md5($_SERVER['REMOTE_ADDR']);
+        } else {
+            return 'd41d8cd98f00b204e9800998ecf8427e';
+        }
+    }
+    
+    public static function bigintval($value) {
+        $value = trim($value);
+        if (ctype_digit($value)) {
+            return $value;
+        }
+        $value = preg_replace("/[^0-9](.*)$/", '', $value);
+        if (ctype_digit($value)) {
+            return $value;
+        }
+        return 0;
+    }
 }

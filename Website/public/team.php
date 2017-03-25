@@ -1,6 +1,6 @@
 <?php 
 include_once(__DIR__.'/zz1.php'); 
-require_once(__DIR__.'/controller/emblemController.php');
+require_once(__DIR__.'/../controller/emblemController.php');
 ?>
 <?php
 if (!isset($_GET['id'])) { exit; }

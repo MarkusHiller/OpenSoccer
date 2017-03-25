@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/teamController.php');
+require_once(__DIR__ . '/TeamController.php');
 
 class GameController {
     

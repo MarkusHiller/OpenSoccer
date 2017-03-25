@@ -1,7 +1,7 @@
 <?php 
 include_once(__DIR__.'/zz1.php'); 
 require_once(__DIR__.'/controller/emblemController.php');
-require_once(__DIR__.'/controller/teamController.php');
+require_once(__DIR__.'/controller/TeamController.php');
 require_once(__DIR__.'/controller/userController.php');
 include_once(__DIR__.'/zz2.php');
 ?>

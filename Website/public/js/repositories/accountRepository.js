@@ -15,7 +15,7 @@
         login: function (data, success, error) {
           $http.post('/api.php/login', data).then(success, error);
         },
-        logout: function(callback) {
+        logout: function (callback) {
           this.isAuthenticated = false;
           $http.get('/api.php/logout');
           callback();
@@ -23,10 +23,23 @@
         changePassword: function (data, success, error) {
           $http.put('/api.php/changePassword', data).then(success, error);
         },
+        changeTeam: function (data, success) {
+          $http.post('/api.php/changeTeam', data).then(success, error);
+        },
         forgotPassword: function (data, success, error) {
           $http.post(baseUrl + '/forgotPassword', data).then(success, error);
+        },
+        checkDataForRegistration: function (data, success, error) {
+          $http.post('/api.php/checkDataForRegistration', data).then(success, error);
+        },
+        registerUser: function (data, success) {
+          $http.post('/api.php/registerUser', data).then(success, error);
         }
       };
+
+      function error() {
+
+      }
 
       init();
 

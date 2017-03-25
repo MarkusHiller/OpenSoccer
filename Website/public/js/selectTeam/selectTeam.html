@@ -1,0 +1,26 @@
+<div ng-if="!vm.teamName">
+<h1>Herzlich Willkommen, {{vm.username}}!</h1>
+<p>Du bist zwar ein Neuling, aber man sagt, du hättest großes Talent. Deshalb haben wir hier ein paar Job-Angebote für Dich.
+    Such Dir einfach ein Team aus und deine Reise als Manager kann beginnen:</p>
+<table>
+    <thead>
+        <tr class="odd">
+            <th scope="col">Team</th>
+            <th scope="col">Liga</th>
+            <th scope="col">Aktion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="team in vm.selectableTeams" ng-class-odd="'odd'">
+            <td class="link"><a ng-href="/team.php?id={{team.ids}}">{{team.name}}</a></td>
+            <td class="link"><a href="/lig_tabelle.php?liga={{team.liga}}">{{team.ligaName}}</a></td>
+            <td class="link"><a href ng-click="vm.chooseTeam(team)">Team wählen</a></td>
+        </tr>
+    </tbody>
+</table>
+<p>Nicht genug Angebote? Du möchtest in einer anderen Liga anfangen? <a href="/?show_all=1">Klicke hier, um mehr anzuzeigen!</a></p>
+<p>Wenn Du Fragen hast, helfen wir Dir gerne im Support-Bereich oder im Chat weiter. Beides findest Du im Hauptmenü unter <i>Community</i>.</p>
+</div>
+<div ng-if="vm.teamName">
+    <div ng-include="'js/selectTeam/selectTeamCompleted.html'"></div>
+</div>
