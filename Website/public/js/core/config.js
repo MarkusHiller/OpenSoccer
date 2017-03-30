@@ -27,7 +27,7 @@
             })
             .when('/central', {
                 templateUrl: 'js/office/central/central.html',
-                controller: 'CentralController'
+                controller: 'CentralController as vm'
             })
             .when('/protocol', {
                 templateUrl: 'js/office/protocol/protocol.html',

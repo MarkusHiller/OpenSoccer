@@ -7,6 +7,7 @@ SelectTeamController.$inject = ['$scope', '$location', 'accountRepository', 'tea
 function SelectTeamController($scope, $location, accRepo, teamRepo) {
     var vm = this;
     vm.teamName = undefined;
+    vm.username = accRepo.username;
     vm.selectableTeams = [];
 
     teamRepo.getSelectableTeams(success);

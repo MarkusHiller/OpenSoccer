@@ -65,4 +65,12 @@ class Utils {
         }
         return 0;
     }
+    
+    public static function einsatz_in_auktionen($teamIds) {
+        $sql1 = "SELECT SUM(betrag_highest) AS einsatz FROM ". CONFIG_TABLE_PREFIX ."transfermarkt WHERE bieter_highest = '".$teamIds."'";
+        $sql2 = mysql_query($sql1);
+        if (mysql_num_rows($sql2) == 0) { return 0; }
+        $sql3 = mysql_fetch_assoc($sql2);
+        return intval($sql3['einsatz']);
+    }
 }

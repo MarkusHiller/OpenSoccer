@@ -5,25 +5,36 @@ angular
 ProtocolController.$inject = ['$scope', '$location', 'officeRepository'];
 /* @ngInject */
 function ProtocolController($scope, $location, $officeRepo) {
-    var self = this;
-    this.entries = [];
-    this.currentPage;
-    this.pages;
+    var vm = this;
+    vm.entries = [];
+    vm.currentPage = 1;
+    vm.pages = 1;
+    vm.selectedType = '';
 
-    $officeRepo.getProtocolData(success, error);
+    vm.page = function (page) {
+        if (page < 1 || page > vm.pages) return;
+        vm.currentPage = page;
+        vm.loadData();
+    }
 
-    function success(result) {
-        if (result.data.err) {
+    vm.loadData = function () {
+        var filter = {
+            page: vm.currentPage,
+            type: vm.selectedType
+        }
+        $officeRepo.getProtocolData(filter, success);
 
-        } else {
-            self.entries = result.data.data;
-            self.currentPage = result.data.currentPage;
-            self.pages = result.data.pages;
+        function success(result) {
+            if (result.data.err) {
+
+            } else {
+                vm.entries = result.data.data;
+                vm.currentPage = result.data.currentPage;
+                vm.pages = result.data.pages;
+            }
         }
     }
 
-    function error(result) {
-
-    }
+    vm.loadData();
 
 }

@@ -1,4 +1,4 @@
-<h1>Dein Verein: --</h1>
+<h1>Dein Verein: {{vm.data.name}}</h1>
 <p style="float:left; text-align:left; margin-bottom:0;">
     <a class="pagenava" href="/freundeWerben.php">Freunde einladen</a>
 </p>
@@ -15,54 +15,54 @@
     <tbody>
         <tr>
             <td>Liga</td>
-            <td>--</td>
+            <td>{{vm.data.rank}}. Platz</td>
         </tr>
         <tr class="odd">
             <td>Pokal</td>
-            <td>--</td>
+            <td>{{ vm.getPokalRound(vm.data.pokal) }}</td>
         </tr>
         <tr>
             <td>Cup</td>
-            <td>--</td>
+            <td>{{ vm.getCupRound(vm.data.cuprunde) }}</td>
         </tr>
         <tr class="odd">
             <td>RKP</td>
-            <td>--</td>
+            <td>{{vm.data.elo | number: 0}} Punkte</td>
         </tr>
         <tr>
             <td>Kontostand</td>
-            <td>--</td>
+            <td>{{vm.data.konto | number: 0}} €</td>
         </tr>
         <tr class="odd">
             <td>Einsatz in Auktionen</td>
-            <td>--</td>
+            <td>{{vm.data.einsatzInAuktionen | number: 0}} €</td>
         </tr>
         <tr>
             <td>Verfügbares Geld</td>
-            <td>--</td>
+            <td>{{vm.data.konto - vm.data.einsatzInAuktionen | number: 0}} €</td>
         </tr>
         <tr class="odd">
             <td>Aufstellungsstärke</td>
-            <td><img src="img/balken/50.png" alt=""></td>
+            <td><img src="img/balken/{{vm.getAufstellungsstaerke(vm.data.aufstellung)}}.png" alt=""></td>
         </tr>
         <tr>
             <td>Kaderstärke</td>
-            <td><img src="img/balken/46.png" alt=""></td>
+            <td><img src="img/balken/{{vm.getKaderstaerke(vm.data.staerke)}}.png" alt=""></td>
         </tr>
         <tr class="odd">
             <td>Jugendabteilung</td>
-            <td class="link"><a href="/kader.php#besetzung">--</a></td>
+            <td class="link"><a href="/kader.php#besetzung">{{ vm.getPosToSearchName(vm.data.posToSearch) }}</a></td>
         </tr>
         <tr>
             <td>Nächster Jugendspieler</td>
-            <td>--</td>
+            <td>{{vm.data.nextYouth}} (Spieltag {{vm.data.nextYouthDay}})</td>
         </tr>
         <tr class="odd">
             <td>Testspiele</td>
-            <td class="link"><a href="/testspiele.php">--</a></td>
+            <td class="link"><a href="/testspiele.php">{{ vm.testspielTrans(vm.data.wantTests) }}</a></td>
         </tr>
         <tr>
-            <td colspan="2"><img style="vertical-align: middle;" alt="Systemzeit" src="img/clock.gif" width="16">--</td>
+            <td colspan="2"><img style="vertical-align: middle;" alt="Systemzeit" src="img/clock.gif" width="16"> {{vm.data.serverTime}}</td>
         </tr>
     </tbody>
 </table>
@@ -79,24 +79,26 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td class="link"><a href="">--</a></td>
-            <td>--</td>
-            <td>--</td>
-            <td>--</td>
-        </tr>
-        <tr class="odd">
-            <td class="link"><a href="">--</a></td>
-            <td>--</td>
-            <td>--</td>
-            <td>--</td>
+        <tr ng-repeat="player in vm.data.shortContracts" ng-class-even="'odd'">
+            <td class="link"><a href="/spieler.php?id={{player.ids}}">{{player.vorname}} {{player.nachname}}</a></td>
+            <td>{{Math.floor(player.wiealt / 365)}}</td>
+            <td>{{player.vertrag}}</td>
+            <td>{{player.gehalt | number: 0}} €</td>
         </tr>
     </tbody>
 </table>
 <h1>Suche nach Teams oder Managern</h1>
-<form action="/index.php" method="get" accept-charset="utf-8">
-    <p><input type="text" name="sucheName" style="width:200px" value=""> <input type="submit" value="Suchen"></p>
+<form ng-submit="vm.searchForTeamOrManager()" accept-charset="utf-8">
+    <p>
+        <input type="text" ng-model="vm.searchInput" style="width:200px" value="">
+        <input type="submit" value="Suchen">
+    </p>
 </form>
+<h1 ng-if-start="vm.showSearchResult">Suchergebnisse (maximal 10/10)</h1>
+<ul ng-if-end>
+    <li ng-repeat="team in vm.matchedTeams"><strong>Team:</strong> <a href="/team.php?id={{team.ids}}">{{team.name}}</a></li>
+    <li ng-repeat="manager in vm.matchedManager"><strong>Manager:</strong> <a href="/manager.php?id={{manager.ids}}">{{manager.username}}</a></li>
+</ul>
 <h1>Fairplay und Multi-Accounts</h1>
 <p>Wie im Sport genießt auch bei uns das Fairplay absolute Priorität.</p>
 <p>Pro Person ist nur ein Account erlaubt. Bekannte, Freunde oder die geliebte Familie dürfen natürlich vom selben Internet-Anschluss

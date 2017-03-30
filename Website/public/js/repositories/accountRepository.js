@@ -12,7 +12,9 @@
 
       var service = {
         isAuthenticated: false,
+        username: '',
         login: function (data, success, error) {
+          this.username = data.username;
           $http.post('/api.php/login', data).then(success, error);
         },
         logout: function (callback) {

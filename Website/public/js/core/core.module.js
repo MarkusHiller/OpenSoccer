@@ -2,5 +2,5 @@
   'use strict';
 
   angular
-        .module('os2', ['ngRoute']);
+        .module('os2', ['ngRoute', 'ngSanitize']);
 })();

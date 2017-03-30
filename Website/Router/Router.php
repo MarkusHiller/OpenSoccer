@@ -10,13 +10,12 @@ class Router {
     }
     
     public static function dispatch() {
-        if(isset($_SERVER['REQUEST_URI'])) {
-            $split = explode('/', $_SERVER['REQUEST_URI']);
-            $url = '/'.end($split);
+        if(isset($_SERVER['PATH_INFO'])) {
+            $url = $_SERVER['PATH_INFO'];
         } else {
             $url = '/';
         }
-        
+        //var_dump($_SERVER);
         if(array_key_exists($url, self::$_routes)) {
             //fix for json data
             $rest_json = file_get_contents("php://input");
