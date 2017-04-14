@@ -257,3 +257,35 @@
 .error {
     color: red;
 }
+
+.page {
+    padding: 2px 6px;
+    border: solid 1px #ddd;
+    background: #fff;
+    cursor: pointer;
+    color: #4F82CB
+}
+
+.page:hover {
+    color: #fff;
+    background: #0063dc;
+    border-color: #036;
+}
+
+.page.deactivated {
+    background: #f2f2f2;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    cursor: default;
+}
+
+.os-note {
+    width: 500px;
+    border: 1px solid #000;
+    margin: 10px;
+}
+
+.os-note span {
+    cursor: pointer;
+}

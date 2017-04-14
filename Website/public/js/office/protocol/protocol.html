@@ -34,9 +34,9 @@
     <strong>Hinweis:</strong> Die Ereignisse sind nach Datum geordnet, d.h. die neueste Meldung steht ganz oben.
 </p>
 <div class="pagebar">
-    <span class="this-page" ng-click="vm.page(1)">Erste</span>
-    <span class="this-page">Vorherige</span>
-    <span class="this-page" ng-repeat="i in [] | pages:vm.pages" ng-click="vm.page(i)">{{i}}</span>
-    <span class="this-page">Nächste</span>
-    <span class="this-page" ng-click="vm.page(vm.pages)">Letzte</span>
+    <span class="page" ng-click="vm.page(1)" ng-class="{deactivated: vm.currentPage == 1}">Erste</span>
+    <span class="page" ng-class="{deactivated: (vm.currentPage - 1) < 1}">Vorherige</span>
+    <span class="page" ng-repeat="i in [] | pages:vm.pages" ng-click="vm.page(i)" ng-class="{deactivated: vm.currentPage == i}">{{i}}</span>
+    <span class="page" ng-class="{deactivated: (vm.currentPage + 1) > vm.pages}">Nächste</span>
+    <span class="page" ng-click="vm.page(vm.pages)" ng-class="{deactivated: (vm.currentPage + 1) > vm.pages}">Letzte</span>
 </div>

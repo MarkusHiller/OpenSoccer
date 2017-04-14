@@ -14,6 +14,9 @@
         getNotes: function (success, error) {
           $http.get('/api.php/getNotes').then(success, error);
         },
+        delNote: function (data, success) {
+          $http.delete('/api.php/delNote', { params: data }).then(success, error);
+        },
         saveNote: function (data, success, error) {
           $http.post('/api.php/saveNote', data).then(success, error);
         },

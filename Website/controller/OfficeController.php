@@ -85,6 +85,13 @@ class OfficeController {
     
     public function GetNotes() {
         $resultModel = new ResultModel();
+        $userIds = $_SESSION['UserIds'];
+        
+        $sql = "SELECT id, text FROM " . CONFIG_TABLE_PREFIX . "users_notizen WHERE user = '$userIds' LIMIT 0, 25";
+        $result = DB::query($sql, false);
+        while($note = mysql_fetch_object($result)) {
+            $resultModel->data[] = $note;
+        }
         
         $resultModel->err = false;
         
@@ -119,10 +126,28 @@ class OfficeController {
         $userIds = $_SESSION['UserIds'];
         $note = $_POST['note'];
         
-        $sql = "INSERT INTO ". CONFIG_TABLE_PREFIX ."users_notizen (user, text, textColor, backgroundColor) VALUES ('".$userIds."', '".$note."', 'black', '#FFFFFF')";
-        $result = DB::query($sql, true);
+        $sql = "INSERT INTO ". CONFIG_TABLE_PREFIX ."users_notizen (user, text, textColor, backgroundColor) VALUES ('".$userIds."', '".$note."', '', '')";
+        $result = DB::query($sql, false);
         
         $resultModel->err = false;
+        $resultModel->data = mysql_insert_id();
+        echo json_encode($resultModel);
+        return;
+    }
+    
+    public function DelNote() {
+        $resultModel = new ResultModel();
+        $userIds = $_SESSION['UserIds'];
+        $noteId = $_GET['noteId'];
+        
+        $sql = "DELETE FROM ". CONFIG_TABLE_PREFIX ."users_notizen WHERE user = '$userIds' AND id = $noteId";
+        $result = DB::query($sql, false);
+        
+        if(mysql_affected_rows() > 0) {
+            $resultModel->err = false;
+        } else {
+            $resultModel->err = true;
+        }  
         
         echo json_encode($resultModel);
         return;

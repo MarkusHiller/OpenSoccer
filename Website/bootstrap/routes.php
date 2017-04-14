@@ -19,6 +19,7 @@ Router::add('/getNextMatches', 'GameController@getNextMatches', true);
 Router::add('/getCentralData', 'OfficeController@getCentralData', true);
 Router::add('/getProtocolData', 'OfficeController@getProtocolData', true);
 Router::add('/getNotes', 'OfficeController@getNotes', true);
+Router::add('/delNote', 'OfficeController@delNote', true);
 Router::add('/saveNote', 'OfficeController@saveNote', true);
 Router::add('/getSettingsData', 'OfficeController@getSettingsData', true);
 Router::add('/searchForTeamOrManager', 'OfficeController@searchForTeamOrManager', true);

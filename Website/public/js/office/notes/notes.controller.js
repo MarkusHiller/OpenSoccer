@@ -5,25 +5,44 @@ angular
 NotesController.$inject = ['$scope', '$location', 'officeRepository'];
 /* @ngInject */
 function NotesController($scope, $location, $officeRepo) {
+    var vm = this;
+    vm.notes = [];
+    vm.note = "";
 
-    this.saveNote = function (form) {
-        $officeRepo.saveNote('', success, error);
+    vm.saveNote = function (note) {
+        $officeRepo.saveNote({ note: note }, success);
         function success(result) {
+            if (result.data.err) {
 
-        }
-
-        function error() {
-
+            } else {
+                vm.notes.push({ id: result.data.data, text: note });
+                vm.note = "";
+            }
         }
     }
 
-    $officeRepo.getNotes(success, error);
+    vm.delNote = function (note) {
+        var result = confirm("Möchtest du diese Notiz wirklichlöschen?");
+        if(result == false) return;
+        $officeRepo.delNote({ noteId: note.id }, success);
+        function success(result) {
+            if (result.data.err) {
+
+            } else {
+                var index = vm.notes.indexOf(note);
+                vm.notes.splice(index, 1);
+            }
+        }
+    }
+
+    $officeRepo.getNotes(success);
 
     function success(result) {
+        if (result.data.err) {
 
-    }
-
-    function error(result) {
+        } else {
+            vm.notes = result.data.data;
+        }
 
     }
 

@@ -3,11 +3,15 @@
     <strong>Hinweis:</strong> Es werden immer nur die letzten 25 Notizen angezeigt.
 </p>
 <h1>Neue Notiz erstellen</h1>
-<form accept-charset="utf-8" ng-submit="notes.saveNote(this)">
+<form accept-charset="utf-8" ng-submit="vm.saveNote(vm.note)">
     <p>
-        <textarea name="note"></textarea>
+        <textarea ng-model="vm.note"></textarea>
     </p>
     <p>
         <input type="submit" value="Speichern">
     </p>
 </form>
+
+<div class="os-note" ng-repeat="note in vm.notes">
+    <p><span ng-click="vm.delNote(note)">[ X ]</span> {{note.text}}</p>
+</div>

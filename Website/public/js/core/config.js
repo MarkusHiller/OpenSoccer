@@ -35,7 +35,7 @@
             })
             .when('/notes', {
                 templateUrl: 'js/office/notes/notes.html',
-                controller: 'NotesController as notes'
+                controller: 'NotesController as vm'
             })
             .when('/settings', {
                 templateUrl: 'js/office/settings/settings.html',
