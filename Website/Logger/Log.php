@@ -26,4 +26,18 @@ class Log {
         file_put_contents($file, $logTxt, FILE_APPEND | LOCK_EX);
     }
 
+    public static function logExceptionToFile($filename, $e) {
+        if (CONFIG_DISABLE_LOGGING) {
+            return;
+        }
+        
+        $date = date('Y-m-d');
+        $time = date('H:i:s');
+        $file = __DIR__ . '/' . $filename . '.txt';
+
+        $logTxt = '[' . $date . ' ' . $time . '] >> ' . $e . "\n";
+
+        file_put_contents($file, $logTxt, FILE_APPEND | LOCK_EX);
+    }
+
 }

@@ -3,3 +3,5 @@ Android/.idea/
 /nbproject/private/
 nbproject/
 Android/projectFilesBackup/.idea/
+Website/node_modules/
+Website/public/libs/
