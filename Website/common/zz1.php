@@ -3,6 +3,8 @@ ini_set('session.use_trans_sid', 0);
 
 include_once(__DIR__.'/zzserver.php');
 include_once(__DIR__.'/zzcookie.php');
+require(__DIR__ . '/../vendor/autoload.php');
+$core = new Dwoo\Core();
 
 if (CONFIG_USE_HTTPS && CONFIG_USE_HTTPS_HSTS) {
     // use HTTP Strict Transport Security (HSTS) with a period of three months
