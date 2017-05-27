@@ -1,4 +1,5 @@
-<?php include_once(__DIR__.'/../common/zz1.php');
+<?php 
+include_once(__DIR__.'/../common/zz1.php');
 
 if (!isset($_GET['id'])) { 
 	exit; 
@@ -44,12 +45,11 @@ if ($loggedin == 1) {
 else {
     $watch3 = 0;
 }
-?>
-<title><?php echo __('Spieler: %1$s %2$s', $sql3['vorname'], $sql3['nachname']); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
 
-<?php include_once(__DIR__.'/../common/zz2.php');
+echo '<title>'.__('Spieler: %1$s %2$s', $sql3['vorname'], $sql3['nachname']).' - '.CONFIG_SITE_NAME.'</title>';
 
-//In Template auslagern anfang
+include_once(__DIR__.'/../common/zz2.php');
+
 if (isset($_GET['action'])) {
 	if ($_GET['action'] == 'setWatching') {
 		setTaskDone('watch_player');
