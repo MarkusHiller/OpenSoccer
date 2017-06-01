@@ -1,4 +1,5 @@
 <?php 
+require_once(__DIR__.'/../utils/database.php');
 include_once(__DIR__.'/../common/zz1.php');
 
 if (!isset($_GET['id'])) { 
@@ -37,13 +38,55 @@ if ($sql3['transfermarkt'] < 999998) { // nur beim Verkauf
 	$sql3['transfermarkt'] = $tskwert;
 }
 // TRANSFERSTATUS KORRIGIEREN ENDE
+
 if ($loggedin == 1) {
     $watch1 = "SELECT COUNT(*) FROM ".CONFIG_TABLE_PREFIX."transfermarkt_watch WHERE team = '".$cookie_team."' AND spieler_id = '".$sql3['ids']."'";
     $watch2 = mysql_query($watch1);
     $watch3 = mysql_result($watch2, 0);
-}
-else {
+
+	$sql = "SELECT konto FROM ".CONFIG_TABLE_PREFIX."teams WHERE ids = '".$cookie_team."' LIMIT 1";
+	$result = DB::query($sql, FALSE);
+	$konto = mysql_result($result, 0);
+} else {
     $watch3 = 0;
+	$konto = 0;
+}
+
+if ($sql3['team'] != $cookie_team) {
+	$sql = "SELECT COUNT(*) FROM ".CONFIG_TABLE_PREFIX."users WHERE team = '".$sql3['team']."'";
+	$result = DB::query($sql, FALSE);
+	if(mysql_result($result, 0) > 0) {
+		$playForAi = false;
+	} else {
+		$playForAi = true;
+	}
+} else {
+	$playForAi = false;
+}
+
+$sql = "SELECT COUNT(*) FROM ".CONFIG_TABLE_PREFIX."scouts WHERE team_ids = '".$cookie_team."' AND assignment_player_ids IS NOT NULL";
+$result = DB::query($sql, FALSE);
+if(mysql_result($result, 0) == 0) {
+	$scoutHasTime = true;
+} else {
+	$scoutHasTime = false;
+}
+
+$sql = "SELECT COUNT(*) FROM ".CONFIG_TABLE_PREFIX."spieler_angebote WHERE team_ids = '".$cookie_team."' AND status = 2";
+$result = DB::query($sql, FALSE);
+if(mysql_result($result, 0) < 3) {
+	$canSubmitAnOffer = true;
+} else {
+	$canSubmitAnOffer = false;
+}
+if($canSubmitAnOffer) {
+	$sql = "SELECT COUNT(*) FROM ".CONFIG_TABLE_PREFIX."spieler_angebote WHERE team_ids = '".$cookie_team."' AND status = 0";
+	$result = DB::query($sql, FALSE);
+	if(mysql_result($result, 0) > 0) {
+		$canSubmitAnOffer = false;
+	} else {
+		$canSubmitAnOffer = true;
+	}
 }
 
 echo '<title>'.__('Spieler: %1$s %2$s', $sql3['vorname'], $sql3['nachname']).' - '.CONFIG_SITE_NAME.'</title>';
@@ -59,7 +102,25 @@ if (isset($_GET['sellSuccess'])) {
 	$sellPrice = number_format($_GET['sellSuccess'], 0, ',', '.');
 	addInfoBox(__('Du hast den Spieler erfolgreich für %s € verkauft.', $sellPrice));
 }
-$schaetzungVomScout = schaetzungVomScout($cookie_team, $cookie_scout, $_GET['id'], $sql3['talent'], $sql3['staerke'], $sql3['team']);
+if (isset($_GET['scout']) && $scoutHasTime && $playForAi) {
+	$sql = "UPDATE ".CONFIG_TABLE_PREFIX."scouts SET last_assignment = NOW(), assignment_player_ids = '".$sql3['ids']."' WHERE team_ids = '".$cookie_team."'";
+	DB::query($sql, FALSE);
+	addInfoBox("Dein Scout schaut sich ".$sql3['vorname']." ".$sql3['nachname']." genauer an und meldet sich dannach bei dir.");
+	$scoutHasTime = false;
+}
+if (isset($_POST['offer']) && is_numeric($_POST['offer']) && $canSubmitAnOffer && $playForAi) {
+	if($konto > $_POST['offer']) {
+		$sql = "INSERT INTO ".CONFIG_TABLE_PREFIX."spieler_angebote SET spieler_ids = '".$sql3['ids']."', team_ids = '".$cookie_team."', angebot = ".$_POST['offer'];
+		DB::query($sql, FALSE);
+		addInfoBox("Du hast ein Angebot über ".number_format($_POST['offer'], 0, ',', '.')." € für ".$sql3['vorname']." ".$sql3['nachname']." abgegeben. Der Manager wird sich nach seiner Entscheidung bei dir melden.");
+		$canSubmitAnOffer = false;
+	} else {
+		addInfoBox("Du hast nicht genug Geld um ein so hohes Gebot abzugeben. Dein Kontostand beträgt: ".number_format($konto, 0, ',', '.')." €");
+	}
+}
+
+$scoutLevel = $cookie_team == $sql3['team'] ? $cookie_scout : 1;
+$schaetzungVomScout = schaetzungVomScout($cookie_team, $scoutLevel, $_GET['id'], $sql3['talent'], $sql3['staerke'], $sql3['team']);
 
 if ($sql3['team'] == 'frei') {
 	$sql3['frische'] = getRegularFreshness(GameTime::getMatchDay());
@@ -78,6 +139,8 @@ if ($loggedin == 1 && $sql3['team'] == $cookie_team) {
 	elseif ($sql3['gehalt'] > 99) { $sosi = 2; }
 	$sidfhisudhfuo = round($sql3['gehalt']/pow(10, $sosi))*pow(10, $sosi);
 	$gehaltContent = 'ca. '.number_format($sidfhisudhfuo, 0, ',', '.').' €';
+} else {
+	$gehaltContent = 'unbekannt';
 }
 
 if ($sql3['team'] == 'frei') {
@@ -122,6 +185,10 @@ $data['schaetzungVomScout'] = $schaetzungVomScout;
 $data['entlassungskosten'] = $entlassungskosten;
 $data['gehaltContent'] = $gehaltContent;
 $data['transferStat'] = $transferStat;
+$data['playForAi'] = $playForAi;
+$data['scoutHasTime'] = $scoutHasTime;
+$data['canSubmitAnOffer'] = $canSubmitAnOffer;
+$data['konto'] = $konto;
 echo $core->get(__DIR__.'/../templates/spieler.tpl', $data);
 
 include_once(__DIR__.'/../common/zz3.php'); 

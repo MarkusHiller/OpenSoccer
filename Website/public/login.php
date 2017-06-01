@@ -47,7 +47,7 @@ if ((isset($_POST['lusername']) && isset($_POST['lpassword'])) OR $valid_bigpoin
 				$_SESSION['multiSperre'] = 0;
 			}
 			else {
-				$teamname1 = "SELECT name, scout FROM ".$prefix."teams WHERE ids = '".$lologin4['team']."'";
+				$teamname1 = "SELECT a.name, b.level AS scout FROM ".CONFIG_TABLE_PREFIX."teams AS a JOIN ".CONFIG_TABLE_PREFIX."scouts AS b ON a.ids = b.team_ids WHERE ids = '".$lologin4['team']."'";
 				$teamname2 = mysql_query($teamname1);
 				$teamname3 = mysql_fetch_assoc($teamname2);
 				// WERT last_managed AUF 0 SETZEN ANFANG
@@ -63,6 +63,7 @@ if ((isset($_POST['lusername']) && isset($_POST['lpassword'])) OR $valid_bigpoin
 					if (strlen($ma3['team']) == 32) { $aktiveMultiAccounts++; }
 					$multiAccountList[] = $ma3['team'];
 				}
+
 				$_SESSION['multiSperre'] = 0; // entfernen wenn Multi-Sperre wieder aktiviert werden soll
 				/*if ($lologin4['multiSperre'] == 1) {
 					$_SESSION['multiSperre'] = 1;

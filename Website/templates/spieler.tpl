@@ -89,7 +89,7 @@
 	        {if $team != 'frei'}
                 {date('d.m.Y H:i', $vertrag)}
             {else}
-                undebkannt
+                unbekannt
             {/if}
             </td>
         </tr>
@@ -234,4 +234,19 @@
             Spieler, die über 33 Jahre alt sind, können grundsätzlich nicht mehr verkauft oder verliehen werden.
         </p>
 	{/if}
+{/if}
+{if $loggedin == 1 && $scoutHasTime && $playForAi}
+    <h2>Scout beauftragen</h2>
+    <p>
+        <a href="/spieler.php?id={$ids}&scout=1" onclick="return {$onWatchClick}" class="pagenava">Spieler begutachten</a>
+    </p>
+{/if}
+{if $loggedin == 1 && $canSubmitAnOffer && $playForAi}
+    <h2>Transferangebot</h2>
+    <form action="/spieler.php?id={$ids}" method="post" accept-charset="utf-8">
+        <p>
+            <input type="number" name="offer" value="0" title="Dein Kontostand: {number_format($konto, 0, ',', '.')} €" />
+            <input type="submit" value="Angebot unterbreiten" onclick="return {$onWatchClick}" />
+        </p>
+    </form>
 {/if}

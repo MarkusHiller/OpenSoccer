@@ -139,7 +139,8 @@ $gesamtMarktwertWerte = array();
 while ($sql6 = mysql_fetch_assoc($sql5)) {
 	$durchschnittsAlterWerte[] = $sql6['wiealt'];
 	$gesamtMarktwertWerte[] = $sql6['marktwert'];
-	$schaetzungVomScout = schaetzungVomScout($cookie_team, $cookie_scout, $sql6['ids'], $sql6['talent'], $sql6['staerke'], $clearid);
+	$scoutLevel = $cookie_team == $clearid ? $cookie_scout : 1;
+	$schaetzungVomScout = schaetzungVomScout($cookie_team, $scoutLevel, $sql6['ids'], $sql6['talent'], $sql6['staerke'], $clearid);
 	if ($counter % 2 == 0) {
 		if ($sql6['verletzung'] != 0) { echo '<tr class="verletzter_spieler">'; } else { echo '<tr>'; }
 	}

@@ -247,7 +247,7 @@ if (isset($_POST['scout']) && $cookie_id != CONFIG_DEMO_USER) {
 		$ch1 = "UPDATE ".$prefix."personal_changes SET zeit = ".time()." WHERE team = '".$cookie_team."' AND personal = 'Scout' AND zeit < ".$timeout;
 		$ch2 = mysql_query($ch1);
 		if (mysql_affected_rows() > 0) {
-            $upd1 = "UPDATE ".$prefix."teams SET scout = ".$temp." WHERE ids = '".$cookie_team."'";
+            $upd1 = "UPDATE ".$prefix."scouts SET level = ".$temp." WHERE ids = '".$cookie_team."'";
             $upd2 = mysql_query($upd1);
             $_SESSION['scout'] = $temp;
             $cookie_scout = $temp;
@@ -267,25 +267,23 @@ if (isset($_POST['scout']) && $cookie_id != CONFIG_DEMO_USER) {
 	}
 }
 ?>
-<?php
-$sql1 = "SELECT scout FROM ".$prefix."teams WHERE ids = '".$cookie_team."'";
-$sql2 = mysql_query($sql1);
-$sql3 = mysql_fetch_assoc($sql2);
-?>
 <div style="float:left; width:280px;">
 <form action="/ver_personal.php" method="post" accept-charset="utf-8">
 <p>
-<input type="radio" name="scout" value="1" <?php if ($sql3['scout'] == 1) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 1, '5.000.000'); ?><br />
-<input type="radio" name="scout" value="2" <?php if ($sql3['scout'] == 2) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 2, '10.000.000'); ?><br />
-<input type="radio" name="scout" value="3" <?php if ($sql3['scout'] == 3) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 3, '15.000.000'); ?><br />
-<input type="radio" name="scout" value="4" <?php if ($sql3['scout'] == 4) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 4, '20.000.000'); ?><br />
-<input type="radio" name="scout" value="5" <?php if ($sql3['scout'] == 5) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 5, '25.000.000'); ?><br />
+<input type="radio" name="scout" value="1" <?php if ($cookie_scout == 1) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 1, '5.000.000'); ?><br />
+<input type="radio" name="scout" value="2" <?php if ($cookie_scout == 2) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 2, '10.000.000'); ?><br />
+<input type="radio" name="scout" value="3" <?php if ($cookie_scout == 3) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 3, '15.000.000'); ?><br />
+<input type="radio" name="scout" value="4" <?php if ($cookie_scout == 4) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 4, '20.000.000'); ?><br />
+<input type="radio" name="scout" value="5" <?php if ($cookie_scout == 5) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 5, '25.000.000'); ?><br />
 <input type="submit" value="<?php echo _('Ändern'); ?>"<?php echo noDemoClick($cookie_id); ?> />
 </p>
 </form>
 </div>
 <div style="float:left; width:220px;"><img src="/images/personal_scout.jpg" alt="Scout" width="220" style="width:220px; height:150px; border:0;" /></div>
 <div style="clear:both;"></div>
+<p>
+	Der Scout schätzt deine Spieler, sowie die Spieler auf der Transferliste immer mit der gewählten Stufe ein. Spieler die aktiv bei anderen Teams spielen werden nur grob geschätzt. Wenn du den Scout zum beobachten eines Spielers schickst, bekommst du nach einer Analyse eine genauere Einschätzung als Nachricht.
+</p>
 <h1><?php echo _('Fitness-Trainer').' <span style="color:red">['._('Angebot und Nachfrage'); ?>]</span></h1>
 <p><?php echo _('Dein Fitness-Trainer bietet Dir an, ein Regenerations-Camp zu buchen. Dies ist ein Mal pro Tag möglich und bringt allen Spielern Deines Kaders einmalig 1, 2 oder 3 Prozentpunkte Frische zusätzlich.'); ?></p>
 <div style="float:left; width:280px;">
