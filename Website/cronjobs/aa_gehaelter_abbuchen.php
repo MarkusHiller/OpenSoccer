@@ -33,7 +33,7 @@ if (mysql_affected_rows() > 0) {
 	$sd1 = "UPDATE ".$prefix."supplyDemandPrices SET price = price*0.9 WHERE price >= 1111112";
 	$sd2 = mysql_query($sd1);
 	// PREISE SENKEN ENDE
-	$sql1 = "SELECT ids, jugendarbeit, fanbetreuer, scout FROM ".$prefix."teams";
+	$sql1 = "SELECT a.ids, a.jugendarbeit, a.fanbetreuer, b.level as scout FROM ".CONFIG_TABLE_PREFIX."teams JOIN ".CONFIG_TABLE_PREFIX."scouts AS b ON ".CONFIG_TABLE_PREFIX."teams.ids = ".CONFIG_TABLE_PREFIX."scouts.team_ids";
 	$sql2 = mysql_query($sql1);
 	while ($sql3 = mysql_fetch_assoc($sql2)) {
 		$sql4 = "SELECT SUM(gehalt) FROM ".$prefix."spieler WHERE team = '".$sql3['ids']."'";

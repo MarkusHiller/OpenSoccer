@@ -13,7 +13,7 @@ try {
 	$sql1 = "UPDATE ".$prefix."ligen SET lastCupSelection = ".time()." WHERE land = '".$landToSimulate4."'";
 	mysql_query($sql1);
 	
-	if (GameTime::getMatchDay() < 2 OR GameTime::getMatchDay() > 22) { 
+	if (GameTime::getMatchDay() < 2 OR GameTime::getMatchDay() >= 22) { 
 		Log::logToFile("debug_cup_auslosen", "Exit match day: " . GameTime::getMatchDay());
 		exit; 
 	}

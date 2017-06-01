@@ -550,6 +550,15 @@ CREATE TABLE `man_referrals` (
   KEY `geworben` (`geworben`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE `man_scouts` (
+  `team_ids` varchar(32) NOT NULL,
+  `level` smallint(1) unsigned NOT NULL,
+  `last_assignment` datetime DEFAULT NULL,
+  `assignment_player_ids` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`team_ids`),
+  UNIQUE KEY `team_ids_UNIQUE` (`team_ids`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 CREATE TABLE `man_spiele` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `liga` varchar(32) NOT NULL,
@@ -658,6 +667,17 @@ CREATE TABLE `man_spieler_mark` (
   `spieler` varchar(32) NOT NULL,
   `farbe` enum('Keine','Blau','Gelb','Rot','Gruen','Pink','Aqua','Silber','Lila','Oliv') NOT NULL DEFAULT 'Keine',
   PRIMARY KEY (`team`,`spieler`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `man_spieler_angebote` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `spieler_ids` varchar(32) NOT NULL,
+  `team_ids` varchar(32) NOT NULL,
+  `angebot` double unsigned DEFAULT '0',
+  `status` tinyint(1) unsigned DEFAULT '0',
+  `datum` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `man_spiele_kommentare` (
@@ -855,7 +875,6 @@ CREATE TABLE `man_teams` (
   `friendlies_ges` smallint(5) unsigned NOT NULL DEFAULT '0',
   `jugendarbeit` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `fanbetreuer` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `scout` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `konto` decimal(12,2) NOT NULL DEFAULT '0.00',
   `vorjahr_konto` decimal(12,2) NOT NULL DEFAULT '0.00',
   `gewinnGeld` decimal(12,2) NOT NULL DEFAULT '0.00',

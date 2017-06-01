@@ -1,5 +1,8 @@
-<?php if (!isset($_GET['mode'])) { include_once(__DIR__.'/../common/zzserver.php'); } ?>
-<?php
+<?php 
+if (!isset($_GET['mode'])) { 
+	include_once(__DIR__.'/../common/zzserver.php'); 
+}
+
 set_time_limit(0);
 $sql1 = "SELECT gespielt FROM ".$prefix."ligen LIMIT 0, 1";
 $sql2 = mysql_query($sql1);

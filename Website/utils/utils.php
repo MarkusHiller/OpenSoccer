@@ -46,4 +46,10 @@ class Utils {
         }
     }
 
+    public static function getChanceForOffer($marktwert, $angebot) {
+        $chance = ($angebot / $marktwert - 1 + (0.3 / $marktwert * ($marktwert - ($angebot - $marktwert)))) * 100;
+        if($chance > 0) return $chance;
+        return 0;
+    }
+
 }

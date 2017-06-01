@@ -52,7 +52,7 @@ $gehalt3 = mysql_fetch_assoc($gehalt2);
 $gehalt3 = $gehalt3['SUM(gehalt)'];
 $ausgaben_jugendtrainer += $daten3['jugendarbeit']*7000000;
 $ausgaben_fanbetreuer = $daten3['fanbetreuer']*3000000;
-$ausgaben_scout = $daten3['scout']*4000000;
+$ausgaben_scout = $cookie_scout*4000000;
 $einnahmen_transfers = "SELECT SUM(gebot) FROM ".$prefix."transfers WHERE besitzer = '".$cookie_team."' AND gebot != 1";
 $einnahmen_transfers = mysql_query($einnahmen_transfers);
 $einnahmen_transfers_zahl = mysql_num_rows($einnahmen_transfers);

@@ -3,6 +3,7 @@
 require_once(__DIR__ . '/../utils/database.php');
 require_once(__DIR__ . '/../utils/utils.php');
 require_once(__DIR__ . '/../Logger/Log.php');
+require_once(__DIR__ . '/../controller/messageController.php');
 
 /**
  * Description of ComputerManager
@@ -19,6 +20,10 @@ class ComputerManager {
     const MAX_PLAYER_A = 7;
     const MAX_PLAYER_M = 7;
     const MAX_PLAYER_S = 4;
+    const MIN_PLAYER_T = 2;
+    const MIN_PLAYER_A = 5;
+    const MIN_PLAYER_M = 5;
+    const MIN_PLAYER_S = 3;
 
     private $in14days;
     private $sqlIsDemoTeam = "";
@@ -73,6 +78,7 @@ class ComputerManager {
     }
 
     private function manageComputerTeam($data) {
+        $this->handlePlayerOffers($data->ids, $data->name);
         $this->handlePlayer($data->ids);
         $this->extendContract($data->ids, true, self::CONTRACT_MAX_AGE_COMPUTER);
         $this->handleTactics($data->ids);
@@ -85,6 +91,101 @@ class ComputerManager {
         $this->extendContract($data->ids, false, self::CONTRACT_MAX_AGE_HOLIDAY);
         $this->updateNomination($data->ids);
         $this->setLastManaged($data->ids);
+    }
+
+    private function handlePlayerOffers($teamIds, $teamName) {
+        $sql = "SELECT * FROM " . CONFIG_TABLE_PREFIX . "spieler WHERE team = '" . $teamIds . "' AND ids IN (SELECT spieler_ids FROM " . CONFIG_TABLE_PREFIX . "spieler_angebote WHERE status = 0 ORDER BY datum ASC)";
+        $result = DB::query($sql, false);
+        while($player = mysql_fetch_object($result)) {
+            $canSell = $this->canSellPlayer($teamIds, $player->position);
+            $isSold = false;
+            $sqlOffer = "SELECT a.id, a.team_ids, a.angebot, b.ids FROM " . CONFIG_TABLE_PREFIX . "spieler_angebote AS a JOIN ".CONFIG_TABLE_PREFIX."users AS b ON a.team_ids = b.team WHERE a.spieler_ids = '" . $player->ids . "' AND a.status = 0 ORDER BY datum ASC";
+            $resultOffer = DB::query($sqlOffer, false);
+            while($offer = mysql_fetch_object($resultOffer)) {
+                if(!$canSell) {
+                    $this->rejectPlayerOffer($player, $offer, $teamName, "MIN_PLAYER");
+                    continue;
+                }
+                if($isSold) {
+                    $this->rejectPlayerOffer($player, $offer, $teamName, "SOLD");
+                    continue;
+                }
+
+                $chance = Utils::getChanceForOffer($player->marktwert, $offer->angebot);
+
+                if(Utils::Chance_Percent($chance)) {
+                    $this->acceptPlayerOffer($player, $offer, $teamName);
+                    $isSold = true;
+                } else {
+                    $this->rejectPlayerOffer($player, $offer, $teamName, "CHANCE");
+                }
+            }
+        }
+    }
+
+    private function acceptPlayerOffer($player, $offer, $teamName) {
+        // konto geld abziehen
+        $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "teams SET konto = konto-" . $offer->angebot . " WHERE ids = '" . $offer->team_ids . "'";
+        DB::query($sql, false);
+
+        // Liga holen
+        $sql = "SELECT liga FROM " . CONFIG_TABLE_PREFIX . "teams WHERE ids = '" . $offer->team_ids . "' LIMIT 1";
+        $result = DB::query($sql, false);
+        $liga = mysql_result($result, 0);
+
+        // team, liga und moral updaten (spieler)
+        $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "spieler SET team = '" . $offer->team_ids . "', liga = '" . $liga . "', spiele_verein = 0, startelf_Liga = 0, startelf_Cup = 0, startelf_Pokal = 0, startelf_Test = 0, moral = 100 WHERE ids = '" . $player->ids . "'";
+        DB::query($sql, false);
+
+        // spieler_historie updaten (History_tabelle erstmal erstellen)
+
+        //angebot schließen
+        $title = "Dein Angebot wurde angenommen";
+        $msg = $teamName . " hat dein Angebot für " . $this->getPlayerLink($player->ids, $player->vorname, $player->nachname) . " angenommen. Die Ablösesumme von " . number_format($offer->angebot, 0, ',', '.') . " € wurden von deinem Konto abgebucht. Der Spieler ist nun in deinem Kader.";
+        MessageController::addOfficialPn($offer->ids, $title, $msg);
+        $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "spieler_angebote SET status = 2 WHERE id = " . $offer->id;
+        DB::query($sql, false);
+    }
+
+    private function rejectPlayerOffer($player, $offer, $teamName, $reason) {
+        $title = "Dein Angebot wurde abgelehnt";
+        switch ($reason) {
+            case "MIN_PLAYER":
+                $msg = $teamName . " hat dein Angebot für " . $this->getPlayerLink($player->ids, $player->vorname, $player->nachname) . " abgelehnt, da sie sonst nicht genügend Spieler für diese Position hätten.";
+                break;
+            case "SOLD":
+                $msg = $teamName . " hat den Spieler " . $this->getPlayerLink($player->ids, $player->vorname, $player->nachname) . " bereit an ein anderes Team verkauft.";
+                break;
+            default:
+                $msg = $teamName . " hat dein Angebot für " . $this->getPlayerLink($player->ids, $player->vorname, $player->nachname) . " abgelehnt, da ihnen dein Angbot nicht ausreichend war.";
+                break;
+        }
+
+        MessageController::addOfficialPn($offer->ids, $title, $msg);
+        $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "spieler_angebote SET status = 1 WHERE id = " . $offer->id;
+        DB::query($sql, false);
+    }
+
+    function getPlayerLink($ids, $firstname, $lastname) {
+        return '<a href="/spieler.php?id='.$ids.'">'.$firstname.' '.$lastname.'</a>';
+    }
+
+    private function canSellPlayer($teamIds, $position) {
+        $sql = "SELECT COUNT(*) FROM " . CONFIG_TABLE_PREFIX . "spieler WHERE team = '" . $teamIds . "' AND position = '" . $position . "'";
+        $result = DB::query($sql, false);
+        switch ($position) {
+            case "T":
+                return mysql_result($result, 0) > self::MIN_PLAYER_T;
+            case "A":
+                return mysql_result($result, 0) > self::MIN_PLAYER_A;
+            case "M":
+                return mysql_result($result, 0) > self::MIN_PLAYER_M;
+            case "S":
+                return mysql_result($result, 0) > self::MIN_PLAYER_S;
+            default:
+                return false;
+        }
+        return false;
     }
 
     private function handlePlayer($teamIds) {

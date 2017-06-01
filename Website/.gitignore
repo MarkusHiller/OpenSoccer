@@ -2,6 +2,11 @@
 cache/*.html
 config.php
 images/emblems/*.png
+node_modules/
+public/libs/
+vendor/
+Logger/
 
 # reinclude exluded files
 !images/emblems/default.png
+!Logger/Log.php
