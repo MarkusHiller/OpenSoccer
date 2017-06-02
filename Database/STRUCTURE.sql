@@ -195,17 +195,6 @@ CREATE TABLE `man_computer_monitoring` (
   PRIMARY KEY (`date`,`team`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `man_cronjobs` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `datei` varchar(255) NOT NULL,
-  `zuletzt` int(11) NOT NULL DEFAULT '0',
-  `intervall` int(5) unsigned NOT NULL DEFAULT '0',
-  `stunde_min` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `stunde_max` tinyint(1) unsigned NOT NULL DEFAULT '24',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `datei` (`datei`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
 CREATE TABLE `man_cupsieger` (
   `saison` int(11) NOT NULL,
   `land` varchar(255) NOT NULL,
