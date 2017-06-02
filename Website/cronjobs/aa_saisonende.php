@@ -50,6 +50,8 @@ $bwl15 = "TRUNCATE TABLE ".$prefix."spiele";
 $bwl16 = mysql_query($bwl15);
 $ber1 = "TRUNCATE TABLE ".$prefix."spiele_kommentare";
 $ber2 = mysql_query($ber1);
+$angebote = "TRUNCATE TABLE ".$prefix."spieler_angebote";
+mysql_query($angebote);
 $bwl17 = "UPDATE ".$prefix."users SET liga = (SELECT liga FROM ".$prefix."teams WHERE ids = ".$prefix."users.team)";
 $bwl18 = mysql_query($bwl17);
 ?>
