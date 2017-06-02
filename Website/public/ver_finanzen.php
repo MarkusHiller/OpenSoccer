@@ -43,7 +43,7 @@ while ($spe3 = mysql_fetch_assoc($spe2)) {
 $leihPraemien_aus = $leihPraemien_aus/GameTime::getMatchDay()*22;
 $leihPraemien_ein = $leihPraemien_ein/GameTime::getMatchDay()*22;
 // HOCHRECHNUNG FUER GANZE SAISON ENDE
-$daten1 = "SELECT jugendarbeit, fanbetreuer, scout, konto, vorjahr_konto, stadion_aus, tv_ein, fanaufkommen FROM ".$prefix."teams WHERE ids = '".$cookie_team."'";
+$daten1 = "SELECT jugendarbeit, fanbetreuer, konto, vorjahr_konto, stadion_aus, tv_ein, fanaufkommen FROM ".$prefix."teams WHERE ids = '".$cookie_team."'";
 $daten2 = mysql_query($daten1);
 $daten3 = mysql_fetch_assoc($daten2);
 $gehalt1 = "SELECT SUM(gehalt) FROM ".$prefix."spieler WHERE team = '".$cookie_team."'";

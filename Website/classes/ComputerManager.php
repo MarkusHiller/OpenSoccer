@@ -140,11 +140,23 @@ class ComputerManager {
         // spieler_historie updaten (History_tabelle erstmal erstellen)
 
         //angebot schließen
+        $playerLink = $this->getPlayerLink($player->ids, $player->vorname, $player->nachname);
         $title = "Dein Angebot wurde angenommen";
-        $msg = $teamName . " hat dein Angebot für " . $this->getPlayerLink($player->ids, $player->vorname, $player->nachname) . " angenommen. Die Ablösesumme von " . number_format($offer->angebot, 0, ',', '.') . " € wurden von deinem Konto abgebucht. Der Spieler ist nun in deinem Kader.";
+        $msg = $teamName . " hat dein Angebot für " . $playerLink . " angenommen. Die Ablösesumme von " . number_format($offer->angebot, 0, ',', '.') . " € wurden von deinem Konto abgebucht. Der Spieler ist nun in deinem Kader.";
         MessageController::addOfficialPn($offer->ids, $title, $msg);
+        //status setzen
         $sql = "UPDATE " . CONFIG_TABLE_PREFIX . "spieler_angebote SET status = 2 WHERE id = " . $offer->id;
         DB::query($sql, false);
+        //Buchung
+        $sql = "INSERT INTO " . CONFIG_TABLE_PREFIX . "buchungen (team, verwendungszweck, betrag, zeit) VALUES ('" . $offer->team_ids . "', 'Ablöse von " . $playerLink . "', " . ($offer->angebot * -1) . ", " . time() . ")";
+        DB::query($sql, false);
+        //Protokoll
+        $protokollText = "Du hast " . $playerLink . " für " . number_format($offer->angebot, 0, ',', '.') . " € gekauft.";
+        $sql = "INSERT INTO " . CONFIG_TABLE_PREFIX . "protokoll (team, text, typ, zeit) VALUES ('" . $offer->team_ids . "', '" . $protokollText . "', 'Finanzen', " . time() . ")";
+        DB::query($sql, false);
+        //Transfer
+        $sql = "INSERT INTO " . CONFIG_TABLE_PREFIX . "transfers (spieler, besitzer, bieter, datum, gebot, damaligerWert, spiele_verein, damaligeStaerke) VALUES ('" . $player->ids ."', '" . $player->team . "', '" . $offer->team_ids . "', " . time() . ", " . $offer->angebot . ", " . $player->marktwert . ", " . $player->spiele_verein . ", " . $player->staerke . ")";
+		DB::query($sql, false);
     }
 
     private function rejectPlayerOffer($player, $offer, $teamName, $reason) {
