@@ -245,7 +245,7 @@ else {
 		echo '<h1>'.__('Herzlich Willkommen, %s!', $cookie_username).'</h1>';
 		$lastManagedTimeout = getTimestamp('-3 days');
 		$getleerLimit = (isset($_GET['show_all'])) ? 624 : 65;
-		$getleer1 = "SELECT a.ids, a.name, a.liga, b.name AS ligaName FROM ".$prefix."teams AS a JOIN ".$prefix."ligen AS b ON a.liga = b.ids WHERE a.ids NOT IN (SELECT team FROM ".$prefix."users) AND a.last_managed > ".$lastManagedTimeout." ORDER BY b.level ASC LIMIT 0, ".$getleerLimit;
+		$getleer1 = "SELECT a.ids, a.name, a.liga, b.name AS ligaName FROM ".$prefix."teams AS a JOIN ".$prefix."ligen AS b ON a.liga = b.ids WHERE a.ids NOT IN (SELECT team FROM ".$prefix."users) AND a.last_managed > ".$lastManagedTimeout." AND b.level = 4 LIMIT 0, ".$getleerLimit;
 		$getleer2 = mysql_query($getleer1);
 		if (mysql_num_rows($getleer2) > 0) {
 			echo '<p>'._('Du bist zwar ein Neuling, aber man sagt, du hättest großes Talent. Deshalb haben wir hier ein paar Job-Angebote für Dich. Such Dir einfach ein Team aus und deine Reise als Manager kann beginnen:').'</p>';
