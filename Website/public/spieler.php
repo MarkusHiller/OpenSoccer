@@ -109,6 +109,7 @@ if (isset($_GET['scout']) && $scoutHasTime && $playForAi) {
 	$scoutHasTime = false;
 }
 if (isset($_POST['offer']) && is_numeric($_POST['offer']) && $canSubmitAnOffer && $playForAi) {
+	
 	if($konto > $_POST['offer']) {
 		$sql = "INSERT INTO ".CONFIG_TABLE_PREFIX."spieler_angebote SET spieler_ids = '".$sql3['ids']."', team_ids = '".$cookie_team."', angebot = ".$_POST['offer'];
 		DB::query($sql, FALSE);

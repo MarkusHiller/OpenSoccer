@@ -245,8 +245,18 @@
     <h2>Transferangebot</h2>
     <form action="/spieler.php?id={$ids}" method="post" accept-charset="utf-8">
         <p>
-            <input type="number" name="offer" value="0" title="Dein Kontostand: {number_format($konto, 0, ',', '.')} €" />
+            <input id="offerInput" type="text" value="0" title="Dein Kontostand: {number_format($konto, 0, ',', '.')} €" />
+            <input id="offer" type="hidden" name="offer" value="0" />
             <input type="submit" value="Angebot unterbreiten" onclick="return {$onWatchClick}" />
         </p>
     </form>
+
+    <script>
+        var offerInput = document.getElementById("offerInput");
+        offerInput.addEventListener('keyup', function(evt){
+            var n = parseInt(this.value.replace(/\D/g,''), 10);
+            document.getElementById("offer").value = n;
+            offerInput.value = n.toLocaleString();
+        }, false);
+    </script>
 {/if}
