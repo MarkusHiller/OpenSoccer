@@ -30,7 +30,7 @@ if (mysql_affected_rows() > 0) {
 		// KOSTEN ANFANG
 		$kosten = 1550000+$sql6['plaetze']*250;
 		// GELAENDE ANFANG
-        require_once(__DIR__.'/classes/StadiumBuildings.php');
+        require_once(__DIR__.'/../classes/StadiumBuildings.php');
         foreach (StadiumBuildings::getList() as $tm) {
             $tempwert = round($tm[3]*$sql6[$tm[0]]); // letzter Faktor = Anzahl der Gebaeude-Einheiten
             $kosten += $tempwert;
