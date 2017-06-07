@@ -20,7 +20,7 @@ if (mysql_num_rows($liga2) == 0) {
 else {
 	$liga3 = mysql_fetch_assoc($liga2);
 	$liga3 = $liga3['name'];
-	$ligaTdContent = '<td class="link"><a href="/lig_tabelle.php?liga='.$sql3['liga'].'">'.$liga3.'</a></td>';
+	$ligaTdContent = '<td class="link"><a href="/saison/lig_tabelle.php?liga='.$sql3['liga'].'">'.$liga3.'</a></td>';
 }
 if ($sql3['team'] != '__'.$clearedID) {
 	$team1 = "SELECT name, wantTests FROM ".$prefix."teams WHERE ids = '".$sql3['team']."'";

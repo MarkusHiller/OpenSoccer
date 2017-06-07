@@ -226,16 +226,16 @@ if (!isset($_SESSION['via_android'])) {
                             </ul>
                         </li><?php } ?>
                     <li class="menueintrag"<?php
-                if ($_SERVER['SCRIPT_NAME'] == '/lig_tabelle.php' OR $_SERVER['SCRIPT_NAME'] == '/pokal.php' OR $_SERVER['SCRIPT_NAME'] == '/cup.php' OR $_SERVER['SCRIPT_NAME'] == '/lig_testspiele_liste.php' OR $_SERVER['SCRIPT_NAME'] == '/testWuensche.php') {
+                if ($_SERVER['SCRIPT_NAME'] == '/saison/lig_tabelle.php' OR $_SERVER['SCRIPT_NAME'] == '/saison/pokal.php' OR $_SERVER['SCRIPT_NAME'] == '/saison/cup.php' OR $_SERVER['SCRIPT_NAME'] == '/saison/lig_testspiele_liste.php' OR $_SERVER['SCRIPT_NAME'] == '/saison/testWuensche.php') {
                     echo ' id="current"';
                 }
-                ?>><a href="/lig_tabelle.php"><?php echo _('Saison'); ?></a>
+                ?>><a href="/saison/lig_tabelle.php"><?php echo _('Saison'); ?></a>
                         <ul>
-                            <li><a href="/lig_tabelle.php"><?php echo _('Liga'); ?></a></li>
-                            <li><a href="/pokal.php"><?php echo _('Int. Pokal'); ?></a></li>
-                            <li><a href="/cup.php"><?php echo _('Nat. Cup'); ?></a></li>
-                            <li><a href="/lig_testspiele_liste.php"><?php echo _('Testspiele'); ?></a></li>
-                            <li><a href="/testWuensche.php"><?php echo _('Testwünsche'); ?></a></li>
+                            <li><a href="/saison/lig_tabelle.php"><?php echo _('Liga'); ?></a></li>
+                            <li><a href="/saison/pokal.php"><?php echo _('Int. Pokal'); ?></a></li>
+                            <li><a href="/saison/cup.php"><?php echo _('Nat. Cup'); ?></a></li>
+                            <li><a href="/saison/lig_testspiele_liste.php"><?php echo _('Testspiele'); ?></a></li>
+                            <li><a href="/saison/testWuensche.php"><?php echo _('Testwünsche'); ?></a></li>
                         </ul>
                     </li>
                     <li class="menueintrag"<?php
@@ -347,7 +347,7 @@ if (!isset($_SESSION['via_android'])) {
 // show random short hints
                         echo '<h1>' . _('Tipp des Tages') . ' (<a href="/tipps_des_tages.php">' . _('Alle') . '</a>)</h1>';
                         echo '<div class="left-box"><p>';
-                        $tipps_des_tages = file('tipps_des_tages.php.txt');
+                        $tipps_des_tages = file(__DIR__.'/../public/tipps_des_tages.php.txt');
 // ignore the first line (PHP tag)
                         $randomHintIndex = mt_rand(1, count($tipps_des_tages) - 1);
 // be careful with the input for eval() here (which should only contain a gettext call)

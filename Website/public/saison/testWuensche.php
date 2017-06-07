@@ -1,6 +1,6 @@
-<?php include_once(__DIR__.'/../common/zz1.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz1.php'); ?>
 <title><?php echo _('Testwünsche'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
-<?php include_once(__DIR__.'/../common/zz2.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz2.php'); ?>
 <h1><?php echo _('Testwünsche'); ?></h1>
 <?php if ($loggedin == 1) { ?>
 <p><?php echo _('Du suchst noch Gegner für Testspiele? Ein paar Termine sind einfach noch frei geblieben? Dann bist Du hier genau richtig!'); ?></p>
@@ -23,7 +23,7 @@ if (isset($_POST['nachricht']) && $cookie_id != CONFIG_DEMO_USER) {
 		$chatSperreBis = $sql3['MAX(chatSperre)'];
 		if ($chatSperreBis > 0 && $chatSperreBis > time()) {
 			addInfoBox('Du bist noch bis zum %1$s Uhr für die Kommunikation im Spiel gesperrt. Wenn Dir unklar ist warum, frage bitte das %2$s.', date('d.m.Y H:i', $chatSperreBis), '<a class="inText" href="/wio.php">'._('Support-Team').'</a>');
-			include_once(__DIR__.'/../common/zz3.php');
+			include_once(__DIR__.'/../../common/zz3.php');
 			exit;
 		}
 	}
@@ -34,7 +34,7 @@ if (isset($_POST['nachricht']) && $cookie_id != CONFIG_DEMO_USER) {
 }
 ?>
 <h1><?php echo _('Deine Nachricht'); ?></h1>
-<form action="/testWuensche.php" method="post" accept-charset="utf-8">
+<form action="/saison/testWuensche.php" method="post" accept-charset="utf-8">
 <p><input type="text" name="nachricht" style="width:60%" /> <input type="submit" value="<?php echo _('Eintragen'); ?>"<?php echo noDemoClick($cookie_id); ?> /></p>
 </form>
 <h1><?php echo _('Wünsche nach Testspielen'); ?></h1>
@@ -51,7 +51,7 @@ $sql2 = mysql_query($sql1);
 while ($sql3 = mysql_fetch_assoc($sql2)) {
 	echo '<p><b>'.displayUsername($sql3['username'], $sql3['user']).' schrieb vor '.time_rel($sql3['zeit']).':';
 	if ($sql3['user'] == $cookie_id OR $_SESSION['status'] == 'Helfer' OR $_SESSION['status'] == 'Admin') {
-		echo ' <a href="/testWuensche.php?delEntry='.$sql3['id'].'">'._('[Löschen]').'</a>';
+		echo ' <a href="/saison/testWuensche.php?delEntry='.$sql3['id'].'">'._('[Löschen]').'</a>';
 	}
 	echo '</b><br />'.autoLink($sql3['nachricht']).'</p>';
 }
@@ -59,4 +59,4 @@ while ($sql3 = mysql_fetch_assoc($sql2)) {
 <?php } else { ?>
 <p><?php echo _('Du musst angemeldet sein, um diese Seite aufrufen zu können!'); ?></p>
 <?php } ?>
-<?php include_once(__DIR__.'/../common/zz3.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz3.php'); ?>

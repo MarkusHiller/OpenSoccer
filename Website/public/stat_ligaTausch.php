@@ -32,8 +32,8 @@ while ($sql3 = mysql_fetch_assoc($sql2)) {
 	if ($counter % 2 == 1) { echo '<tr>'; } else { echo '<tr class="odd">'; }
 	echo '<td>'.date('d.m.Y H:i', $sql3['zeit']).'</td>';
 	echo '<td>'.displayUsername($sql3['username'], $sql3['user1']).'</td>';
-	echo '<td class="link"><a href="/lig_tabelle.php?liga='.$sql3['newLiga2'].'">'; if (isset($ligaIDToLand[$sql3['newLiga2']])) { echo $ligaIDToLand[$sql3['newLiga2']]; } else { echo '?'; } echo '</a></td>';
-	echo '<td class="link"><a href="/lig_tabelle.php?liga='.$sql3['newLiga1'].'">'; if (isset($ligaIDToLand[$sql3['newLiga1']])) { echo $ligaIDToLand[$sql3['newLiga1']]; } else { echo '?'; } echo '</a></td>';
+	echo '<td class="link"><a href="/saison/lig_tabelle.php?liga='.$sql3['newLiga2'].'">'; if (isset($ligaIDToLand[$sql3['newLiga2']])) { echo $ligaIDToLand[$sql3['newLiga2']]; } else { echo '?'; } echo '</a></td>';
+	echo '<td class="link"><a href="/saison/lig_tabelle.php?liga='.$sql3['newLiga1'].'">'; if (isset($ligaIDToLand[$sql3['newLiga1']])) { echo $ligaIDToLand[$sql3['newLiga1']]; } else { echo '?'; } echo '</a></td>';
 	echo '</tr>';
 	$counter++;
 }

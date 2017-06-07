@@ -13,7 +13,7 @@ if ($_SESSION['status'] == 'Helfer' OR $_SESSION['status'] == 'Admin') {
 	$counter = 0;
 	while ($sql3 = mysql_fetch_assoc($sql2)) {
 		if ($counter % 2 == 0) { echo '<tr>'; } else { echo '<tr class="odd">'; }
-		echo '<td class="link"><a href="/ipInfo.php?ip='.$sql3['ip'].'">'.$sql3['username'].'</a></td><td>'.date('d.m.Y H:i', $sql3['zeit']).'</td><td>'.round($sql3['dabei']/86400).' Tage</td><td class="link"><a href="/lig_tabelle.php?liga='.$sql3['liga'].'">'.$sql3['name'].'</a></td>';
+		echo '<td class="link"><a href="/ipInfo.php?ip='.$sql3['ip'].'">'.$sql3['username'].'</a></td><td>'.date('d.m.Y H:i', $sql3['zeit']).'</td><td>'.round($sql3['dabei']/86400).' Tage</td><td class="link"><a href="/saison/lig_tabelle.php?liga='.$sql3['liga'].'">'.$sql3['name'].'</a></td>';
 		echo '</tr>';
 		$counter++;
 	}

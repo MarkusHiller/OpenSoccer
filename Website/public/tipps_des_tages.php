@@ -18,7 +18,7 @@ else {
 ?>
 <p><strong><?php echo _('Hier findest Du alle <i>Tipps des Tages</i> - gesammelt auf einer Seite.'); ?></strong></p>
 <?php
-$tippList = file('tipps_des_tages.php.txt');
+$tippList = file(__DIR__.'/tipps_des_tages.php.txt');
 $counter = -1;
 foreach ($tippList as $tippEntry) {
     // increment the counter

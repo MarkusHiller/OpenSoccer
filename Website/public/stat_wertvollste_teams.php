@@ -45,7 +45,7 @@
 <tbody>
 <?php
 $temp = FALSE;
-$tmp_dateiname = 'cache/stat_wertvollste_teams'.$temp_liga.'.html';
+$tmp_dateiname = __DIR__.'/../cache/stat_wertvollste_teams'.$temp_liga.'.html';
 if (file_exists($tmp_dateiname)) {
 	if (filemtime($tmp_dateiname) > getTimestamp('-1 day')) {
 		$tmp_liga_cache = file_get_contents($tmp_dateiname);

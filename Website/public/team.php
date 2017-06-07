@@ -65,7 +65,7 @@ if ($vql4 == 0) { $last_managed = date('d.m.Y H:i', $sql3['last_managed']); $str
 echo '<tr class="odd"><td>'._('Trainer').'</td>'.$strainer.'</tr>';
 echo '<tr><td>'._('Manager').'</td>'.$strainer.'</tr>';
 echo '<tr class="odd"><td>'._('Finanzlage').'</td><td>'.kontoToWort($sql3['konto']).'</td></tr>';
-echo '<tr><td>'._('Land').'</td><td class="link"><a href="/lig_tabelle.php?liga='.$sql3['liga'].'">'.$tql3['name'].'</a></td></tr>';
+echo '<tr><td>'._('Land').'</td><td class="link"><a href="/saison/lig_tabelle.php?liga='.$sql3['liga'].'">'.$tql3['name'].'</a></td></tr>';
 echo '<tr class="odd"><td>'._('Liga (Vorjahr)').'</td><td>'.$sql3['rank'].'. ('.$sql3['vorjahr_platz'].'.)</td></tr>';
 echo '<tr><td>'._('Pokal (Vorjahr)').'</td><td>'.pokalrunde_wort($sql3['pokalrunde']).' ('.pokalrunde_wort($sql3['vorjahr_pokalrunde']).')</td></tr>';
 echo '<tr class="odd"><td>'._('Cup (Vorjahr)').'</td><td>'.cuprunde_wort($sql3['cuprunde']).' ('.cuprunde_wort($sql3['vorjahr_cuprunde']).')</td></tr>';
