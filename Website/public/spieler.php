@@ -109,11 +109,11 @@ if (isset($_GET['scout']) && $scoutHasTime && $playForAi) {
 	$scoutHasTime = false;
 }
 if (isset($_POST['offer']) && is_numeric($_POST['offer']) && $canSubmitAnOffer && $playForAi) {
-	
-	if($konto > $_POST['offer']) {
-		$sql = "INSERT INTO ".CONFIG_TABLE_PREFIX."spieler_angebote SET spieler_ids = '".$sql3['ids']."', team_ids = '".$cookie_team."', angebot = ".$_POST['offer'];
+	$offer = $_POST['offer'] * 1000000;
+	if($konto > $offer) {
+		$sql = "INSERT INTO ".CONFIG_TABLE_PREFIX."spieler_angebote SET spieler_ids = '".$sql3['ids']."', team_ids = '".$cookie_team."', angebot = ".$offer;
 		DB::query($sql, FALSE);
-		addInfoBox("Du hast ein Angebot über ".number_format($_POST['offer'], 0, ',', '.')." € für ".$sql3['vorname']." ".$sql3['nachname']." abgegeben. Der Manager wird sich nach seiner Entscheidung bei dir melden.");
+		addInfoBox("Du hast ein Angebot über ".number_format($offer, 0, ',', '.')." € für ".$sql3['vorname']." ".$sql3['nachname']." abgegeben. Der Manager wird sich nach seiner Entscheidung bei dir melden.");
 		$canSubmitAnOffer = false;
 	} else {
 		addInfoBox("Du hast nicht genug Geld um ein so hohes Gebot abzugeben. Dein Kontostand beträgt: ".number_format($konto, 0, ',', '.')." €");

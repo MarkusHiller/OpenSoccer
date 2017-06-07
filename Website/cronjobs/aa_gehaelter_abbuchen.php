@@ -34,7 +34,6 @@ if (mysql_affected_rows() > 0) {
 	$sd2 = mysql_query($sd1);
 	// PREISE SENKEN ENDE
 	$sql1 = "SELECT a.ids, a.jugendarbeit, a.fanbetreuer, b.level AS scout FROM ".CONFIG_TABLE_PREFIX."teams AS a JOIN ".CONFIG_TABLE_PREFIX."scouts AS b ON a.ids = b.team_ids";
-	echo $sql1;
 	$sql2 = mysql_query($sql1);
 	while ($sql3 = mysql_fetch_assoc($sql2)) {
 		$sql4 = "SELECT SUM(gehalt) FROM ".$prefix."spieler WHERE team = '".$sql3['ids']."'";
