@@ -28,7 +28,7 @@ require_once(__DIR__.'/../classes/I18N.php');
 if (isset($_GET['setLocale'])) {
     I18N::changeLanguage($_GET['setLocale']);
 }
-I18N::init('messages', './i18n', 'en_US', array(
+I18N::init('messages', __DIR__.'/../i18n', 'en_US', array(
     '/^de((-|_).*?)?$/i' => 'de_DE',
     '/^en((-|_).*?)?$/i' => 'en_US',
     '/^es((-|_).*?)?$/i' => 'es_ES'
