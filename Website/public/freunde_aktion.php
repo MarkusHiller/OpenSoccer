@@ -1,5 +1,5 @@
-<?php include 'zzserver.php'; ?>
-<?php include 'zzcookie.php'; ?>
+<?php include_once(__DIR__.'/../common/zzserver.php'); ?>
+<?php include_once(__DIR__.'/../common/zzcookie.php'); ?>
 <?php
 $adresse = 'Location: /freunde.php';
 if (isset($_GET['id']) && isset($_GET['aktion']) && $loggedin == 1 && $cookie_id != CONFIG_DEMO_USER) {

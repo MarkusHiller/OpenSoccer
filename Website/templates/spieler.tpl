@@ -245,7 +245,7 @@
     <h2>Transferangebot</h2>
     <form action="/spieler.php?id={$ids}" method="post" accept-charset="utf-8">
         <p>
-            <input id="offer" type="number" value="0" title="Dein Kontostand: {number_format($konto, 0, ',', '.')} €" />
+            <input name="offer" type="number" value="0" title="Dein Kontostand: {number_format($konto, 0, ',', '.')} €" />
             <label style="display: inline;" for="offer"> Mio.</label>
             <input type="submit" value="Angebot unterbreiten" onclick="return {$onWatchClick}" />
         </p>
