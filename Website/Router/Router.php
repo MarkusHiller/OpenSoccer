@@ -15,7 +15,7 @@ class Router {
         } else {
             $url = '/';
         }
-        //var_dump($_SERVER);
+
         if(array_key_exists($url, self::$_routes)) {
             //fix for json data
             $rest_json = file_get_contents("php://input");

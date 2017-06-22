@@ -13,6 +13,10 @@
     "html5-boilerplate": "~4.3.0",
     "angular-ui-router": "~0.2.15",
     "lodash": "~3.10.1",
-    "angular-sanitize": "^1.6.x"
+    "angular-sanitize": "^1.6.x",
+    "knockout": "^3.4.2",
+    "notify": "^0.0.1",
+    "knockout-mapping": "^2.4.1",
+    "jquery": "^3.2.1"
   }
 }

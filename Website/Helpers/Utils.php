@@ -73,4 +73,30 @@ class Utils {
         $sql3 = mysql_fetch_assoc($sql2);
         return intval($sql3['einsatz']);
     }
+    
+    public static function schaetzungVomScout($cookie_team, $cookie_scout, $spielerID, $spielerTalent, $spielerStaerke) {
+        $possibleMD5chr = array(48=>-1, 49=>1, 50=>-1, 51=>1, 52=>-1, 53=>1, 54=>-1, 55=>1, 56=>-1, 57=>1, 97=>-1, 98=>1, 99=>-1, 100=>1, 101=>-1, 102=>1);
+        if ($spielerStaerke == $spielerTalent) { return $spielerTalent; }
+        $scout_hash = md5($cookie_team.$cookie_scout.$spielerID);
+        $scout_hash_zahl = ord($scout_hash);
+        if ($possibleMD5chr[$scout_hash_zahl] == 1) {
+            $abweichung_max = 0.35-$cookie_scout*0.05;
+        }
+        else {
+            $abweichung_max = -0.35+$cookie_scout*0.05;
+        }
+        $scout_hash = substr($scout_hash, 16);
+        $scout_hash_zahl = ord($scout_hash);
+        $zufallszahl_abweichung = $scout_hash_zahl-47;
+        if ($zufallszahl_abweichung > 10) {
+            $zufallszahl_abweichung = $zufallszahl_abweichung-39;
+        }
+        // $zufallszahl_abweichung ist jetzt eine Zufallszahl zwischen 1 und 16
+        $abweichung_pro_zufallszahl = $abweichung_max/16;
+        $abweichung = 1+$zufallszahl_abweichung*$abweichung_pro_zufallszahl;
+        $schaetzung_des_scouts = round(($spielerTalent*$abweichung), 1);
+        if ($schaetzung_des_scouts > 9.9) { $schaetzung_des_scouts = 9.9; }
+        if ($schaetzung_des_scouts < $spielerStaerke) { $schaetzung_des_scouts = $spielerStaerke; }
+        return $schaetzung_des_scouts;
+    }
 }

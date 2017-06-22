@@ -41,6 +41,10 @@
                 templateUrl: 'js/office/settings/settings.html',
                 controller: 'SettingsController as vm'
             })
+            .when('/nomination', {
+                templateUrl: 'js/team/nomination/nomination.html',
+                controller: 'NominationController as vm'
+            })
             .when('/help', {
                 templateUrl: 'js/help/help.html',
                 controller: 'HelpController'

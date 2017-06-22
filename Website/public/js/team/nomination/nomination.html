@@ -1,0 +1,259 @@
+<div id="showInfoBox99" class="showInfoBox" style="z-index:99;">
+    <span>
+        Aufgestellte Spieler: {{vm.anzPlayer}}/11, Stärke: {{vm.aufstellungsstaerke}}
+    </span>
+</div>
+<div id="infoBoxMp" class="showInfoBox" style="z-index:100;display: none;">
+    <span>Herzlichen Glückwunsch, Du hast gerade einen weiteren Teil deiner <a class="inText" href="/managerPruefung.php">Manager-Prüfung</a> abgeschlossen!</span>
+</div>
+<p style="text-align:right; margin-right: 5px;">
+    <span class="pagenava" ng-click="vm.changeType('Liga')" ng-class="{aktiv: vm.aufstellungsType === 'Liga'}">Liga</span>
+    <span class="pagenava" ng-click="vm.changeType('Pokal')" ng-class="{aktiv: vm.aufstellungsType === 'Pokal'}">Pokal</span>
+    <span class="pagenava" ng-click="vm.changeType('Cup')" ng-class="{aktiv: vm.aufstellungsType === 'Cup'}">Cup</span>
+    <span class="pagenava" ng-click="vm.changeType('Test')" ng-class="{aktiv: vm.aufstellungsType === 'Test'}">Test</span>
+</p>
+<p>
+    <button ng-click="vm.saveAufstellung()">Aufstellung speichern</button>
+</p>
+<div class="os-lineup-field">
+    <div class="os-lineup-player os-lineup-player-forward1" ng-bind="vm.getPlayerByPos(1)" ng-model-options="{getterSetter: true}" ng-click="vm.openChoosePlayerDialog(1)">
+        <div ng-if="this.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">14</span>
+            </div>
+            <div class="os-lineup-player-name">
+                {{this.player.vorname().substring(0,1) + '. ' + $data.player.nachname()}}
+            </div>
+        </div>
+        <div class="os-player-placeholder" ng-if="this.hasPlayer === false">
+            <span style="line-height: 40px;">ST</span>
+        </div>
+    </div>
+    <!--        <div class="os-lineup-player os-lineup-player-forward2" data-bind="with: getPlayerByPos(11), click: function() {openChoosePlayerDialog(11);}">
+                <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+                    <img src="images/trikot.png" style="width:100%;position: absolute;left: 0;top: 0;" alt="trikot" />
+                    <span class="os-trikot-number">15</span>
+    <span class="os-lineup-player-name" data-bind="text: $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname()"></span>
+                </div>
+                <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+                    <span style="line-height: 40px;">ST</span>
+                </div>
+            </div>-->
+    <div class="os-lineup-player os-lineup-player-forward3" data-bind="with: getPlayerByPos(2), click: function() {openChoosePlayerDialog(2);}">
+        <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">16</span>
+            </div>
+            <div class="os-lineup-player-name" data-bind="text: $data.player ? $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname() : ''"></div>
+        </div>
+        <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+            <span style="line-height: 40px;">ST</span>
+        </div>
+    </div>
+    <div class="os-lineup-player os-lineup-player-midfield1" data-bind="with: getPlayerByPos(3), click: function() {openChoosePlayerDialog(3);}">
+        <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">8</span>
+            </div>
+            <div class="os-lineup-player-name" data-bind="text: $data.player ? $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname() : ''"></div>
+        </div>
+        <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+            <span style="line-height: 40px;">LM</span>
+        </div>
+    </div>
+    <div class="os-lineup-player os-lineup-player-midfield2" data-bind="with: getPlayerByPos(4), click: function() {openChoosePlayerDialog(4);}">
+        <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">9</span>
+            </div>
+            <div class="os-lineup-player-name" data-bind="text: $data.player ? $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname() : ''"></div>
+        </div>
+        <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+            <span style="line-height: 40px;">ZM</span>
+        </div>
+    </div>
+    <!--        <div class="os-lineup-player os-lineup-player-midfield3" data-bind="with: getPlayerByPos(32), click: function() {openChoosePlayerDialog(32);}">
+                <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+                    <img src="images/trikot.png" style="width:100%;position: absolute;left: 0;top: 0;" alt="trikot" />
+                    <span class="os-trikot-number">10</span>
+    <span class="os-lineup-player-name" data-bind="text: $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname()"></span>
+                </div>
+                <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+                    <span style="line-height: 40px;">ZM</span>
+                </div>
+            </div>-->
+    <div class="os-lineup-player os-lineup-player-midfield4" data-bind="with: getPlayerByPos(5), click: function() {openChoosePlayerDialog(5);}">
+        <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">11</span>
+            </div>
+            <div class="os-lineup-player-name" data-bind="text: $data.player ? $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname() : ''"></div>
+        </div>
+        <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+            <span style="line-height: 40px;">ZM</span>
+        </div>
+    </div>
+    <div class="os-lineup-player os-lineup-player-midfield5" data-bind="with: getPlayerByPos(6), click: function() {openChoosePlayerDialog(6);}">
+        <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">12</span>
+            </div>
+            <div class="os-lineup-player-name" data-bind="text: $data.player ? $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname() : ''"></div>
+        </div>
+        <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+            <span style="line-height: 40px;">RM</span>
+        </div>
+    </div>
+    <div class="os-lineup-player os-lineup-player-defender1" data-bind="with: getPlayerByPos(7), click: function() {openChoosePlayerDialog(7);}">
+        <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">2</span>
+            </div>
+            <div class="os-lineup-player-name" data-bind="text: $data.player ? $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname() : ''"></div>
+        </div>
+        <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+            <span style="line-height: 40px;">LV</span>
+        </div>
+    </div>
+    <div class="os-lineup-player os-lineup-player-defender2" data-bind="with: getPlayerByPos(8), click: function() {openChoosePlayerDialog(8);}">
+        <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">3</span>
+            </div>
+            <div class="os-lineup-player-name" data-bind="text: $data.player ? $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname() : ''"></div>
+        </div>
+        <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+            <span style="line-height: 40px;">IV</span>
+        </div>
+    </div>
+    <!--        <div class="os-lineup-player os-lineup-player-defender3" data-bind="with: getPlayerByPos(52)">
+                <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+                    <img src="images/trikot.png" style="width:100%;position: absolute;left: 0;top: 0;" alt="trikot" />
+                    <span class="os-trikot-number">3</span>
+    <span class="os-lineup-player-name" data-bind="text: $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname()"></span>
+                </div>
+                <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+                    <span style="line-height: 40px;">IV</span>
+                </div>
+            </div>-->
+    <div class="os-lineup-player os-lineup-player-defender4" data-bind="with: getPlayerByPos(9), click: function() {openChoosePlayerDialog(9);}">
+        <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">5</span>
+            </div>
+            <div class="os-lineup-player-name" data-bind="text: $data.player ? $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname() : ''"></div>
+        </div>
+        <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+            <span style="line-height: 40px;">IV</span>
+        </div>
+    </div>
+    <div class="os-lineup-player os-lineup-player-defender5" data-bind="with: getPlayerByPos(10), click: function() {openChoosePlayerDialog(10);}">
+        <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">6</span>
+            </div>
+            <div class="os-lineup-player-name" data-bind="text: $data.player ? $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname() : ''"></div>
+        </div>
+        <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+            <span style="line-height: 40px;">RV</span>
+        </div>
+    </div>
+    <div class="os-lineup-player os-lineup-player-goalkeeper" data-bind="with: getPlayerByPos(11), click: function() {openChoosePlayerDialog(11);}">
+        <div style="display: none;" data-bind="visible: $data.hasPlayer !== false">
+            <div class="os-trikot-container">
+                <img src="img/trikot.png" alt="trikot" />
+                <span class="os-trikot-number">1</span>
+            </div>
+            <div class="os-lineup-player-name" data-bind="text: $data.player ? $data.player.vorname().substring(0,1) + '. ' + $data.player.nachname() : ''"></div>
+        </div>
+        <div class="os-player-placeholder" style="display: none;" data-bind="visible: $data.hasPlayer === false">
+            <span style="line-height: 40px;">TW</span>
+        </div>
+    </div>
+</div>
+<div id="playerSelectDialog" class="os-player-dialog-backdrop" style="display: none;">
+    <div class="os-player-dialog">
+        <div class="os-player-dialog-header">
+            <span>Spieler wählen</span>
+            <span style="cursor: pointer; position: absolute; right: 15px;" data-bind="click: closeDialog()">X</span>
+        </div>
+        <div style="height: 93%;overflow-y: scroll;">
+            <div class="os-dialog-card" data-bind="click: function() {setPlayerToPosition(null);}">
+                <div style="text-align: center;">
+                    Kein Spieler
+                </div>
+            </div>
+            <!-- ko foreach: choosablePlayers -->
+            <div class="os-dialog-card" data-bind="css: {'os-dialog-player-active': $parent.isOnPosition($data) === 1, 'os-dialog-player-activeO': $parent.isOnPosition($data) === 2}, click: function() {$parent.setPlayerToPosition($data);}">
+                <div style="margin-right: 5px;display: inline-block;">
+                    <img src="img/trikot.png" style="width:40px;" alt="trikot" />
+                </div>
+                <div style="display: inline-block;width:130px;">
+                    <b><div data-bind="text: vorname() + ' ' + nachname()"></div></b>
+                    <div data-bind="text: 'Alter: ' + Math.floor(wiealt() / 365)"></div>
+                    <div data-bind="text: 'Stärke: ' + staerke()"></div>
+                </div>
+                <div style="display: inline-block; width: 85px;">
+                    <div data-bind="text: 'Frische: ' + $parent.percent(frische())"></div>
+                    <div data-bind="text: 'Moral: ' + $parent.percent(moral()), style: { color: moral() > 75 ? 'green' : moral() > 60 ? '' : 'red' }"></div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<p>
+    <select size="1" style="width:200px" data-bind="options: availableOptions(), value: selectedOptionTake"></select>
+    <button data-bind="click: takeAufstellung">Aufstellung übernehmen</button>
+</p>
+<h1>Meine Spieler</h1>
+<table>
+    <thead>
+        <tr class="odd">
+            <th scope="col">&nbsp;</th>
+            <th scope="col">MT</th>
+            <th scope="col">Name</th>
+            <th scope="col"><a href="/aufstellung.php?orderBy=AL">AL</a></th>
+            <th scope="col"><a href="/aufstellung.php?orderBy=staerke">Stärke</a></th>
+            <th scope="col"><a href="/aufstellung.php?orderBy=FR">FR</a></th>
+            <th scope="col"><a href="/aufstellung.php?orderBy=MO">MO</a></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: players">
+        <tr data-bind="css: {'os-player-row-injured': verletzung() != 0}, style: {'font-weight': $parent.play($data) ? 'bold' : 100}">
+            <td data-bind="style: {'background-color': $parent.color(ids())}">&nbsp;</td>
+            <td data-bind="text: position()"></td>
+            <td class="link">
+                <a data-bind="attr: {href: '/spieler.php?id=' + ids()}, text: vorname() + ' ' + nachname()"></a>
+            </td>
+            <td data-bind="text: Math.floor(wiealt() / 365)"></td>
+            <td>
+                <span data-bind="text: staerke()"></span>
+                <span style="color:#999" data-bind="text: '(' + talent() + ')'"></span>
+            </td>
+            <td>
+                <!-- ko if: verletzung() > 0 -->
+                <span data-bind="text: verletzung() + (verletzung() > 1 ? ' Tage' : ' Tag')"></span>
+                <!-- /ko -->
+                <!-- ko if: verletzung() == 0 -->
+                <span data-bind="text: $parent.percent(frische())"></span>
+                <!-- /ko -->
+            </td>
+            <td style="font-weight: 100;" data-bind="text: $parent.percent(moral()), style: { color: moral() > 75 ? 'green' : moral() > 60 ? '' : 'red' }"></td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>Überschriften:</strong> SE: Startelf, MT: Mannschaftsteil, AL: Alter, FR: Frische, MO: Moral</p>
+<p><strong>Mannschaftsteile:</strong> T: Torwart, A: Abwehr, M: Mittelfeld, S: Sturm</p>
+<p><strong>Fettdruck:</strong> Aufgestellte Spieler</p>
+<p><strong>Rote Schrift:</strong> verletzte oder gesperrte Spieler</p>

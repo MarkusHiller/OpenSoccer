@@ -22,7 +22,7 @@ function NotesController($scope, $location, $officeRepo) {
     }
 
     vm.delNote = function (note) {
-        var result = confirm("Möchtest du diese Notiz wirklichlöschen?");
+        var result = confirm("Möchtest du diese Notiz wirklich löschen?");
         if(result == false) return;
         $officeRepo.delNote({ noteId: note.id }, success);
         function success(result) {

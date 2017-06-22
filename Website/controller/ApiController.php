@@ -1,13 +1,13 @@
 <?php
 
-require_once(__DIR__ . "/../utils/utils.php");
+require_once(__DIR__ . "/../Helpers/utils.php");
 
 class ApiController {
 
     public function updateAufstellung() {
         $result = new stdClass();
         $type = $_POST['type'];
-        $data = $_POST['data'];
+        $data = $_POST['data'];var_dump($_POST);
         if (!$this->validateOncePerPosition($type, $data)) {
             $result->err = true;
             echo json_encode($result);

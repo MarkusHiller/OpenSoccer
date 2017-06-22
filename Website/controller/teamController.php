@@ -55,4 +55,52 @@ class TeamController {
         return;
     }
     
+    public function getNominationData() {
+        $resultModel = new ResultModel();
+        
+        $teamIds = $_SESSION['TeamIds'];
+        $scout = $_SESSION['scout'];
+        $sql = "SELECT spieler, farbe FROM " . CONFIG_TABLE_PREFIX . "spieler_mark WHERE team = '$teamIds'";
+        $result = DB::query($sql, false);
+        
+        $resultModel->data = new stdClass();
+        $resultModel->data->markierungen = array();
+        while ($playerMark = mysql_fetch_assoc($result)) {
+            $mark[] = $playerMark;
+            $resultModel->data->markierungen[$playerMark['spieler']] = $playerMark['farbe'];
+        }
+        
+        $spieltypAufstellung = 'Liga';
+        if (isset($_GET['orderBy'])) {
+            switch ($_GET['orderBy']) {
+                case 'AL':
+                    $orderBy = "wiealt";
+                    break;
+                case 'MO':
+                    $orderBy = "moral";
+                    break;
+                case 'FR':
+                    $orderBy = "frische DESC";
+                    break;
+                default:
+                    $orderBy = "staerke DESC";
+            }
+        } else {
+            $orderBy = "staerke DESC";
+        }
+        
+        $sql = "SELECT ids, position, vorname, nachname, wiealt, moral, staerke, talent, frische, startelf_" . $spieltypAufstellung . " AS startelfWert, verletzung, startelf_Liga, startelf_Pokal, startelf_Cup, startelf_Test FROM " . CONFIG_TABLE_PREFIX . "spieler WHERE team = '" . $teamIds . "' ORDER BY position = 'S', position = 'M', position = 'A', position = 'T', " . $orderBy;
+        $result = mysql_query($sql);
+        $counter = 0;
+        $resultModel->data->players = array();
+        while ($player = mysql_fetch_assoc($result)) {
+            $player['talent'] = number_format(Utils::schaetzungVomScout($teamIds, $scout, $player['ids'], $player['talent'], $player['staerke']), 1, ',', '.');
+            $resultModel->data->players[] = $player;
+        }
+        
+        $resultModel->err = false;
+        echo json_encode($resultModel);
+        return;
+    }
+    
 }

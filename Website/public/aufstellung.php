@@ -15,7 +15,7 @@ if ($_SESSION['via_android'] == 1) {
 $spieltypAufstellung = 'Liga';
 
 if ($loggedin == 1) {
-    include_once(__DIR__ . '/views/aufstellung.html');
+    include_once(__DIR__ . '/../views/aufstellung.html');
 
     $gf1 = "SELECT spieler, farbe FROM " . $prefix . "spieler_mark WHERE team = '" . $cookie_team . "'";
     $gf2 = mysql_query($gf1);
@@ -53,7 +53,7 @@ if ($loggedin == 1) {
         $players[] = $sql3;
     }
 
-    include_once(__DIR__ . '/viewModels/aufstellung.php');
+    include_once(__DIR__ . '/../viewModels/aufstellung.php');
 } else {
     echo '<p>' . _('Du musst angemeldet sein, um diese Seite aufrufen zu können!') . '</p>';
 }

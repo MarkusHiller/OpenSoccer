@@ -11,6 +11,7 @@ Router::add('/changeTeam', 'AccountController@changeTeam', true);
 
 //CommonController
 Router::add('/getTopmanager', 'CommonController@getTopmanager', false);
+Router::add('/getInfocounts', 'CommonController@getInfocounts', false);
 
 //GameController
 Router::add('/getNextMatches', 'GameController@getNextMatches', true);
@@ -26,6 +27,7 @@ Router::add('/searchForTeamOrManager', 'OfficeController@searchForTeamOrManager'
 
 //TeamController
 Router::add('/getSelectableTeams', 'TeamController@getSelectableTeams', true);
+Router::add('/getNominationData', 'TeamController@getNominationData', true);
 
 
 Router::add('/updateAufstellung', 'ApiController@updateAufstellung', true);

@@ -65,12 +65,12 @@ function setTaskDone($shortName) {
 <link rel="stylesheet" href="css/Refresh.php?v=234936" type="text/css" />
 <link rel="stylesheet" href="css/emblem.css" type="text/css" />
 <link rel="stylesheet" href="css/app.css?v=01102016" type="text/css" />
-<script type="text/javascript" src="js/drop_down.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/knockout.min.js"></script>
-<script type="text/javascript" src="js/ko.mapping.min.js"></script>
-<script type="text/javascript" src="js/lodash.min.js"></script>
-<script type="text/javascript" src="js/notify.min.js"></script>
+<script type="text/javascript" src="extras/drop_down.js"></script>
+<script type="text/javascript" src="libs/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="libs/knockout/dist/knockout.js"></script>
+<script type="text/javascript" src="libs/knockout-mapping/knockout.mapping.js"></script>
+<script type="text/javascript" src="libs/lodash/lodash.min.js"></script>
+<script type="text/javascript" src="libs/notify/notification.js"></script>
 <link rel="stylesheet" href="css/drop_down.css" type="text/css" />
 <link rel="icon" type="image/png" href="img/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />

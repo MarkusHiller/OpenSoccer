@@ -9,7 +9,7 @@ class AccountController {
             $username = $_POST['username'];
             $password = md5('1'.$_POST['password'].'29');
             
-            $sql = "SELECT id, ids, email, username, status, liga, team, regdate, last_login, readSticky, multiSperre, acceptedRules, hasLicense FROM ".CONFIG_TABLE_PREFIX."users WHERE username = '$username' AND password = '$password' LIMIT 1";
+            $sql = "SELECT id, ids, email, username, status, liga, team, regdate, last_login, readSticky, multiSperre, acceptedRules, hasLicense FROM " . CONFIG_TABLE_PREFIX . "users WHERE username = '$username' AND password = '$password' LIMIT 1";
             $result = DB::query($sql, true);
             $count = mysql_num_rows($result);
             

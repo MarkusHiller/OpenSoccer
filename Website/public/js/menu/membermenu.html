@@ -1,8 +1,8 @@
 <li class="menueintrag">
-    <a href="#/central.php">Büro</a>
+    <a href="#/central">Büro</a>
     <ul>
         <li><a ng-href="#/central">Zentrale</a></li>
-        <li><a href="#/protocol">Protokoll</a></li>
+        <li><a ng-href="#/protocol">Protokoll</a></li>
         <li><a ng-href="#/notes">Notizen</a></li>
         <li><a ng-href="#/settings">Einstellungen</a></li>
     </ul>
@@ -28,7 +28,7 @@
 <li class="menueintrag">
     <a href="/aufstellung.php">Team</a>
     <ul>
-        <li><a href="/aufstellung.php">Aufstellung</a></li>
+        <li><a href="#/nomination">Aufstellung</a></li>
         <li><a href="/taktik.php">Taktik</a></li>
         <li><a ng-href="#/squard">Kader</a></li>
         <li><a href="/entwicklung.php">Entwicklung</a></li>
@@ -58,15 +58,15 @@
     </ul>
 </li>
 <li class="menueintrag">
-    <a href="/leihgaben.php">Anfragen (0)</a>
+    <a href="/leihgaben.php">Anfragen ({{vm.requestsCount}})</a>
     <ul>
-        <li><a href="/leihgaben.php">Leihgaben (0)</a></li>
-        <li><a href="/testspiele.php">Testspiele (0)</a></li>
-        <li><a href="/ligaTausch.php">Ligatausch (0)</a></li>
+        <li><a href="/leihgaben.php">Leihgaben ({{vm.loanCount}})</a></li>
+        <li><a href="/testspiele.php">Testspiele ({{vm.testgameCount}})</a></li>
+        <li><a href="/ligaTausch.php">Ligatausch ({{vm.ligachangeCount}})</a></li>
     </ul>
 </li>
 <li class="menueintrag">
-    <a href="/support.php">Support (?)</a>
+    <a href="/support.php">Support ({{vm.supportCount}})</a>
     <ul>
         <li><a href="/support.php">Support</a></li>
         <li><a href="/wio.php#teamList">Post ans Team</a></li>

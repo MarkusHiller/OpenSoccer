@@ -180,9 +180,9 @@ if (!isset($_SESSION['via_android'])) {
                         ?>><a href="/#/central"><?php echo _('Büro'); ?></a>
                         <ul>
                             <li><a href="/#/central"><?php echo _('Zentrale'); ?></a></li>
-    <?php if ($cookie_team != '__' . $cookie_id) { ?><li><a href="/protokoll.php"><?php echo _('Protokoll'); ?></a></li><?php } ?>
-                            <li><a href="/notizen.php"><?php echo _('Notizen'); ?></a></li>
-                            <li><a href="/einstellungen.php"><?php echo _('Einstellungen'); ?></a></li>
+    <?php if ($cookie_team != '__' . $cookie_id) { ?><li><a href="/#/protocol"><?php echo _('Protokoll'); ?></a></li><?php } ?>
+                            <li><a href="/#/notes"><?php echo _('Notizen'); ?></a></li>
+                            <li><a href="/#/settings"><?php echo _('Einstellungen'); ?></a></li>
                         </ul>
                     </li>
                     <li class="menueintrag"<?php
@@ -217,7 +217,7 @@ if (!isset($_SESSION['via_android'])) {
                     }
                     ?>><a href="/aufstellung.php"><?php echo _('Team'); ?></a>
                             <ul>
-                                <li><a href="/aufstellung.php"><?php echo _('Aufstellung'); ?></a></li>
+                                <li><a href="/#/nomination"><?php echo _('Aufstellung'); ?></a></li>
                                 <li><a href="/taktik.php"><?php echo _('Taktik'); ?></a></li>
                                 <li><a href="/kader.php"><?php echo _('Kader'); ?></a></li>
                                 <li><a href="/entwicklung.php"><?php echo _('Entwicklung'); ?></a></li>

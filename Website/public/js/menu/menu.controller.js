@@ -2,25 +2,33 @@ angular
     .module('os2')
     .controller('MenuController', MenuController);
 
-MenuController.$inject = ['$scope', '$location', 'accountRepository'];
+MenuController.$inject = ['$scope', '$location', 'accountRepository', 'commonRepository'];
 /* @ngInject */
-function MenuController($scope, $location, accRepo) {
+function MenuController($scope, $location, accRepo, commonRepo) {
+    var vm = this;
+    vm.supportCount = 0;
+    vm.requestsCount = 0;
+    vm.testgameCount = 0;
+    vm.loanCount = 0;
+    vm.ligachangeCount = 0;
 
-    if (!window.localStorage.getItem("token")) {
-        $location.path("/home");
-    }
-
-    this.logout = function () {
+    vm.logout = function () {
         accRepo.logout(function () {
             $location.path("/logout");
         });
     };
 
-    this.isAuthenticated = function () {
+    vm.isAuthenticated = function () {
         return accRepo.isAuthenticated;
     };
 
-    this.useDemoAccount = function () {
+    $scope.$watch(accRepo.isAuthenticated, function() {
+        if (accRepo.isAuthenticated) {
+            updateInfoCounter();
+        }
+    });
+
+    vm.useDemoAccount = function () {
         var self = this;
         var loginData = {
             username: "Demo",
@@ -39,4 +47,20 @@ function MenuController($scope, $location, accRepo) {
         function error(error) {
         }
     };
+
+    function updateInfoCounter() {
+        commonRepo.getInfocounts(success);
+
+        function success(result) {
+            if (result.data.err) {
+
+            } else {
+                vm.supportCount = result.data.data.supportCount;
+                vm.requestsCount = result.data.data.testgameCount;
+                vm.testgameCount = result.data.data.testgameCount;
+                vm.loanCount = result.data.data.loanCount;
+                vm.ligachangeCount = result.data.data.ligachangeCount;
+            }
+        }
+    }
 }
