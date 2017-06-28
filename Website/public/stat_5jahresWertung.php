@@ -38,7 +38,7 @@ while ($sql3 = mysql_fetch_assoc($sql2)) {
 	if ($counter <= 6) { echo '<tr class="tabelle_3startplaetze">'; }
 	elseif ($counter % 2 == 1) { echo '<tr>'; }
 	else { echo '<tr class="odd">'; }
-	echo '<td>'.$counter.'.</td><td class="link"><a href="/lig_tabelle.php?liga='.$sql3['ids'].'">'.substr($sql3['name'], 0, -2).'</a></td>';
+	echo '<td>'.$counter.'.</td><td class="link"><a href="/saison/lig_tabelle.php?liga='.$sql3['ids'].'">'.substr($sql3['name'], 0, -2).'</a></td>';
 	if ($live_scoring_spieltyp_laeuft == 'Pokal') {
 		echo '<td>?</td><td>?</td>';
 	}

@@ -256,7 +256,7 @@ else {
 				if ($counter % 2 != 0) { echo ' class="odd"'; }
 				echo '>';
 				echo '<td class="link"><a href="/team.php?id='.$getleer3['ids'].'">'.$getleer3['name'].'</a></td>';
-				echo '<td class="link"><a href="/lig_tabelle.php?liga='.$getleer3['liga'].'">'.$getleer3['ligaName'].'</a></td>';
+				echo '<td class="link"><a href="/saison/lig_tabelle.php?liga='.$getleer3['liga'].'">'.$getleer3['ligaName'].'</a></td>';
 				echo '<td class="link"><a href="/index.php?newUser=1&amp;selectTeam='.$getleer3['ids'].'&amp;verify='.md5($getleer3['ids']).'" onclick="return confirm(\''._('Bist Du sicher?').'\');">'._('Team wählen').'</a></td>';
 				echo '</tr>';
 				$counter++;

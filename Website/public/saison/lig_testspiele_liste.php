@@ -1,11 +1,11 @@
-<?php include_once(__DIR__.'/../common/zz1.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz1.php'); ?>
 <title><?php echo _('Testspiele'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
 <?php if ($loggedin == 1) { ?>
 <?php } ?>
-<?php include_once(__DIR__.'/../common/zz2.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz2.php'); ?>
 <?php if ($loggedin == 1) { ?>
 <h1><?php echo _('Spieltag auswählen'); ?></h1>
-<form action="/lig_testspiele_liste.php" method="get" accept-charset="utf-8">
+<form action="/saison/lig_testspiele_liste.php" method="get" accept-charset="utf-8">
 <p><select name="tag" size="1" style="width:200px">
 <?php
 if (isset($_GET['tag'])) {
@@ -71,4 +71,4 @@ while ($sql3 = mysql_fetch_assoc($sql2)) {
 <h1><?php echo _('Testspiele'); ?></h1>
 <p><?php echo _('Du musst angemeldet sein, um diese Seite aufrufen zu können!'); ?></p>
 <?php } ?>
-<?php include_once(__DIR__.'/../common/zz3.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz3.php'); ?>

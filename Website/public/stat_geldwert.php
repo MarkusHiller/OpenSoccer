@@ -6,7 +6,7 @@
 <h1><?php echo _('Wert des Geldes'); ?></h1>
 <?php
 $temp = FALSE;
-$tmp_dateiname = '../cache/stat_geldwert.html';
+$tmp_dateiname = __DIR__.'/../cache/stat_geldwert.html';
 if (file_exists($tmp_dateiname)) {
 	if (filemtime($tmp_dateiname) > getTimestamp('-1 day')) {
 		$tmp_liga_cache = file_get_contents($tmp_dateiname);

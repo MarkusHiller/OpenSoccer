@@ -18,7 +18,7 @@
 <tbody>
 <?php
 $temp = FALSE;
-$tmp_dateiname = '../cache/stat_dauerbrenner.html';
+$tmp_dateiname = __DIR__.'/../cache/stat_dauerbrenner.html';
 if (file_exists($tmp_dateiname)) {
 	if (filemtime($tmp_dateiname) > getTimestamp('-1 day')) {
 		$tmp_liga_cache = file_get_contents($tmp_dateiname);

@@ -1,6 +1,6 @@
 <?php 
-include_once(__DIR__.'/../common/zz1.php');
-require_once(__DIR__.'/../controller/emblemController.php');
+include_once(__DIR__.'/../../common/zz1.php');
+require_once(__DIR__.'/../../controller/emblemController.php');
 ?>
 <title><?php echo _('Tabelle | Liga'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
 <style type="text/css">
@@ -53,7 +53,7 @@ if (isset($_GET['slide'])) {
 }
 // ERGEBNISSE FUER TAG DAVOR ODER DANACH ENDE
 ?>
-<?php include_once(__DIR__.'/../common/zz2.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz2.php'); ?>
 <?php
 if ($loggedin == 1) {
     setTaskDone('league_standings');
@@ -67,7 +67,7 @@ if (isset($_POST['nachricht']) && isset($_POST['liga']) && $loggedin == 1 && $co
 		$chatSperreBis = $sql3['MAX(chatSperre)'];
 		if ($chatSperreBis > 0 && $chatSperreBis > time()) {
 			addInfoBox(__('Du bist noch bis zum %1$s Uhr für die Kommunikation im Spiel gesperrt. Wenn Dir unklar ist warum, frage bitte das %2$s.', date('d.m.Y H:i', $chatSperreBis), '<a class="inText" href="/wio.php">'._('Support-Team').'</a>'));
-			include_once(__DIR__.'/../common/zz3.php');
+			include_once(__DIR__.'/../../common/zz3.php');
 			exit;
 		}
 	}
@@ -95,7 +95,7 @@ if (isset($_POST['nachricht']) && isset($_POST['liga']) && $loggedin == 1 && $co
 </form>
 <?php
 $temp = FALSE;
-$tmp_dateiname = '../cache/tabelle'.$temp_liga.'.html';
+$tmp_dateiname = __DIR__.'/../../cache/tabelle'.$temp_liga.'.html';
 if (file_exists($tmp_dateiname)) {
 	if (filemtime($tmp_dateiname) > getTimestamp('-1 hour') OR (date('H', time()) < 16 && date('H', time()) > 13)) {
 		$tmp_liga_cache = file_get_contents($tmp_dateiname);
@@ -219,7 +219,7 @@ echo $tmp_liga_cache;
 }
 ?>
 <h1><?php echo __('Ergebnisse (%s. Spieltag)', $slideResults); ?></h1>
-<form action="/lig_tabelle.php" method="get" accept-charset="utf-8">
+<form action="/saison/lig_tabelle.php" method="get" accept-charset="utf-8">
 <p style="text-align:right">
 	<input type="hidden" name="liga" value="<?php echo $temp_liga; ?>" /><select name="slide" size="1" style="width:120px">
 		<?php
@@ -274,7 +274,7 @@ echo '</table>';
 if ($loggedin == 1) {
 ?>
 <h1><?php echo _('Deine Nachricht'); ?></h1>
-<form action="/lig_tabelle.php" method="post" accept-charset="utf-8">
+<form action="/saison/lig_tabelle.php" method="post" accept-charset="utf-8">
 <p><input type="text" name="nachricht" style="width:60%" /> <input type="hidden" name="liga" value="<?php echo $temp_liga; ?>" /><input type="submit" value="<?php echo _('Eintragen'); ?>"<?php echo noDemoClick($cookie_id); ?> /></p>
 </form>
 <h1><?php echo _('Manager-Talk'); ?></h1>
@@ -291,10 +291,10 @@ $sql2 = mysql_query($sql1);
 while ($sql3 = mysql_fetch_assoc($sql2)) {
 	echo '<p><b>'.__('%1$s schrieb am %2$s:', displayUsername($sql3['username'], $sql3['user']), date('d.m.Y, H:i', $sql3['zeit']));
 	if ($loggedin == 1 && ($sql3['user'] == $cookie_id || $_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin')) {
-		echo ' <a href="/lig_tabelle.php?liga='.mysql_real_escape_string($temp_liga).'&amp;delEntry='.$sql3['id'].'">'._('[Löschen]').'</a>';
+		echo ' <a href="/saison/lig_tabelle.php?liga='.mysql_real_escape_string($temp_liga).'&amp;delEntry='.$sql3['id'].'">'._('[Löschen]').'</a>';
 	}
 	echo '</b><br />'.$sql3['nachricht'].'</p>';
 }
 }
 ?>
-<?php include_once(__DIR__.'/../common/zz3.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz3.php'); ?>

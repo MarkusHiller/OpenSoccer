@@ -1,9 +1,9 @@
 <?php 
-include_once(__DIR__.'/../common/zz1.php'); 
-require_once(__DIR__.'/../controller/emblemController.php');
+include_once(__DIR__.'/../../common/zz1.php'); 
+require_once(__DIR__.'/../../controller/emblemController.php');
 ?>
 <title><?php echo _('Nationaler Cup'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
-<?php include_once(__DIR__.'/../common/zz2.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz2.php'); ?>
 <?php if ($loggedin == 1) { ?>
 <h1><?php echo _('Land wählen'); ?></h1>
 <form action="" method="get" accept-charset="utf-8">
@@ -40,7 +40,7 @@ require_once(__DIR__.'/../controller/emblemController.php');
 <p><?php echo _('Es gibt eine Qualifikation und danach fünf Runden, die jeweils ausgelost werden. In einem KO-Spiel pro Runde ermitteln die Teams den Sieger, der dann die nächste Runde erreicht.'); ?></p>
 <?php
 $temp = FALSE;
-$tmp_dateiname = '../cache/cup_ergebnisse'.urlencode($temp_land).'.html';
+$tmp_dateiname = __DIR__.'/../../cache/cup_ergebnisse'.urlencode($temp_land).'.html';
 if (file_exists($tmp_dateiname)) {
 	if (filemtime($tmp_dateiname) > getTimestamp('+2 hours')) {
 		$tmp_liga_cache = file_get_contents($tmp_dateiname);
@@ -48,7 +48,7 @@ if (file_exists($tmp_dateiname)) {
 			$ersatz_temp = '<strong>'.$cookie_teamname.'</strong>';
 			echo str_replace($cookie_teamname, $ersatz_temp, $tmp_liga_cache);
             $temp = TRUE;
-            include_once(__DIR__.'/../common/zz3.php');
+            include_once(__DIR__.'/../../common/zz3.php');
             exit;
 		}
 	}
@@ -139,4 +139,4 @@ echo str_replace($cookie_teamname, $ersatz_temp, $tmp_liga_cache);
 <h1><?php echo _('Nationaler Cup'); ?></h1>
 <p><?php echo _('Du musst angemeldet sein, um diese Seite aufrufen zu können!'); ?></p>
 <?php } ?>
-<?php include_once(__DIR__.'/../common/zz3.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz3.php'); ?>
