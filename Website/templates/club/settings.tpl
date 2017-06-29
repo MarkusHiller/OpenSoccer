@@ -2,17 +2,19 @@
 {if $loggedin == 1}
 <p>Hier kannst du vereinsspeziefische Einstellungen vornehmen.</p>
 
-<h1>Wappen</h1>
-<img class="emblem-big" src="/images/emblems/{$emblem}" />
-<form enctype="multipart/form-data" action="/club/settings.php" method="POST">
-    <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
-    <p>Datei auswählen: <input name="emblem" type="file" /></p>
-    <p>
-        <input type="submit" value="Speichern" />
-    </p>
-</form>
-<p>{$emblemResult}</p>
-
+<div>
+    <h1>Wappen</h1>
+    <img class="emblem-big" src="/images/emblems/{$emblem}" />
+    <form enctype="multipart/form-data" action="/club/settings.php" method="POST">
+        <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+        <p>Datei auswählen: <input name="emblem" type="file" /></p>
+        <p>
+            <input type="submit" value="Speichern" />
+        </p>
+    </form>
+    <p>{$emblemResult}</p>
+    <div style="clear: both;"></div>
+</div>
 <h1>Verein in eine andere Liga umziehen</h1>
 <p>Ein Wechsel in eine andere Liga ist nur alle 45 Tage möglich und auch nur in den ersten fünf Spieltagen der Saison. Wärend der Livespiele ist der Ligawechsel ebenfalls nicht möglich.</p>
     {if $ligachangeResult != ''}
@@ -25,11 +27,11 @@
                 Leider konnte der Wechsel nicht erfolgreich durchgeführt werden. Eventuell ist kein freies Team in der Liga vorhanden.
             </p>
         {/if}
-    {*elseif $daysToWait > 0*}
+    {elseif $daysToWait > 0}
     <p>Du musst noch <strong>{$daysToWait} Tage</strong> warten, bis Du wieder die Liga wechseln kannst.</p>
-    {*elseif $matchDay > 5*}
+    {elseif $matchDay > 5}
     <p>Der Verband erlaubt einen Ligatausch nur an den <strong>ersten fünf Spieltagen</strong>. Bitte warte bis zur nächsten Saison.</p>
-    {*elseif $liveScoringType != ''*}
+    {elseif $liveScoringType != ''}
     <p>Zurzeit laufen <strong>{$liveScoringType}-Spiele</strong>. Deshalb kannst Du leider keine Liga-Wechsel durchführen. Bitte warte, bis die Spiele beendet sind.</p>
     {else}
     <form action="/club/settings.php" method="POST">
