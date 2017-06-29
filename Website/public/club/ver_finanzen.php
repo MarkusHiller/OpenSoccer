@@ -1,6 +1,6 @@
-<?php include_once(__DIR__.'/../common/zz1.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz1.php'); ?>
 <title><?php echo _('Finanzen'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
-<?php include_once(__DIR__.'/../common/zz2.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz2.php'); ?>
 <h1><?php echo _('Finanzen'); ?></h1>
 <?php if ($loggedin == 1) { ?>
 <p><?php echo _('Hier im Finanz-Bereich findest Du eine Bilanz für die aktuelle Saison. Durch Transfers, Austausch von Personal und Stadionausbau kann die Prognose vom tatsächlichen Saisonergebnis abweichen.'); ?></p>
@@ -95,14 +95,14 @@ function showSymbolIcon($which) {
 <tr><?php echo showSymbolIcon('tvgelder'); ?><td><?php echo _('TV-Gelder'); ?></td><td style="text-align:right"><?php echo number_format($daten3['tv_ein'], 0, ',', '.'); ?> €</td><td style="text-align:right">0 €</td></tr>
 <tr class="odd"><?php echo showSymbolIcon('sponsor'); ?><td class="link"><a href="/sponsoren.php"><?php echo _('Sponsor'); ?> <sup>2)</sup></a></td><td style="text-align:right"><?php echo showKontostand($sponsor_einkommen).' €'; ?></td><td style="text-align:right">0 €</td></tr>
 <tr><?php echo showSymbolIcon('spieler'); ?><td class="link"><a href="/vertraege.php"><?php echo _('Spielergehälter'); ?> <sup>2)</sup></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($gehalt3, 0, ',', '.'); ?> €</td></tr>
-<tr class="odd"><?php echo showSymbolIcon('personal'); ?><td class="link"><a href="/ver_personal.php"><?php echo _('Jugendtrainer'); ?> <sup>2)</sup></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($ausgaben_jugendtrainer, 0, ',', '.'); ?> €</td></tr>
-<tr><?php echo showSymbolIcon('personal'); ?><td class="link"><a href="/ver_personal.php"><?php echo _('Fanbetreuer'); ?> <sup>2)</sup></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($ausgaben_fanbetreuer, 0, ',', '.'); ?> €</td></tr>
-<tr class="odd"><?php echo showSymbolIcon('personal'); ?><td class="link"><a href="/ver_personal.php"><?php echo _('Scout'); ?> <sup>2)</sup></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($ausgaben_scout, 0, ',', '.'); ?> €</td></tr>
-<tr><?php echo showSymbolIcon('personal'); ?><td class="link"><a href="/ver_personal.php"><?php echo _('Fitness-Trainer'); ?></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($fitnesstrainer3, 0, ',', '.'); ?> €</td></tr>
-<tr class="odd"><?php echo showSymbolIcon('personal'); ?><td class="link"><a href="/ver_personal.php"><?php echo _('Physiotherapeut'); ?></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($physiotherapeut, 0, ',', '.'); ?> €</td></tr>
+<tr class="odd"><?php echo showSymbolIcon('personal'); ?><td class="link"><a href="/club/ver_personal.php"><?php echo _('Jugendtrainer'); ?> <sup>2)</sup></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($ausgaben_jugendtrainer, 0, ',', '.'); ?> €</td></tr>
+<tr><?php echo showSymbolIcon('personal'); ?><td class="link"><a href="/club/ver_personal.php"><?php echo _('Fanbetreuer'); ?> <sup>2)</sup></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($ausgaben_fanbetreuer, 0, ',', '.'); ?> €</td></tr>
+<tr class="odd"><?php echo showSymbolIcon('personal'); ?><td class="link"><a href="/club/ver_personal.php"><?php echo _('Scout'); ?> <sup>2)</sup></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($ausgaben_scout, 0, ',', '.'); ?> €</td></tr>
+<tr><?php echo showSymbolIcon('personal'); ?><td class="link"><a href="/club/ver_personal.php"><?php echo _('Fitness-Trainer'); ?></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($fitnesstrainer3, 0, ',', '.'); ?> €</td></tr>
+<tr class="odd"><?php echo showSymbolIcon('personal'); ?><td class="link"><a href="/club/ver_personal.php"><?php echo _('Physiotherapeut'); ?></a></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($physiotherapeut, 0, ',', '.'); ?> €</td></tr>
 <tr><?php echo showSymbolIcon('transfers'); ?><td class="link"><a href="/lig_transfers.php?team=<?php echo $cookie_team; ?>"><?php echo _('Transfers'); ?></a></td><td style="text-align:right"><?php echo number_format($einnahmen_transfers, 0, ',', '.'); ?> €</td><td style="text-align:right"><?php echo number_format($ausgaben_transfers, 0, ',', '.'); ?> €</td></tr>
 <tr class="odd"><?php echo showSymbolIcon('steuer'); ?><td><?php echo _('Ablösesteuer'); ?></td><td style="text-align:right">0 €</td><td style="text-align:right"><?php echo number_format($abloesesteuer3, 0, ',', '.'); ?> €</td></tr>
-<tr><?php echo showSymbolIcon('stadion'); ?><td class="link"><a href="/ver_stadion.php"><?php echo _('Stadion'); ?> <sup>2)</sup></a></td><td style="text-align:right"><?php echo number_format($einnahmen_stadion, 0, ',', '.'); ?> €</td><td style="text-align:right"><?php echo number_format($ausgaben_stadion, 0, ',', '.'); ?> €</td></tr>
+<tr><?php echo showSymbolIcon('stadion'); ?><td class="link"><a href="/club/ver_stadion.php"><?php echo _('Stadion'); ?> <sup>2)</sup></a></td><td style="text-align:right"><?php echo number_format($einnahmen_stadion, 0, ',', '.'); ?> €</td><td style="text-align:right"><?php echo number_format($ausgaben_stadion, 0, ',', '.'); ?> €</td></tr>
 <tr class="odd"><?php echo showSymbolIcon('transfers'); ?><td class="link"><a href="/leihgaben.php"><?php echo _('Leihprämien'); ?> <sup>2)</sup></a></td><td style="text-align:right"><?php echo number_format($leihPraemien_ein, 0, ',', '.'); ?> €</td><td style="text-align:right"><?php echo number_format($leihPraemien_aus, 0, ',', '.'); ?> €</td></tr>
 <tr><?php echo showSymbolIcon('sonstiges'); ?><td><?php echo _('Sonstiges'); ?> <sup>3)</sup></td><td style="text-align:right"><?php echo number_format($sonstiges_ein, 0, ',', '.'); ?> €</td><td style="text-align:right"><?php echo number_format($sonstiges_aus, 0, ',', '.'); ?> €</td></tr>
 <tr><td>&nbsp;</td><td>&nbsp;</td><td style="text-align:right"><?php echo number_format($bilanzEinnahmen, 0, ',', '.'); ?> €</td><td style="text-align:right"><?php echo number_format($bilanzAusgaben, 0, ',', '.'); ?> €</td></tr>
@@ -119,4 +119,4 @@ function showSymbolIcon($which) {
 <?php } else { ?>
 <p><?php echo _('Du musst angemeldet sein, um diese Seite aufrufen zu können!'); ?></p>
 <?php } ?>
-<?php include_once(__DIR__.'/../common/zz3.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz3.php'); ?>

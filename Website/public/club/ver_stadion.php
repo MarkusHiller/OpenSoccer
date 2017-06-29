@@ -1,6 +1,6 @@
-<?php include_once(__DIR__.'/../common/zz1.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz1.php'); ?>
 <title><?php echo _('Stadion'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
-<?php include_once(__DIR__.'/../common/zz2.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz2.php'); ?>
 <?php if ($loggedin == 1) { ?>
 <?php
 
@@ -123,7 +123,7 @@ if (isset($_POST['preis']) && $cookie_id != CONFIG_DEMO_USER) {
 	}
 }
 
-require_once(__DIR__.'/../classes/StadiumBuildings.php');
+require_once(__DIR__.'/../../classes/StadiumBuildings.php');
 
 if (isset($_POST['umfeld_bearbeiten']) && $cookie_id != CONFIG_DEMO_USER) {
     $stadiumSeats1 = "SELECT plaetze FROM ".$prefix."stadien WHERE team = '".$cookie_team."'";
@@ -221,7 +221,7 @@ echo '<img src="'.$selectedStadionPhoto[1].'" alt="'._('Dein Stadion').'" title=
 </tbody>
 </table>
 <h1><?php echo _('Namen ändern'); ?></h1>
-<form action="/ver_stadion.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_stadion.php" method="post" accept-charset="utf-8">
 <p><select name="kuerzel1" size="1" style="width:100px"><option value="">&nbsp;-&nbsp;</option>
 <?php
 foreach ($stadiumAffixes as $stadiumAffix) {
@@ -244,7 +244,7 @@ foreach ($stadiumAffixes as $stadiumAffix) {
 <p><input type="submit" value="<?php echo _('Namen ändern'); ?>"<?php echo noDemoClick($cookie_id); ?> /></p>
 </form>
 <h1><?php echo _('Preis ändern'); ?></h1>
-<form action="/ver_stadion.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_stadion.php" method="post" accept-charset="utf-8">
 <p><select name="preis" size="1" style="width:60px">
 	<?php
 	for ($i = 20; $i < 71; $i++) {
@@ -256,7 +256,7 @@ foreach ($stadiumAffixes as $stadiumAffix) {
 </select> <input type="submit" value="<?php echo _('Ändern'); ?>" onclick="return<?php echo noDemoClick($cookie_id, TRUE); ?> confirm('<?php echo _('Bist Du sicher?'); ?>')" /></p>
 </form>
 <h1><?php echo _('Umbau'); ?></h1>
-<form action="/ver_stadion.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_stadion.php" method="post" accept-charset="utf-8">
 <p><?php echo _('Anzahl der Plätze:'); ?>&nbsp;<select name="plaetze" size="1" style="width:100px">
     <?php
     $nochBis100Tausend = intval(100000-$sql3['plaetze']);
@@ -287,7 +287,7 @@ foreach ($stadiumAffixes as $stadiumAffix) {
 <p><strong><?php echo _('Wichtig:').'</strong> '._('Der Stadion-Umbau kann nicht stattfinden, wenn dadurch Schulden entstehen würden.'); ?></p>
 <p><strong><?php echo _('Information:').'</strong> '._('Sowohl eine Erweiterung als auch eine Verkleinerung kostet viel Geld. Bei einer Erweiterung steigen die möglichen Einnahmen durch den Kartenverkauf, dagegen steigen jedoch auch die Kosten für die Instandhaltung. Durch eine Verkleinerung kann man die Instandhaltungskosten senken, wodurch aber auch nur noch geringere Einnahmen durch den Kartenverkauf möglich sind.'); ?></p>
 <h1><?php echo _('Gelände'); ?></h1>
-<form action="/ver_stadion.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_stadion.php" method="post" accept-charset="utf-8">
 <p>
 <?php
 foreach (StadiumBuildings::getList() as $tm) {
@@ -315,4 +315,4 @@ if (isset($selectedStadionPhoto)) {
 <h1><?php echo _('Stadion'); ?></h1>
 <p><?php echo _('Du musst angemeldet sein, um diese Seite aufrufen zu können!'); ?></p>
 <?php } ?>
-<?php include_once(__DIR__.'/../common/zz3.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz3.php'); ?>

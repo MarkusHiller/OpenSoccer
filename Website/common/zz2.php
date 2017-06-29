@@ -155,23 +155,6 @@ if (!isset($_SESSION['via_android'])) {
                             $_SESSION['last_chatter_check'] = time() + mt_rand(0, 20);
                         }
 // CHATTER ONLINE ENDE
-// LIGA-TAUSCH-ANFRAGEN ANFANG
-                        if (!isset($_SESSION['last_ligaTausch_check'])) {
-                            $_SESSION['last_ligaTausch_check'] = 0;
-                        }
-                        if (!isset($_SESSION['last_ligaTausch_anzahl'])) {
-                            $_SESSION['last_ligaTausch_anzahl'] = 0;
-                        }
-                        if ($_SESSION['last_ligaTausch_anzahl'] < 0) {
-                            $_SESSION['last_ligaTausch_anzahl'] = 0;
-                        }
-                        if ($_SESSION['last_ligaTausch_check'] < $vor3Minuten) {
-                            $pnew1 = "SELECT COUNT(*) FROM " . $prefix . "ligaChangeAnfragen WHERE anTeam = '" . $cookie_team . "'";
-                            $pnew2 = mysql_query($pnew1);
-                            $_SESSION['last_ligaTausch_anzahl'] = mysql_result($pnew2, 0);
-                            $_SESSION['last_ligaTausch_check'] = time() + mt_rand(0, 20);
-                        }
-// LIGA-TAUSCH-ANFRAGEN ENDE
                         ?>
                     <li class="menueintrag"<?php
                         if ($_SERVER['SCRIPT_NAME'] == '/index.php' OR $_SERVER['SCRIPT_NAME'] == '/notizen.php' OR $_SERVER['SCRIPT_NAME'] == '/protokoll.php' OR $_SERVER['SCRIPT_NAME'] == '/einstellungen.php') {
@@ -182,7 +165,7 @@ if (!isset($_SESSION['via_android'])) {
                             <li><a href="/"><?php echo _('Zentrale'); ?></a></li>
     <?php if ($cookie_team != '__' . $cookie_id) { ?><li><a href="/protokoll.php"><?php echo _('Protokoll'); ?></a></li><?php } ?>
                             <li><a href="/notizen.php"><?php echo _('Notizen'); ?></a></li>
-                            <li><a href="/einstellungen.php"><?php echo _('Einstellungen'); ?></a></li>
+                            <li><a href="/office/einstellungen.php"><?php echo _('Einstellungen'); ?></a></li>
                         </ul>
                     </li>
                     <li class="menueintrag"<?php
@@ -239,28 +222,27 @@ if (!isset($_SESSION['via_android'])) {
                         </ul>
                     </li>
                     <li class="menueintrag"<?php
-                    if (substr($_SERVER['SCRIPT_NAME'], 1, 4) == 'ver_') {
+                    if (substr($_SERVER['SCRIPT_NAME'], 1, 4) == 'club') {
                         echo ' id="current"';
                     }
-                    ?>><a href="/ver_finanzen.php"><?php echo _('Verein'); ?></a>
+                    ?>><a href="/club/ver_finanzen.php"><?php echo _('Verein'); ?></a>
                         <ul>
-                            <li><a href="/ver_finanzen.php"><?php echo _('Finanzen'); ?></a></li>
-                            <li><a href="/ver_settings.php"><?php echo _('Einstellungen'); ?></a></li>
-                            <li><a href="/ver_buchungen.php"><?php echo _('Buchungen'); ?></a></li>
-                            <li><a href="/ver_personal.php"><?php echo _('Personal'); ?></a></li>
-                            <li><a href="/ver_stadion.php"><?php echo _('Stadion'); ?></a></li>
-                            <li><a href="/ver_lotto.php"><?php echo _('Lotto'); ?></a></li>
+                            <li><a href="/club/ver_finanzen.php"><?php echo _('Finanzen'); ?></a></li>
+                            <li><a href="/club/settings.php"><?php echo _('Einstellungen'); ?></a></li>
+                            <li><a href="/club/ver_buchungen.php"><?php echo _('Buchungen'); ?></a></li>
+                            <li><a href="/club/ver_personal.php"><?php echo _('Personal'); ?></a></li>
+                            <li><a href="/club/ver_stadion.php"><?php echo _('Stadion'); ?></a></li>
+                            <li><a href="/club/ver_lotto.php"><?php echo _('Lotto'); ?></a></li>
                         </ul>
                     </li>
                     <li class="menueintrag"<?php
-                        if ($_SERVER['SCRIPT_NAME'] == '/leihgaben.php' OR $_SERVER['SCRIPT_NAME'] == '/testspiele.php' OR $_SERVER['SCRIPT_NAME'] == '/ligaTausch.php') {
+                        if ($_SERVER['SCRIPT_NAME'] == '/leihgaben.php' OR $_SERVER['SCRIPT_NAME'] == '/testspiele.php') {
                             echo ' id="current"';
                         }
                         ?>><a href="/leihgaben.php"><?php echo _('Anfragen'); ?> (<?php echo intval($_SESSION['last_testspiele_anzahl'] + $_SESSION['last_leihgaben_anzahl'] + $_SESSION['last_ligaTausch_anzahl']); ?>)</a>
                         <ul>
                             <li><a href="/leihgaben.php"><?php echo _('Leihgaben'); ?> (<?php echo $_SESSION['last_leihgaben_anzahl']; ?>)</a></li>
                             <li><a href="/testspiele.php"><?php echo _('Testspiele'); ?> (<?php echo $_SESSION['last_testspiele_anzahl']; ?>)</a></li>
-                            <li><a href="/ligaTausch.php"><?php echo _('Ligatausch'); ?> (<?php echo $_SESSION['last_ligaTausch_anzahl']; ?>)</a></li>
                         </ul>
                     </li>
                     <li class="menueintrag"<?php

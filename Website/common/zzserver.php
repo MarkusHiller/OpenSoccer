@@ -12,6 +12,7 @@ header_remove('X-Powered-By');
 date_default_timezone_set('Europe/Berlin');
 ignore_user_abort(true);
 include_once(__DIR__.'/../config.php');
+require_once(__DIR__.'/../utils/database.php');
 
 // connect to the database
 mysql_connect(CONFIG_DATABASE_HOST, CONFIG_DATABASE_USERNAME, CONFIG_DATABASE_PASSWORD) or die ('Falsche MySQL-Daten!');

@@ -321,15 +321,6 @@ CREATE TABLE `man_licenseTasks_Completed` (
   UNIQUE KEY `taskID` (`user`,`task`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
-CREATE TABLE `man_ligaChangeAnfragen` (
-  `vonTeam` varchar(32) NOT NULL,
-  `anTeam` varchar(32) NOT NULL,
-  `zeit` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`vonTeam`,`anTeam`),
-  KEY `anTeam` (`anTeam`),
-  KEY `zeit` (`zeit`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
 CREATE TABLE `man_ligaChanges` (
   `user1` varchar(32) NOT NULL,
   `team1` varchar(32) NOT NULL,
@@ -339,17 +330,6 @@ CREATE TABLE `man_ligaChanges` (
   `newLiga2` varchar(32) NOT NULL,
   `zeit` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`zeit`,`user1`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-CREATE TABLE `man_ligaChangeWuensche` (
-  `teamID` varchar(32) NOT NULL,
-  `teamName` varchar(255) NOT NULL,
-  `landNoch` varchar(255) NOT NULL,
-  `landWunsch` varchar(255) NOT NULL,
-  `zeit` int(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`teamID`),
-  KEY `zeit` (`zeit`),
-  KEY `landWunsch` (`landWunsch`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `man_ligen` (

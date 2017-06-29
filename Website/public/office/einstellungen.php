@@ -1,9 +1,9 @@
-<?php include_once(__DIR__.'/../common/zz1.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz1.php'); ?>
 <title><?php echo _('Einstellungen'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
-<?php include_once(__DIR__.'/../common/zz2.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz2.php'); ?>
 <?php if ($loggedin == 1) { ?>
 <?php
-require_once(__DIR__.'/../controller/teamController.php');
+require_once(__DIR__.'/../../controller/teamController.php');
 if (isset($_POST['accDelPlus']) && isset($_POST['accDelMinus']) && $cookie_id != CONFIG_DEMO_USER) {
 	$accDelPlus = mysql_real_escape_string(trim(strip_tags($_POST['accDelPlus'])));
 	$accDelMinus = mysql_real_escape_string(trim(strip_tags($_POST['accDelMinus'])));
@@ -266,4 +266,4 @@ for ($i = $start_urlaub; $i <= $noch_urlaub; $i++) {
 <h1><?php echo _('Einstellungen'); ?></h1>
 <p><?php echo _('Du musst angemeldet sein, um diese Seite aufrufen zu können!'); ?></p>
 <?php } ?>
-<?php include_once(__DIR__.'/../common/zz3.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz3.php'); ?>

@@ -1,6 +1,6 @@
-<?php include_once(__DIR__.'/../common/zz1.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz1.php'); ?>
 <title><?php echo _('Lotto'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
-<?php include_once(__DIR__.'/../common/zz2.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz2.php'); ?>
 <?php
 $monthIndex = date('m', time());
 switch ($monthIndex) {
@@ -81,7 +81,7 @@ else {
 addInfoBox('<strong>'._('Jackpot:').'</strong> '.number_format($get_jackpot3['jackpot'], 0, ',', '.').' €');
 ?>
 <?php if ($meine_zahlen == '') { ?>
-<form action="/ver_lotto.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_lotto.php" method="post" accept-charset="utf-8">
 <div style="position:relative;width:372px;height:483px;background-image:url(/images/lottoschein.png)">
 <?php
 for ($i = 0; $i < 5; $i++) {
@@ -139,4 +139,4 @@ while ($sql3 = mysql_fetch_assoc($sql2)) {
 <?php } else { ?>
 <p><?php echo _('Du musst angemeldet sein, um diese Seite aufrufen zu können!'); ?></p>
 <?php } ?>
-<?php include_once(__DIR__.'/../common/zz3.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz3.php'); ?>

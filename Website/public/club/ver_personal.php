@@ -1,6 +1,6 @@
-<?php include_once(__DIR__.'/../common/zz1.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz1.php'); ?>
 <title><?php echo _('Personal'); ?> - <?php echo CONFIG_SITE_NAME; ?></title>
-<?php include_once(__DIR__.'/../common/zz2.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz2.php'); ?>
 <?php if ($loggedin == 1) { ?>
 <?php
 if (!isset($_SESSION['supplyDemandPrices'])) {
@@ -183,7 +183,7 @@ $sql2 = mysql_query($sql1);
 $sql3 = mysql_fetch_assoc($sql2);
 ?>
 <div style="float:left; width:280px;">
-<form action="/ver_personal.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_personal.php" method="post" accept-charset="utf-8">
 <p>
 <input type="radio" name="jugendtrainer" value="1" <?php if ($sql3['jugendarbeit'] == 1) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 1, '8.000.000'); ?><br />
 <input type="radio" name="jugendtrainer" value="2" <?php if ($sql3['jugendarbeit'] == 2) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 2, '16.000.000'); ?><br />
@@ -228,7 +228,7 @@ $sql1 = "SELECT fanbetreuer FROM ".$prefix."teams WHERE ids = '".$cookie_team."'
 $sql2 = mysql_query($sql1);
 $sql3 = mysql_fetch_assoc($sql2);
 ?>
-<form action="/ver_personal.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_personal.php" method="post" accept-charset="utf-8">
 <p>
 <input type="radio" name="fanbetreuer" value="1" <?php if ($sql3['fanbetreuer'] == 1) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 1, '6.000.000'); ?><br />
 <input type="radio" name="fanbetreuer" value="2" <?php if ($sql3['fanbetreuer'] == 2) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 2, '12.000.000'); ?><br />
@@ -268,7 +268,7 @@ if (isset($_POST['scout']) && $cookie_id != CONFIG_DEMO_USER) {
 }
 ?>
 <div style="float:left; width:280px;">
-<form action="/ver_personal.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_personal.php" method="post" accept-charset="utf-8">
 <p>
 <input type="radio" name="scout" value="1" <?php if ($cookie_scout == 1) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 1, '5.000.000'); ?><br />
 <input type="radio" name="scout" value="2" <?php if ($cookie_scout == 2) { echo 'checked="checked" '; } ?>/> <?php echo __('Stufe %1$d (%2$s € pro Saison)', 2, '10.000.000'); ?><br />
@@ -289,7 +289,7 @@ if (isset($_POST['scout']) && $cookie_id != CONFIG_DEMO_USER) {
 <div style="float:left; width:280px;">
 <p><strong><?php echo _('Wichtig:').'</strong> '._('Dieses Angebot ist nur für finanzstarke Vereine empfehlenswert, die ihrem Team einen kleinen Vorteil verschaffen wollen. Es ist aber auch sehr gut möglich, ohne dieses Angebot sportlichen Erfolg zu haben.'); ?></p>
 <?php if ($getkonto4 > 0) { ?>
-<form action="/ver_personal.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_personal.php" method="post" accept-charset="utf-8">
 <p>
 <input type="radio" name="fitness_regeneration" value="1" checked="checked" /> <?php echo __('%d%% mehr Frische', 1); ?> (<?php echo number_format($supplyDemandPrices['Fitness-Trainer'], 0, ',', '.'); ?> €)<br />
 <input type="radio" name="fitness_regeneration" value="2" /> <?php echo __('%d%% mehr Frische', 2); ?> (<?php echo number_format($supplyDemandPrices['Fitness-Trainer']*2.15, 0, ',', '.'); ?> €)<br />
@@ -305,7 +305,7 @@ if (isset($_POST['scout']) && $cookie_id != CONFIG_DEMO_USER) {
 <p><?php echo _('Dein Physiotherapeut bietet Dir an, die Behandlung Deiner verletzten Spieler zu übernehmen. Er verspricht dabei, die Verletzungszeit zu verkürzen.'); ?></p>
 <p><strong><?php echo _('Wichtig:').'</strong> '._('Dieses Angebot ist nur für finanzstarke Vereine empfehlenswert, die ihrem Team einen kleinen Vorteil verschaffen wollen. Es ist aber auch sehr gut möglich, ohne dieses Angebot sportlichen Erfolg zu haben.'); ?></p>
 <?php if ($getkonto4 > 0) { ?>
-<form action="/ver_personal.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_personal.php" method="post" accept-charset="utf-8">
 <p>
 <input type="radio" name="physio_behandlung" value="1" checked="checked" /> <?php echo __('%d Tage kürzere Verletzungen', 1); ?> (<?php echo number_format($supplyDemandPrices['Physiotherapeut'], 0, ',', '.'); ?> €)<br />
 <input type="radio" name="physio_behandlung" value="2" /> <?php echo __('%d Tage kürzere Verletzungen', 2); ?> (<?php echo number_format($supplyDemandPrices['Physiotherapeut']*2.15, 0, ',', '.'); ?> €)<br />
@@ -317,7 +317,7 @@ if (isset($_POST['scout']) && $cookie_id != CONFIG_DEMO_USER) {
 <p><?php echo _('Der Psychologe Deines Vereins bietet Dir an, die Betreuung Deiner unmotivierten Spieler zu übernehmen. Er verspricht dabei, ihre Moral zu erhöhen.'); ?></p>
 <p><strong><?php echo _('Wichtig:').'</strong> '._('Dieses Angebot ist nur für finanzstarke Vereine empfehlenswert, die ihrem Team einen kleinen Vorteil verschaffen wollen. Es ist aber auch sehr gut möglich, ohne dieses Angebot sportlichen Erfolg zu haben.'); ?></p>
 <?php if ($getkonto4 > 0) { ?>
-<form action="/ver_personal.php" method="post" accept-charset="utf-8">
+<form action="/club/ver_personal.php" method="post" accept-charset="utf-8">
 <p>
 <input type="radio" name="psychologe_behandlung" value="2" checked="checked" /> <?php echo __('%d Punkte mehr Moral', 2); ?> (<?php echo number_format($supplyDemandPrices['Psychologe']*2.15, 0, ',', '.'); ?> €)<br />
 <input type="radio" name="psychologe_behandlung" value="5" /> <?php echo __('%d Punkte mehr Moral', 5); ?> (<?php echo number_format($supplyDemandPrices['Psychologe']*5.575, 0, ',', '.'); ?> €)<br />
@@ -330,4 +330,4 @@ if (isset($_POST['scout']) && $cookie_id != CONFIG_DEMO_USER) {
 <h1><?php echo _('Mein Personal'); ?></h1>
 <p><?php echo _('Du musst angemeldet sein, um diese Seite aufrufen zu können!'); ?></p>
 <?php } ?>
-<?php include_once(__DIR__.'/../common/zz3.php'); ?>
+<?php include_once(__DIR__.'/../../common/zz3.php'); ?>
