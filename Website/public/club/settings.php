@@ -112,6 +112,7 @@ while($row = mysql_fetch_array($result)) {
     $data['ligen'][] = $row;
 }
 
+$formSubmit = noDemoClick($cookie_id, TRUE);
 $data['emblem'] = EmblemController::getEmblemByTeamIds($cookie_team);
 $data['loggedin'] = $loggedin;
 $data['emblemResult'] = $emblemResult;
@@ -119,6 +120,7 @@ $data['matchDay'] = GameTime::getMatchDay();
 $data['daysToWait'] = $daysToWait;
 $data['liveScoringType'] = $live_scoring_spieltyp_laeuft;
 $data['ligachangeResult'] = $ligachangeResult;
+$data['formSubmit'] = $formSubmit != "" ? $formSubmit : "confirm('Bist Du sicher?');";
 echo $core->get(__DIR__.'/../../templates/club/settings.tpl', $data);
 
 include_once(__DIR__.'/../../common/zz3.php'); ?>

@@ -9,7 +9,7 @@
         <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
         <p>Datei auswählen: <input name="emblem" type="file" /></p>
         <p>
-            <input type="submit" value="Speichern" />
+            <input type="submit" value="Speichern" onclick="return {$formSubmit};" />
         </p>
     </form>
     <p>{$emblemResult}</p>
@@ -41,7 +41,7 @@
             <option value="{$val.ids}">{$val.name}</option>
             {/foreach}
         </select>
-        <input type="submit" value="Wechseln" onclick="return confirm('Bist Du sicher?');" />
+        <input type="submit" value="Wechseln" onclick="return {$formSubmit};" />
     </form>
     {/if}
 {else}

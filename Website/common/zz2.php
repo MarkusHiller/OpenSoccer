@@ -239,7 +239,7 @@ if (!isset($_SESSION['via_android'])) {
                         if ($_SERVER['SCRIPT_NAME'] == '/leihgaben.php' OR $_SERVER['SCRIPT_NAME'] == '/testspiele.php') {
                             echo ' id="current"';
                         }
-                        ?>><a href="/leihgaben.php"><?php echo _('Anfragen'); ?> (<?php echo intval($_SESSION['last_testspiele_anzahl'] + $_SESSION['last_leihgaben_anzahl'] + $_SESSION['last_ligaTausch_anzahl']); ?>)</a>
+                        ?>><a href="/leihgaben.php"><?php echo _('Anfragen'); ?> (<?php echo intval($_SESSION['last_testspiele_anzahl'] + $_SESSION['last_leihgaben_anzahl']); ?>)</a>
                         <ul>
                             <li><a href="/leihgaben.php"><?php echo _('Leihgaben'); ?> (<?php echo $_SESSION['last_leihgaben_anzahl']; ?>)</a></li>
                             <li><a href="/testspiele.php"><?php echo _('Testspiele'); ?> (<?php echo $_SESSION['last_testspiele_anzahl']; ?>)</a></li>
