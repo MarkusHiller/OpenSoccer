@@ -250,4 +250,5 @@
             <input type="submit" value="Angebot unterbreiten" onclick="return {$onWatchClick}" />
         </p>
     </form>
+    <p>Das angegebene Potenzial könnte eine <strong>Abweichung von 30%</strong> haben, daher ist es ratsam vor dem Bieten den Spieler erst zu begutachten.</p>
 {/if}
