@@ -157,7 +157,7 @@ if (!isset($_SESSION['via_android'])) {
 // CHATTER ONLINE ENDE
                         ?>
                     <li class="menueintrag"<?php
-                        if ($_SERVER['SCRIPT_NAME'] == '/index.php' OR $_SERVER['SCRIPT_NAME'] == '/notizen.php' OR $_SERVER['SCRIPT_NAME'] == '/protokoll.php' OR $_SERVER['SCRIPT_NAME'] == '/einstellungen.php') {
+                        if ($_SERVER['SCRIPT_NAME'] == '/index.php' OR $_SERVER['SCRIPT_NAME'] == '/notizen.php' OR $_SERVER['SCRIPT_NAME'] == '/protokoll.php' OR $_SERVER['SCRIPT_NAME'] == '/office/einstellungen.php') {
                             echo ' id="current"';
                         }
                         ?>><a href="/"><?php echo _('Büro'); ?></a>

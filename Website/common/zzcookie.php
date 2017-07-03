@@ -40,7 +40,7 @@ if ($loggedin == 1) {
 						'/registrieren.php', 
 						'/registrierung.php', 
 						'/notizen.php', 
-						'/einstellungen.php', 
+						'/office/einstellungen.php', 
 						'/forum.php', 
 						'/forum_thema.php', 
 						'/post.php', 
@@ -68,7 +68,7 @@ if ($loggedin == 1) {
 							'/wio.php', 
 							'/manager.php', 
 							'/notizen.php', 
-							'/einstellungen.php', 
+							'/office/einstellungen.php', 
 							'/saison/lig_tabelle.php', 
 							'/transfermarkt.php', 
 							'/transfermarkt_leihe.php', 
@@ -105,7 +105,7 @@ if ($loggedin == 1) {
 			exit;
 		}
 	}
-	if ($_SESSION['multiSperre'] == 1 && $_SERVER['SCRIPT_NAME'] != '/multiSperre.php' && $_SERVER['SCRIPT_NAME'] != '/impressum.php' && $_SERVER['SCRIPT_NAME'] != '/regeln.php' && $_SERVER['SCRIPT_NAME'] != '/logout.php' && $_SERVER['SCRIPT_NAME'] != '/einstellungen.php') {
+	if ($_SESSION['multiSperre'] == 1 && $_SERVER['SCRIPT_NAME'] != '/multiSperre.php' && $_SERVER['SCRIPT_NAME'] != '/impressum.php' && $_SERVER['SCRIPT_NAME'] != '/regeln.php' && $_SERVER['SCRIPT_NAME'] != '/logout.php' && $_SERVER['SCRIPT_NAME'] != '/office/einstellungen.php') {
 		header('Location: /multiSperre.php');
 		exit;
 	}

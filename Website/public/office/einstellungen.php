@@ -56,7 +56,7 @@ if (mysql_num_rows($get_urlaub5) > 0) {
 	$get_urlaub6 = mysql_fetch_assoc($get_urlaub5);
 	if ($get_urlaub6['ende'] > time()) {
         $aktueller_urlaub = '<p>'.__('Du hast zurzeit Urlaub, und zwar bis zum %s.', date('d.m.Y', $get_urlaub6['ende'])).'</p>';
-        $aktueller_urlaub .= '<form action="/einstellungen.php" method="post" accept-charset="utf-8"><input type="hidden" name="urlaub_abbrechen" value="1" /><input type="submit" value="'._('Urlaub abbrechen').'" onclick="return'.noDemoClick($cookie_id, TRUE).' confirm(\''._('Bist Du sicher?').'\')" /></form>';
+        $aktueller_urlaub .= '<form action="/office/einstellungen.php" method="post" accept-charset="utf-8"><input type="hidden" name="urlaub_abbrechen" value="1" /><input type="submit" value="'._('Urlaub abbrechen').'" onclick="return'.noDemoClick($cookie_id, TRUE).' confirm(\''._('Bist Du sicher?').'\')" /></form>';
 	}
 	else {
 		$aktueller_urlaub = '';
@@ -211,7 +211,7 @@ echo '<p><strong>'._('Langer Urlaub (11-30 Tage):').'</strong> '.__('Du hast %1$
 ?>
 </p>
 <?php if ($urlaub_erlaubt_kurz == TRUE OR $urlaub_erlaubt_lang == TRUE) { ?>
-<form action="/einstellungen.php" method="post" accept-charset="utf-8">
+<form action="/office/einstellungen.php" method="post" accept-charset="utf-8">
 <p>Beginn:<br /><?php echo date('d.m.Y', time()); ?> (heute)</p>
 <p>Ende:<br /><select name="urlaub_ende" size="1">
 <?php
@@ -247,7 +247,7 @@ for ($i = $start_urlaub; $i <= $noch_urlaub; $i++) {
 
 <h1><?php echo _('Passwort ändern'); ?></h1>
 <p><?php echo _('Mit dem folgenden Formular kannst Du Dein Passwort ändern. Dazu musst Du alle Felder ausfüllen.'); ?></p>
-<form action="/einstellungen.php" method="post" accept-charset="utf-8">
+<form action="/office/einstellungen.php" method="post" accept-charset="utf-8">
 <p><?php echo _('Altes Passwort:'); ?><br /><input type="password" name="pw_alt" size="50" /></p>
 <p><?php echo _('Neues Passwort:'); ?><br /><input type="password" name="pw_neu1" size="50" /></p>
 <p><?php echo _('Neues Passwort (Bestätigung):'); ?><br /><input type="password" name="pw_neu2" size="50" /></p>
@@ -257,7 +257,7 @@ for ($i = $start_urlaub; $i <= $noch_urlaub; $i++) {
 <h1 id="accDel"><?php echo _('Account löschen'); ?></h1>
 <p><?php echo _('Du bist Dir wirklich sicher, dass Du Deinen Account löschen möchtest? Das ist sehr schade, aber wir akzeptieren das natürlich.'); ?></p>
 <p><?php echo _('Wir würden uns freuen, wenn Du uns noch mitteilen würdest, was Dir hier gefallen hat und was noch nicht so gut war.'); ?></p>
-<form action="/einstellungen.php" method="post" accept-charset="utf-8">
+<form action="/office/einstellungen.php" method="post" accept-charset="utf-8">
 <p><?php echo _('Das war gut:'); ?><br /><input type="text" name="accDelPlus" style="width:250px" /></p>
 <p><?php echo _('Das hat mir nicht gefallen:'); ?><br /><input type="text" name="accDelMinus" style="width:250px" /></p>
 <p><input type="submit" value="<?php echo _('Account endgültig löschen'); ?>" onclick="return<?php echo noDemoClick($cookie_id, TRUE); ?> confirm('<?php echo _('Bist Du sicher?'); ?>')" /></p>
