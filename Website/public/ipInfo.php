@@ -18,7 +18,7 @@ echo '<h1>'._('IP-Info:').' '.$getIP.'</h1>';
 </thead>
 <tbody>
 <?php
-$sql1 = "SELECT DISTINCT(a.user), b.username, b.last_login FROM ".$prefix."loginLog AS a JOIN ".$prefix."users AS b ON a.user = b.ids WHERE a.ip = '".$getIP."'";
+$sql1 = "SELECT DISTINCT(a.user), b.username, b.last_login FROM ".$prefix."loginlog AS a JOIN ".$prefix."users AS b ON a.user = b.ids WHERE a.ip = '".$getIP."'";
 $sql2 = mysql_query($sql1);
 $counter = 0;
 while ($sql3 = mysql_fetch_assoc($sql2)) {

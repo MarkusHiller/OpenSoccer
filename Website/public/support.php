@@ -14,7 +14,7 @@
 <?php if ($loggedin == 1) { ?>
 <?php
 // CHAT-SPERREN ANFANG
-$blockCom1 = "SELECT MAX(chatSperre) FROM ".$prefix."helferLog WHERE managerBestrafen = '".$cookie_id."'";
+$blockCom1 = "SELECT MAX(chatSperre) FROM ".$prefix."helferlog WHERE managerBestrafen = '".$cookie_id."'";
 $blockCom2 = mysql_query($blockCom1);
 if (mysql_num_rows($blockCom2) > 0) {
 	$blockCom3 = mysql_fetch_assoc($blockCom2);
@@ -43,16 +43,16 @@ if (mysql_num_rows($blockCom2) > 0) {
 // ANFRAGE LÖSCHEN ANFANG
 if (isset($_GET['del']) && ($_SESSION['status'] == 'Admin' OR $_SESSION['status'] == 'Helfer') && $cookie_id != CONFIG_DEMO_USER) {
 	$delID = bigintval(secure2id($_GET['del']));
-	$sql1 = "SELECT author, pro, contra FROM ".$prefix."supportRequests WHERE id = ".$delID;
+	$sql1 = "SELECT author, pro, contra FROM ".$prefix."supportrequests WHERE id = ".$delID;
 	$sql2 = mysql_query($sql1) or die(mysql_error());
 	if (mysql_num_rows($sql2) == 1) {
 		$delVoteCount = mysql_fetch_assoc($sql2);
-		$sql1 = "UPDATE ".$prefix."supportRequests SET visibilityLevel = 2 WHERE id = ".$delID." AND open = 1";
+		$sql1 = "UPDATE ".$prefix."supportrequests SET visibilityLevel = 2 WHERE id = ".$delID." AND open = 1";
 		$sql2 = mysql_query($sql1) or die(mysql_error());
 		if (mysql_affected_rows() == 1) {
-			$sql1 = "DELETE FROM ".$prefix."supportComments WHERE requestID = ".$delID;
+			$sql1 = "DELETE FROM ".$prefix."supportcomments WHERE requestID = ".$delID;
 			$sql2 = mysql_query($sql1) or die(mysql_error());
-			$sql1 = "DELETE FROM ".$prefix."supportVotes WHERE request = ".$delID;
+			$sql1 = "DELETE FROM ".$prefix."supportvotes WHERE request = ".$delID;
 			$sql2 = mysql_query($sql1) or die(mysql_error());
 			addInfoBox(_('Die ausgewählte Anfrage wurde vollständig gelöscht.'));
 		}
@@ -81,13 +81,13 @@ if (isset($_POST['category']) && isset($_POST['title']) && isset($_POST['descrip
 	else {
 		$newVisibility = 0;
 	}
-	$sql1 = "INSERT INTO ".$prefix."supportRequests (category, title, description, timeAdded, lastAction, author, visibilityLevel) VALUES ('".$newCategory."', '".$newTitle."', '".$newDescription."', ".time().", ".time().", '".$cookie_id."', ".$newVisibility.")";
+	$sql1 = "INSERT INTO ".$prefix."supportrequests (category, title, description, timeAdded, lastAction, author, visibilityLevel) VALUES ('".$newCategory."', '".$newTitle."', '".$newDescription."', ".time().", ".time().", '".$cookie_id."', ".$newVisibility.")";
 	$sql2 = mysql_query($sql1);
 	if ($sql2 == FALSE) {
 		addInfoBox(_('Sorry, Du kannst nicht zwei Anfragen mit dem gleichen Titel erstellen.'));
 	}
 	else {
-		$sql1 = "INSERT INTO ".$prefix."supportVotes (request, userID, vote) VALUES (".mysql_insert_id().", '".$cookie_id."', 1)";
+		$sql1 = "INSERT INTO ".$prefix."supportvotes (request, userID, vote) VALUES (".mysql_insert_id().", '".$cookie_id."', 1)";
 		$sql2 = mysql_query($sql1);
 		addInfoBox(_('Danke, Deine Anfrage wurde erstellt.'));
 	}
@@ -104,7 +104,7 @@ if (isset($_GET['q'])) {
 if ($isSearchPage == TRUE) { echo '<h1>'.__('Aktuelle Anfragen zum Thema &quot;%s&quot;', $q).'</h1>'; } else { echo '<h1>'._('Aktuelle Anfragen').'</h1>'; }
 if (isset($_GET['mark'])) {
 	if ($_GET['mark'] == 'read') {
-		$markRead1 = "INSERT IGNORE INTO ".$prefix."supportRead (userID, anfrageID) SELECT '".$cookie_id."' AS user, id FROM ".$prefix."supportRequests WHERE open = 1";
+		$markRead1 = "INSERT IGNORE INTO ".$prefix."supportread (userID, anfrageID) SELECT '".$cookie_id."' AS user, id FROM ".$prefix."supportrequests WHERE open = 1";
 		$markRead2 = mysql_query($markRead1);
 		if ($markRead2 == FALSE) {
 			addInfoBox(_('Es konnten nicht alle Themen als gelesen markiert werden (E073).'));
@@ -134,7 +134,7 @@ function time_rel_s($zeitstempel) {
 ?>
 <?php
 $geleseneRequests = array();
-$sql1 = "SELECT anfrageID FROM ".$prefix."supportRead WHERE userID = '".$cookie_id."'";
+$sql1 = "SELECT anfrageID FROM ".$prefix."supportread WHERE userID = '".$cookie_id."'";
 $sql2 = mysql_query($sql1);
 if ($sql2 == FALSE) { exit; }
 while ($sql3 = mysql_fetch_assoc($sql2)) {
@@ -153,13 +153,13 @@ while ($sql3 = mysql_fetch_assoc($sql2)) {
 <?php
 // MARKIERUNGEN (GEVOTED + GELESEN) ANFANG
 $listVoted = array();
-$sql1 = "SELECT request FROM ".$prefix."supportVotes WHERE userID = '".$cookie_id."'";
+$sql1 = "SELECT request FROM ".$prefix."supportvotes WHERE userID = '".$cookie_id."'";
 $sql2 = mysql_query($sql1);
 while ($sql3 = mysql_fetch_assoc($sql2)) {
 	$listVoted[$sql3['request']] = TRUE;
 }
 // MARKIERUNGEN (GEVOTED + GELESEN) ENDE
-$sql1 = "SELECT id, pro, contra, category, title, description, lastAction, open, visibilityLevel FROM ".$prefix."supportRequests".$addSql;
+$sql1 = "SELECT id, pro, contra, category, title, description, lastAction, open, visibilityLevel FROM ".$prefix."supportrequests".$addSql;
 if ($isSearchPage) {
 	$sql1 .= " AND MATCH (description) AGAINST ('".$q."')";
 }
@@ -254,7 +254,7 @@ else {
 </thead>
 <tbody>
 <?php
-$sql1 = "SELECT a.userID, a.replies, a.fastReplies, a.thanksReceived, a.votes, b.username FROM ".$prefix."supportUsers AS a JOIN ".$prefix."users AS b ON a.userID = b.ids ORDER BY a.points DESC LIMIT 0, 10";
+$sql1 = "SELECT a.userID, a.replies, a.fastReplies, a.thanksReceived, a.votes, b.username FROM ".$prefix."supportusers AS a JOIN ".$prefix."users AS b ON a.userID = b.ids ORDER BY a.points DESC LIMIT 0, 10";
 $sql2 = mysql_query($sql1);
 $counter = 1;
 while ($sql3 = mysql_fetch_assoc($sql2)) {
@@ -273,7 +273,7 @@ while ($sql3 = mysql_fetch_assoc($sql2)) {
 </tbody>
 </table>
 <?php
-$myRequests1 = "SELECT id, title FROM ".$prefix."supportRequests WHERE author = '".$cookie_id."' ORDER BY id DESC LIMIT 0, 5";
+$myRequests1 = "SELECT id, title FROM ".$prefix."supportrequests WHERE author = '".$cookie_id."' ORDER BY id DESC LIMIT 0, 5";
 $myRequests2 = mysql_query($myRequests1);
 if (mysql_num_rows($myRequests2) > 0) {
 	echo '<h1>'._('Meine letzten Anfragen').'</h1><ul>';

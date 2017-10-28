@@ -20,7 +20,7 @@ if ($_SESSION['status'] == 'Helfer' OR $_SESSION['status'] == 'Admin') {
 		$q1 = mysql_real_escape_string(trim(strip_tags($_GET['user'])));
 		$q2 = mysql_real_escape_string(trim(strip_tags($_GET['reporter'])));
 		$q3 = mysql_real_escape_string(trim(strip_tags($_GET['datum'])));
-		$sql1 = "SELECT protokoll FROM ".$prefix."chatroomReportedUsers WHERE user = '".$q1."' AND reporter = '".$q2."' AND datum = '".$q3."' LIMIT 0, 1";
+		$sql1 = "SELECT protokoll FROM ".$prefix."chatroomreportedusers WHERE user = '".$q1."' AND reporter = '".$q2."' AND datum = '".$q3."' LIMIT 0, 1";
 		$sql2 = mysql_query($sql1);
 		if (mysql_num_rows($sql2) == 1) {
 			$sql3 = mysql_fetch_assoc($sql2);
@@ -35,7 +35,7 @@ if ($_SESSION['status'] == 'Helfer' OR $_SESSION['status'] == 'Admin') {
 			$q1 = mysql_real_escape_string(trim(strip_tags($_GET['aufheben'])));
 			$q2 = mysql_real_escape_string(trim(strip_tags($_GET['reporter'])));
 			$q3 = mysql_real_escape_string(trim(strip_tags($_GET['datum'])));
-			$sql1 = "UPDATE ".$prefix."chatroomReportedUsers SET sperrRelevant = 0 WHERE user = '".$q1."' AND reporter = '".$q2."' AND datum = '".$q3."' LIMIT 1";
+			$sql1 = "UPDATE ".$prefix."chatroomreportedusers SET sperrRelevant = 0 WHERE user = '".$q1."' AND reporter = '".$q2."' AND datum = '".$q3."' LIMIT 1";
 			$sql2 = mysql_query($sql1);
 			if (mysql_affected_rows() == 1) {
 				addInfoBox(_('Die Sperre durch den ausgewählten Report wurde aufgehoben.'));
@@ -56,7 +56,7 @@ if ($_SESSION['status'] == 'Helfer' OR $_SESSION['status'] == 'Admin') {
 		echo '</tr>';
 		echo '</thead>';
 		echo '<tbody>';
-		$sql1 = "SELECT a.user, a.reporter, a.datum, a.sperrRelevant, b.username AS userNick, c.username AS reporterNick FROM ".$prefix."chatroomReportedUsers AS a JOIN ".$prefix."users AS b ON a.user = b.ids JOIN ".$prefix."users AS c ON a.reporter = c.ids ORDER BY a.datum DESC LIMIT ".$start.", ".$eintraege_pro_seite;
+		$sql1 = "SELECT a.user, a.reporter, a.datum, a.sperrRelevant, b.username AS userNick, c.username AS reporterNick FROM ".$prefix."chatroomreportedusers AS a JOIN ".$prefix."users AS b ON a.user = b.ids JOIN ".$prefix."users AS c ON a.reporter = c.ids ORDER BY a.datum DESC LIMIT ".$start.", ".$eintraege_pro_seite;
 		$sql2 = mysql_query($sql1);
 		$blaetter3 = anzahl_datensaetze_gesamt($sql1);
 		while ($sql3 = mysql_fetch_assoc($sql2)) {

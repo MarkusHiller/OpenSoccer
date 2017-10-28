@@ -60,7 +60,7 @@
 if (isset($_POST['kuerzel']) && isset($_POST['stadt'])) {
 	$kuerzel = mysql_real_escape_string(trim(strip_tags($_POST['kuerzel'])));
 	$stadt = mysql_real_escape_string(trim(strip_tags($_POST['stadt'])));
-	$sql1 = "INSERT INTO ".$prefix."vNameOriginals (stadt, zusatz, helfer) VALUES ('".$stadt."', '".$kuerzel."', '".$cookie_id."')";
+	$sql1 = "INSERT INTO ".$prefix."vnameoriginals (stadt, zusatz, helfer) VALUES ('".$stadt."', '".$kuerzel."', '".$cookie_id."')";
 	$sql2 = mysql_query($sql1);
 }
 ?>
@@ -73,7 +73,7 @@ foreach ($kuerzelListe as $kuerzel) {
 ?>
 </select> <select name="stadt" size="1" style="width:200px">
 <?php
-$sql4 = "SELECT name FROM ".$prefix."vNamePool ORDER BY name ASC";
+$sql4 = "SELECT name FROM ".$prefix."vnamepool ORDER BY name ASC";
 $sql5 = mysql_query($sql4);
 while ($sql6 = mysql_fetch_assoc($sql5)) {
 	echo '<option>'.$sql6['name'].'</option>';
@@ -85,7 +85,7 @@ while ($sql6 = mysql_fetch_assoc($sql5)) {
 <?php } ?>
 <ul>
 <?php
-$sql1 = "SELECT stadt, zusatz FROM ".$prefix."vNameOriginals ORDER BY stadt ASC";
+$sql1 = "SELECT stadt, zusatz FROM ".$prefix."vnameoriginals ORDER BY stadt ASC";
 $sql2 = mysql_query($sql1);
 while ($sql3 = mysql_fetch_assoc($sql2)) {
 	echo '<li>'.$sql3['zusatz'].' '.$sql3['stadt'].' / '.$sql3['stadt'].' '.$sql3['zusatz'].'</li>';

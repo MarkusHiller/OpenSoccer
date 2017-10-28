@@ -4,7 +4,7 @@
 <?php if ($loggedin == 1) { ?>
 <?php
 if ($_SESSION['status'] == 'Helfer' OR $_SESSION['status'] == 'Admin') {
-	$sql1 = "SELECT user, zeit, plus, minus FROM ".$prefix."accDel ORDER BY zeit DESC LIMIT ".$start.", ".$eintraege_pro_seite;
+	$sql1 = "SELECT user, zeit, plus, minus FROM ".$prefix."accdel ORDER BY zeit DESC LIMIT ".$start.", ".$eintraege_pro_seite;
 	$sql2 = mysql_query($sql1);
 	$blaetter3 = anzahl_datensaetze_gesamt($sql1);
 	echo '<h1>'._('Gründe für Löschung').'</h1>';

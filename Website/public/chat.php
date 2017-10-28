@@ -33,7 +33,7 @@ function senden(nachricht) {
 <?php
 setTaskDone('open_chat');
 // CHAT-SPERREN ANFANG
-$sql1 = "SELECT MAX(chatSperre) FROM ".$prefix."helferLog WHERE managerBestrafen = '".$cookie_id."'";
+$sql1 = "SELECT MAX(chatSperre) FROM ".$prefix."helferlog WHERE managerBestrafen = '".$cookie_id."'";
 $sql2 = mysql_query($sql1);
 if (mysql_num_rows($sql2) > 0) {
 	$sql3 = mysql_fetch_assoc($sql2);

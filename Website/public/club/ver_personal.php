@@ -4,7 +4,7 @@
 <?php if ($loggedin == 1) { ?>
 <?php
 if (!isset($_SESSION['supplyDemandPrices'])) {
-	$supplyDemandPrices1 = "SELECT * FROM ".$prefix."supplyDemandPrices";
+	$supplyDemandPrices1 = "SELECT * FROM ".$prefix."supplydemandprices";
 	$supplyDemandPrices2 = mysql_query($supplyDemandPrices1);
 	while ($supplyDemandPrices3 = mysql_fetch_assoc($supplyDemandPrices2)) {
 		$supplyDemandPrices[$supplyDemandPrices3['item']] = $supplyDemandPrices3['price'];
@@ -57,7 +57,7 @@ if (isset($_POST['fitness_regeneration']) && $cookie_id != CONFIG_DEMO_USER) {
 					$sql8 = mysql_query($sql7);
 					// PROTOKOLL ENDE
 					// PREIS ERHOHEN ANFANG
-					$sd1 = "UPDATE ".$prefix."supplyDemandPrices SET price = price*1.04 WHERE item = 'Fitness-Trainer'";
+					$sd1 = "UPDATE ".$prefix."supplydemandprices SET price = price*1.04 WHERE item = 'Fitness-Trainer'";
 					$sd2 = mysql_query($sd1);
 					// PREIS ERHOEHEN ENDE
 					addInfoBox($formulierung);
@@ -98,7 +98,7 @@ if (isset($_POST['physio_behandlung']) && $cookie_id != CONFIG_DEMO_USER) {
 				$sql8 = mysql_query($sql7);
 				// PROTOKOLL ENDE
 				// PREIS ERHOHEN ANFANG
-				$sd1 = "UPDATE ".$prefix."supplyDemandPrices SET price = price*1.06 WHERE item = 'Physiotherapeut'";
+				$sd1 = "UPDATE ".$prefix."supplydemandprices SET price = price*1.06 WHERE item = 'Physiotherapeut'";
 				$sd2 = mysql_query($sd1);
 				// PREIS ERHOEHEN ENDE
 				addInfoBox($formulierung);
@@ -138,7 +138,7 @@ if (isset($_POST['psychologe_behandlung']) && $cookie_id != CONFIG_DEMO_USER) {
 				$sql8 = mysql_query($sql7);
 				// PROTOKOLL ENDE
 				// PREIS ERHOHEN ANFANG
-				$sd1 = "UPDATE ".$prefix."supplyDemandPrices SET price = price*1.06 WHERE item = 'Psychologe'";
+				$sd1 = "UPDATE ".$prefix."supplydemandprices SET price = price*1.06 WHERE item = 'Psychologe'";
 				$sd2 = mysql_query($sd1);
 				// PREIS ERHOEHEN ENDE
 				addInfoBox($formulierung);

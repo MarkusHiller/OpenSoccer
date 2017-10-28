@@ -5,7 +5,7 @@ if (isset($_POST['logoutOrNot'])) {
 	switch ($decisionValue) {
 		case _('Ich komme später wieder - Ausloggen!'): header('Location: /logout.php'); break;
 		case _('Ich habe ein Problem oder eine Frage - Hilfe!'): header('Location: /support.php'); break;
-		case _('Ich habe keine Lust mehr - Account löschen!'): header('Location: /einstellungen.php#accDel'); break;
+		case _('Ich habe keine Lust mehr - Account löschen!'): header('Location: /office/einstellungen.php#accDel'); break;
         default: throw new Exception('Unknown decision value: '.$decisionValue);
 	}
     exit;

@@ -147,7 +147,7 @@ if ((isset($_POST['lusername']) && isset($_POST['lpassword'])) OR $valid_bigpoin
 			// TRANSFER-SPERREN ANFANG
 			$_SESSION['transferGesperrt'] = FALSE;
 			if ($lologin4['team'] != '__'.$lologin4['ids']) {
-				$sperrQL1 = "SELECT MAX(transferSperre) FROM ".$prefix."helferLog WHERE managerBestrafen = '".$lologin4['ids']."'";
+				$sperrQL1 = "SELECT MAX(transferSperre) FROM ".$prefix."helferlog WHERE managerBestrafen = '".$lologin4['ids']."'";
 				$sperrQL2 = mysql_query($sperrQL1);
 				if (mysql_num_rows($sperrQL2) > 0) {
 					$sperrQL3 = mysql_fetch_assoc($sperrQL2);

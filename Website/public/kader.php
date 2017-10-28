@@ -202,7 +202,7 @@ if ($loggedin == 1) {
             <?php
 // BESETZUNGEN BERECHNEN ANFANG
             $startSql = mt_rand(0, 234) * 8;
-            $posSel1 = "SELECT team, position, COUNT(*) AS anzahl FROM " . $prefix . "spieler WHERE (team = '" . $cookie_team . "' AND leiher = 'keiner') OR leiher = '" . $cookie_team . "' GROUP BY position";
+            $posSel1 = "SELECT ANY_VALUE(team), position, COUNT(*) AS anzahl FROM " . $prefix . "spieler WHERE (team = '" . $cookie_team . "' AND leiher = 'keiner') OR leiher = '" . $cookie_team . "' GROUP BY position";
             $posSel2 = mysql_query($posSel1);
             $posArr = array();
             while ($posSel3 = mysql_fetch_assoc($posSel2)) {

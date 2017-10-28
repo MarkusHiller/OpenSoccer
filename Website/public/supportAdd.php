@@ -6,7 +6,7 @@
     <p style="text-align:right"><a href="/support.php" class="pagenava"><?php echo _('Zurück zur Hauptseite'); ?></a></p>
     <?php
 // CHAT-SPERREN ANFANG
-    $blockCom1 = "SELECT MAX(chatSperre) FROM " . $prefix . "helferLog WHERE managerBestrafen = '" . $cookie_id . "'";
+    $blockCom1 = "SELECT MAX(chatSperre) FROM " . $prefix . "helferlog WHERE managerBestrafen = '" . $cookie_id . "'";
     $blockCom2 = mysql_query($blockCom1);
     if (mysql_num_rows($blockCom2) > 0) {
         $blockCom3 = mysql_fetch_assoc($blockCom2);
@@ -19,7 +19,7 @@
     }
 // CHAT-SPERREN ENDE
     $timeout = getTimestamp('-1 day');
-    $sql1 = "SELECT COUNT(*) FROM " . $prefix . "supportRequests WHERE timeAdded > " . $timeout . " AND author = '" . $cookie_id . "'";
+    $sql1 = "SELECT COUNT(*) FROM " . $prefix . "supportrequests WHERE timeAdded > " . $timeout . " AND author = '" . $cookie_id . "'";
     $sql2 = mysql_query($sql1);
     $sql3 = mysql_result($sql2, 0);
     if ($sql3 <= 5) {

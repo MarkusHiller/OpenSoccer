@@ -67,10 +67,10 @@ if(isset($_POST['selectedLiga']) && $_POST['selectedLiga'] != '') {
         $tspiel2 = DB::query($tspiel1, false); // weil da falscher Name noch gespeichert ist
         $tspiel1 = "DELETE FROM " . CONFIG_TABLE_PREFIX . "transfermarkt_leihe WHERE (bieter = '".$daten1['name']."') AND akzeptiert = 0";
         $tspiel2 = DB::query($tspiel1, false); // weil da falscher Name noch gespeichert ist
-        $nameChange1 = "UPDATE " . CONFIG_TABLE_PREFIX . "vNameChanges SET sperre = 0 WHERE team = '$cookie_team'";
+        $nameChange1 = "UPDATE " . CONFIG_TABLE_PREFIX . "vnamechanges SET sperre = 0 WHERE team = '$cookie_team'";
         DB::query($nameChange1, false);
         // TAUSCH DURCHFUEHREN ENDE
-        $sql1 = "INSERT INTO " . CONFIG_TABLE_PREFIX . "ligaChanges (user1, team1, user2, team2, zeit, newLiga1, newLiga2) VALUES ('$cookie_id', '".$cookie_team."', '', '".$newTeam."', ".time().", '".mysql_real_escape_string($daten2['liga'])."', '".mysql_real_escape_string($daten1['liga'])."')";
+        $sql1 = "INSERT INTO " . CONFIG_TABLE_PREFIX . "ligachanges (user1, team1, user2, team2, zeit, newLiga1, newLiga2) VALUES ('$cookie_id', '".$cookie_team."', '', '".$newTeam."', ".time().", '".mysql_real_escape_string($daten2['liga'])."', '".mysql_real_escape_string($daten1['liga'])."')";
         $sql2 = DB::query($sql1, false);
         
         //Logout thecurrent user

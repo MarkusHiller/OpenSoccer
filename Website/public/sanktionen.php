@@ -33,7 +33,7 @@ if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
 		$throttling1 = "UPDATE ".$prefix."users SET lastBackendEmail = '".date('Y-m-d')."' WHERE ids = '".$cookie_id."' AND (status = 'Admin' OR status = 'Helfer')";
 		mysql_query($throttling1);
 		if (mysql_affected_rows() == 1) {
-			$queueEmails1 = "INSERT INTO ".$prefix."backendEmails_pending (zeit, user, text, voters) VALUES (".time().", '".$cookie_id."', '".mysql_real_escape_string($emailText)."', '-".$cookie_id."-')";
+			$queueEmails1 = "INSERT INTO ".$prefix."backendemails_pending (zeit, user, text, voters) VALUES (".time().", '".$cookie_id."', '".mysql_real_escape_string($emailText)."', '-".$cookie_id."-')";
 			mysql_query($queueEmails1);
 			addInfoBox('Die E-Mails werden versendet, sobald es die Bestätigung von 2 Team-Mitgliedern gibt.');
 		}
@@ -51,10 +51,10 @@ if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
 		$approveMode = intval(trim($_GET['approveMode']));
 		if ($approveTokenIst == $approveTokenSoll) {
 			if ($approveMode == 1) { // bestätigen
-				$approveMail1 = "UPDATE ".$prefix."backendEmails_pending SET votes = votes+1, voters = CONCAT(voters, '-".$cookie_id."-') WHERE id = ".$approveMailID." AND votes < 3 AND voters NOT LIKE '%".$cookie_id."%'";
+				$approveMail1 = "UPDATE ".$prefix."backendemails_pending SET votes = votes+1, voters = CONCAT(voters, '-".$cookie_id."-') WHERE id = ".$approveMailID." AND votes < 3 AND voters NOT LIKE '%".$cookie_id."%'";
 				$approveMail2 = mysql_query($approveMail1);
 				if (mysql_affected_rows() > 0) {
-					$approveMail3 = "SELECT text FROM ".$prefix."backendEmails_pending WHERE id = ".$approveMailID." AND votes >= 3 AND voters LIKE '%-".$cookie_id."-'";
+					$approveMail3 = "SELECT text FROM ".$prefix."backendemails_pending WHERE id = ".$approveMailID." AND votes >= 3 AND voters LIKE '%-".$cookie_id."-'";
 					$approveMail4 = mysql_query($approveMail3);
 					if (mysql_num_rows($approveMail4) == 1) {
 						$approveMail5 = mysql_fetch_assoc($approveMail4);
@@ -110,7 +110,7 @@ if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
 						}
 						if(!empty($bccList)){
 							email_senden(CONFIG_SITE_EMAIL, $approveMail5['text'], $bccList);
-							$logBackend1 = "INSERT INTO ".$prefix."backendEmails (zeit, user, text) VALUES (".time().", '".$cookie_id."', '".mysql_real_escape_string($emailText)."')";
+							$logBackend1 = "INSERT INTO ".$prefix."backendemails (zeit, user, text) VALUES (".time().", '".$cookie_id."', '".mysql_real_escape_string($emailText)."')";
                             mysql_query($logBackend1);
 							addInfoBox('Insgesamt '.$emailUsersCount.' E-Mails werden nun versendet ...');
 						}
@@ -127,7 +127,7 @@ if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
 				}
 			}
 			else { // ablehnen
-				$approveMail1 = "UPDATE ".$prefix."backendEmails_pending SET voters = CONCAT(voters, '-".$cookie_id."-') WHERE id = ".$approveMailID." AND votes < 3 AND voters NOT LIKE '%".$cookie_id."%'";
+				$approveMail1 = "UPDATE ".$prefix."backendemails_pending SET voters = CONCAT(voters, '-".$cookie_id."-') WHERE id = ".$approveMailID." AND votes < 3 AND voters NOT LIKE '%".$cookie_id."%'";
 				$approveMail2 = mysql_query($approveMail1);
 				addInfoBox('Die E-Mail an alle User wurde abgelehnt!');
 			}
@@ -177,11 +177,11 @@ if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
 					$vomTMrunter3 = "UPDATE ".$prefix."spieler SET transfermarkt = 0 WHERE team = '".$team."'";
 					mysql_query($vomTMrunter3);
 				}
-				$close7 = "INSERT INTO ".$prefix."helferLog (helfer, managerBestrafen, zeit, chatSperre, transferSperre, geldStrafe, verstoss) VALUES ('".$cookie_id."', '".$managerBestrafen."', ".time().", ".$chatSperre.", ".$transferSperre.", ".$geldStrafe.", ".$verstoss.")";
+				$close7 = "INSERT INTO ".$prefix."helferlog (helfer, managerBestrafen, zeit, chatSperre, transferSperre, geldStrafe, verstoss) VALUES ('".$cookie_id."', '".$managerBestrafen."', ".time().", ".$chatSperre.", ".$transferSperre.", ".$geldStrafe.", ".$verstoss.")";
 				$close8 = mysql_query($close7);
 			}
 			else {
-				$close7 = "INSERT INTO ".$prefix."helferLog (helfer, managerBestrafen, zeit, chatSperre, transferSperre, geldStrafe, verstoss) VALUES ('".$cookie_id."', '".$managerBestrafen."', ".time().", ".$chatSperre.", ".$transferSperre.", ".$geldStrafe.", ".$verstoss.")";
+				$close7 = "INSERT INTO ".$prefix."helferlog (helfer, managerBestrafen, zeit, chatSperre, transferSperre, geldStrafe, verstoss) VALUES ('".$cookie_id."', '".$managerBestrafen."', ".time().", ".$chatSperre.", ".$transferSperre.", ".$geldStrafe.", ".$verstoss.")";
 				$close8 = mysql_query($close7);
 			}
 			$anzSanktionen1 = "UPDATE ".$prefix."users SET anzSanktionen = anzSanktionen+1 WHERE ids = '".$managerBestrafen."'";
@@ -192,7 +192,7 @@ if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
 	if (isset($_GET['un1']) && isset($_GET['un2'])) {
 		$un1 = mysql_real_escape_string(trim(strip_tags($_GET['un1'])));
 		$un2 = bigintval($_GET['un2']);
-		$unData1 = "SELECT geldStrafe FROM ".$prefix."helferLog WHERE managerBestrafen = '".$un1."' AND zeit = ".$un2;
+		$unData1 = "SELECT geldStrafe FROM ".$prefix."helferlog WHERE managerBestrafen = '".$un1."' AND zeit = ".$un2;
 		$unData2 = mysql_query($unData1);
 		if (mysql_num_rows($unData2) == 1) {
 			$unData3 = mysql_fetch_assoc($unData2);
@@ -206,7 +206,7 @@ if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
 					mysql_query($unGeld1);
 				}
 			}
-			$un3 = "UPDATE ".$prefix."helferLog SET chatSperre = zeit, transferSperre = zeit, geldStrafe = -1 WHERE managerBestrafen = '".$un1."' AND zeit = ".$un2;
+			$un3 = "UPDATE ".$prefix."helferlog SET chatSperre = zeit, transferSperre = zeit, geldStrafe = -1 WHERE managerBestrafen = '".$un1."' AND zeit = ".$un2;
 			mysql_query($un3);
 			addInfoBox('Die Sperre wurde aufgehoben, bleibt jedoch in der Liste stehen.');
 		}
@@ -230,7 +230,7 @@ if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
 				addInfoBox('Dieser Username existiert schon.');
 			}
 			else {
-				$nameChanges1 = "INSERT INTO ".$prefix."nameChanges (helfer, zeit, vonID, vonName, zuName) VALUES ('".$cookie_id."', ".time().", '".$IDofUserToChange_id."', '".$IDofUserToChange_name."', '".$neuerName."')";
+				$nameChanges1 = "INSERT INTO ".$prefix."namechanges (helfer, zeit, vonID, vonName, zuName) VALUES ('".$cookie_id."', ".time().", '".$IDofUserToChange_id."', '".$IDofUserToChange_name."', '".$neuerName."')";
 				mysql_query($nameChanges1);
 				addInfoBox('Der Username wurde erfolgreich geändert.');
 			}
@@ -288,7 +288,7 @@ if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
 <p>Community-Sperren beinhalten Sperren für den Chat und das Versenden von privaten Nachrichten. Auch der Zugriff auf den Support-Bereich wird blockiert.</p>
 <?php
 $timeout = getTimestamp('-28 days');
-$sql1 = "SELECT a.managerBestrafen, a.zeit, a.chatSperre, a.transferSperre, a.geldStrafe, a.helfer, a.verstoss, b.username FROM ".$prefix."helferLog AS a JOIN ".$prefix."users AS b ON a.managerBestrafen = b.ids WHERE zeit > ".$timeout." OR chatSperre > ".time()." OR transferSperre > ".time()." ORDER BY zeit DESC";
+$sql1 = "SELECT a.managerBestrafen, a.zeit, a.chatSperre, a.transferSperre, a.geldStrafe, a.helfer, a.verstoss, b.username FROM ".$prefix."helferlog AS a JOIN ".$prefix."users AS b ON a.managerBestrafen = b.ids WHERE zeit > ".$timeout." OR chatSperre > ".time()." OR transferSperre > ".time()." ORDER BY zeit DESC";
 $sql2 = mysql_query($sql1);
 if (mysql_num_rows($sql2) > 0) {
 ?>
@@ -368,7 +368,7 @@ function zahleEntschaedigung($teamID, $betrag, $reason = '') {
 	mysql_query($sql1);
 }
 if ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] == 'Admin') {
-	$getBackendMails1 = "SELECT a.id, a.user, b.username, a.zeit, a.text, a.votes, a.voters FROM ".$prefix."backendEmails_pending AS a JOIN ".$prefix."users AS b ON a.user = b.ids WHERE a.votes < 3 ORDER BY a.zeit ASC";
+	$getBackendMails1 = "SELECT a.id, a.user, b.username, a.zeit, a.text, a.votes, a.voters FROM ".$prefix."backendemails_pending AS a JOIN ".$prefix."users AS b ON a.user = b.ids WHERE a.votes < 3 ORDER BY a.zeit ASC";
 	$getBackendMails2 = mysql_query($getBackendMails1);
 	if (mysql_num_rows($getBackendMails2) > 0) {
 		echo '<h1>E-Mails bestätigen</h1>';

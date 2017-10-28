@@ -18,9 +18,9 @@ echo '</tr>';
 echo '</thead>';
 echo '<tbody>';
 $delOld_Timeout = getTimestamp('-28 days');
-$delOld1 = "DELETE FROM ".$prefix."spielerEntwicklung WHERE team = '".$cookie_team."' AND zeit < ".$delOld_Timeout;
+$delOld1 = "DELETE FROM ".$prefix."spielerentwicklung WHERE team = '".$cookie_team."' AND zeit < ".$delOld_Timeout;
 $delOld2 = mysql_query($delOld1);
-$sql1 = "SELECT a.spieler, a.zeit, a.staerkeNeu, a.staerkeAlt, b.vorname, b.nachname, b.position, b.wiealt FROM ".$prefix."spielerEntwicklung AS a JOIN ".$prefix."spieler AS b ON a.spieler = b.ids WHERE a.team = '".$cookie_team."' ORDER BY a.zeit DESC LIMIT ".$start.", ".$eintraege_pro_seite;
+$sql1 = "SELECT a.spieler, a.zeit, a.staerkeNeu, a.staerkeAlt, b.vorname, b.nachname, b.position, b.wiealt FROM ".$prefix."spielerentwicklung AS a JOIN ".$prefix."spieler AS b ON a.spieler = b.ids WHERE a.team = '".$cookie_team."' ORDER BY a.zeit DESC LIMIT ".$start.", ".$eintraege_pro_seite;
 $sql2 = mysql_query($sql1);
 $blaetter3 = anzahl_datensaetze_gesamt($sql1);
 while ($sql3 = mysql_fetch_assoc($sql2)) {

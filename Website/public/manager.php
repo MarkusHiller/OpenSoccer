@@ -125,7 +125,7 @@ if ($loggedin == 1 && ($_SESSION['status'] == 'Helfer' || $_SESSION['status'] ==
 }
 // MULTI-ACCOUNTS ENDE
 // TEAM-TAUSCH MIT CODE ANFANG
-$ttc1 = "SELECT zeit, team2 FROM ".$prefix."teamChanges WHERE team1 = '".$sql3['team']."' AND zeit > ".$sql3['regdate']." LIMIT 0, 1";
+$ttc1 = "SELECT zeit, team2 FROM ".$prefix."teamchanges WHERE team1 = '".$sql3['team']."' AND zeit > ".$sql3['regdate']." LIMIT 0, 1";
 $ttc2 = mysql_query($ttc1);
 if (mysql_num_rows($ttc2) > 0) {
 	$ttc3 = mysql_fetch_assoc($ttc2);
@@ -246,7 +246,7 @@ if ($loggedin == 1 && $sql3['team'] != '__'.$cookie_id && $clearedID != '__'.$co
 if ($loggedin == 1) {
     if (isset($_POST['gaestebuch_eintrag']) && $cookie_id != CONFIG_DEMO_USER) {
         // CHAT-SPERREN ANFANG
-        $ban1 = "SELECT MAX(chatSperre) FROM ".$prefix."helferLog WHERE managerBestrafen = '".$cookie_id."'";
+        $ban1 = "SELECT MAX(chatSperre) FROM ".$prefix."helferlog WHERE managerBestrafen = '".$cookie_id."'";
         $ban2 = mysql_query($ban1);
         if (mysql_num_rows($ban2) > 0) {
             $ban3 = mysql_fetch_assoc($ban2);

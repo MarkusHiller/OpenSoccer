@@ -25,7 +25,7 @@ while ($sql3 = mysql_fetch_assoc($sql2)) {
 	$ligaIDToLand[$sql3['ids']] = $sql3['land'];
 }
 // LIGA-ID TO LAND ANFANG
-$sql1 = "SELECT a.user1, a.newLiga1, a.newLiga2, a.zeit, b.username FROM ".$prefix."ligaChanges AS a JOIN ".$prefix."users AS b ON a.user1 = b.ids ORDER BY a.zeit DESC";
+$sql1 = "SELECT a.user1, a.newLiga1, a.newLiga2, a.zeit, b.username FROM ".$prefix."ligachanges AS a JOIN ".$prefix."users AS b ON a.user1 = b.ids ORDER BY a.zeit DESC";
 $sql2 = mysql_query($sql1);
 $counter = 1;
 while ($sql3 = mysql_fetch_assoc($sql2)) {

@@ -5,19 +5,19 @@ if (isset($_GET['likeComment'])) {
     include_once(__DIR__.'/../common/zzcookie.php');
     if ($cookie_id != CONFIG_DEMO_USER) {
         $likeComment = intval(secure2id(trim($_GET['likeComment'])));
-        $getAuthor1 = "SELECT userID FROM " . $prefix . "supportComments WHERE id = " . $likeComment;
+        $getAuthor1 = "SELECT userID FROM " . $prefix . "supportcomments WHERE id = " . $likeComment;
         $getAuthor2 = mysql_query($getAuthor1);
         if (mysql_num_rows($getAuthor2) == 1) {
             $getAuthor3 = mysql_real_escape_string(mysql_result($getAuthor2, 0));
         } else {
             $getAuthor3 = FALSE;
         }
-        $sql1 = "INSERT INTO " . $prefix . "supportLikes (userID, commentID, zeit) VALUES ('" . $cookie_id . "', " . $likeComment . ", " . time() . ")";
+        $sql1 = "INSERT INTO " . $prefix . "supportlikes (userID, commentID, zeit) VALUES ('" . $cookie_id . "', " . $likeComment . ", " . time() . ")";
         $sql2 = mysql_query($sql1);
         if ($sql2 !== FALSE && $getAuthor3 !== FALSE) {
-            $sql1 = "UPDATE " . $prefix . "supportComments SET likes = likes+1 WHERE id = " . $likeComment;
+            $sql1 = "UPDATE " . $prefix . "supportcomments SET likes = likes+1 WHERE id = " . $likeComment;
             $sql2 = mysql_query($sql1);
-            $thx1 = "INSERT INTO " . $prefix . "supportUsers (userID, thanksReceived) VALUES ('" . $getAuthor3 . "', 1) ON DUPLICATE KEY UPDATE thanksReceived = thanksReceived+1, points = (replies*10+fastReplies*25+thanksReceived*5+votes*1)";
+            $thx1 = "INSERT INTO " . $prefix . "supportusers (userID, thanksReceived) VALUES ('" . $getAuthor3 . "', 1) ON DUPLICATE KEY UPDATE thanksReceived = thanksReceived+1, points = (replies*10+fastReplies*25+thanksReceived*5+votes*1)";
             $thx2 = mysql_query($thx1);
             echo _('Vielen Dank!');
         }
@@ -32,7 +32,7 @@ if (isset($_GET['likeComment'])) {
 <?php include_once(__DIR__.'/../common/zz1.php'); ?>
 <?php
 $requestID = secure2id($_GET['id']);
-$sql1 = "SELECT id, open, pro, contra, timeAdded, lastAction, author, category, title, description, visibilityLevel FROM " . $prefix . "supportRequests WHERE id = " . $requestID;
+$sql1 = "SELECT id, open, pro, contra, timeAdded, lastAction, author, category, title, description, visibilityLevel FROM " . $prefix . "supportrequests WHERE id = " . $requestID;
 $sql2 = mysql_query($sql1);
 if ($sql2 == FALSE) {
     exit;
@@ -111,7 +111,7 @@ $entryNumber .= ')';
     }
     if (isset($_GET['delCom']) && $cookie_id != CONFIG_DEMO_USER) {
         $delCom = secure2id($_GET['delCom']);
-        $up1 = "UPDATE " . $prefix . "supportComments SET deleted = 1 WHERE id = " . $delCom;
+        $up1 = "UPDATE " . $prefix . "supportcomments SET deleted = 1 WHERE id = " . $delCom;
         if ($_SESSION['status'] != 'Admin' && $_SESSION['status'] != 'Helfer') {
             $up1 .= " AND userID = '" . $cookie_id . "'";
         }
@@ -129,7 +129,7 @@ $entryNumber .= ')';
         }
     }
 // CHAT-SPERREN ANFANG
-    $blockCom1 = "SELECT MAX(chatSperre) FROM " . $prefix . "helferLog WHERE managerBestrafen = '" . $cookie_id . "'";
+    $blockCom1 = "SELECT MAX(chatSperre) FROM " . $prefix . "helferlog WHERE managerBestrafen = '" . $cookie_id . "'";
     $blockCom2 = mysql_query($blockCom1);
     if (mysql_num_rows($blockCom2) > 0) {
         $blockCom3 = mysql_fetch_assoc($blockCom2);
@@ -142,7 +142,7 @@ $entryNumber .= ')';
     }
 // CHAT-SPERREN ENDE
 // ANFRAGE ALS GELESEN MARKIEREN ANFANG
-    $read1 = "INSERT IGNORE INTO " . $prefix . "supportRead (userID, anfrageID) VALUES ('" . $cookie_id . "', " . $requestID . ")";
+    $read1 = "INSERT IGNORE INTO " . $prefix . "supportread (userID, anfrageID) VALUES ('" . $cookie_id . "', " . $requestID . ")";
     $read2 = mysql_query($read1);
 //if (mysql_affected_rows() == 1) { $_SESSION['last_forumneu_anzahl']--; }
 // ANFRAGE ALS GELESEN MARKIEREN ENDE
@@ -167,7 +167,7 @@ $entryNumber .= ')';
     </p>
     <?php
     if ($sql3['category'] == 'Vorschlag') {
-        $votes1 = "SELECT COUNT(*) FROM " . $prefix . "supportVotes WHERE request = " . $requestID . " AND userID = '" . $cookie_id . "'";
+        $votes1 = "SELECT COUNT(*) FROM " . $prefix . "supportvotes WHERE request = " . $requestID . " AND userID = '" . $cookie_id . "'";
         $votes2 = mysql_query($votes1);
         $votes3 = mysql_result($votes2, 0);
     } else {
@@ -175,27 +175,27 @@ $entryNumber .= ')';
     }
     if (isset($_POST['myComment']) && $sql3['open'] == 1 && $cookie_id != CONFIG_DEMO_USER) {
         $myComment = mysql_real_escape_string(trim(strip_tags(nl2br($_POST['myComment']), '<br>')));
-        $up1 = "INSERT INTO " . $prefix . "supportComments (userID, requestID, zeit, text) VALUES ('" . $cookie_id . "', " . $requestID . ", " . time() . ", '" . $myComment . "')";
+        $up1 = "INSERT INTO " . $prefix . "supportcomments (userID, requestID, zeit, text) VALUES ('" . $cookie_id . "', " . $requestID . ", " . time() . ", '" . $myComment . "')";
         $up2 = mysql_query($up1);
-        $up1 = "UPDATE " . $prefix . "supportRequests SET lastAction = " . time() . " WHERE id = " . $requestID;
+        $up1 = "UPDATE " . $prefix . "supportrequests SET lastAction = " . time() . " WHERE id = " . $requestID;
         $up2 = mysql_query($up1);
         // TOP-USER-LISTE AKTUALISIEREN ANFANG
         if ($sql3['visibilityLevel'] == 0) { // nur öffentliche Posts zählen
-            $getOwnComments1 = "SELECT COUNT(*) FROM " . $prefix . "supportComments WHERE userID = '" . $cookie_id . "' AND requestID = " . $requestID;
+            $getOwnComments1 = "SELECT COUNT(*) FROM " . $prefix . "supportcomments WHERE userID = '" . $cookie_id . "' AND requestID = " . $requestID;
             $getOwnComments2 = mysql_query($getOwnComments1);
             $getOwnComments3 = mysql_result($getOwnComments2, 0);
             if ($getOwnComments3 == 1) { // wenn es der erste Kommentar zu dieser Anfrage war
                 if ((time() - $sql3['timeAdded']) < 3600) { // fastReply
-                    $up1 = "INSERT INTO " . $prefix . "supportUsers (userID, replies, fastReplies) VALUES ('" . $cookie_id . "', 1, 1) ON DUPLICATE KEY UPDATE replies = replies+1, fastReplies = fastReplies+1, points = (replies*10+fastReplies*25+thanksReceived*5+votes*1)";
+                    $up1 = "INSERT INTO " . $prefix . "supportusers (userID, replies, fastReplies) VALUES ('" . $cookie_id . "', 1, 1) ON DUPLICATE KEY UPDATE replies = replies+1, fastReplies = fastReplies+1, points = (replies*10+fastReplies*25+thanksReceived*5+votes*1)";
                     $up2 = mysql_query($up1);
                 } else { // normalReply
-                    $up1 = "INSERT INTO " . $prefix . "supportUsers (userID, replies) VALUES ('" . $cookie_id . "', 1) ON DUPLICATE KEY UPDATE replies = replies+1, points = (replies*10+fastReplies*25+thanksReceived*5+votes*1)";
+                    $up1 = "INSERT INTO " . $prefix . "supportusers (userID, replies) VALUES ('" . $cookie_id . "', 1) ON DUPLICATE KEY UPDATE replies = replies+1, points = (replies*10+fastReplies*25+thanksReceived*5+votes*1)";
                     $up2 = mysql_query($up1);
                 }
             }
         }
         // TOP-USER-LISTE AKTUALISIEREN ENDE
-        $unRead1 = "DELETE FROM " . $prefix . "supportRead WHERE userID != '" . $cookie_id . "' AND anfrageID = " . $requestID;
+        $unRead1 = "DELETE FROM " . $prefix . "supportread WHERE userID != '" . $cookie_id . "' AND anfrageID = " . $requestID;
         $unRead2 = mysql_query($unRead1);
     }
     if (isset($_POST['ownRating']) && $votes3 == 0 && $sql3['open'] == 1 && $cookie_id != CONFIG_DEMO_USER) {
@@ -211,14 +211,14 @@ $entryNumber .= ')';
                 break;
         }
         $proConDifference = intval($sqlPro - $sqlCon);
-        $up1 = "INSERT INTO " . $prefix . "supportVotes (request, userID, vote) VALUES (" . $requestID . ", '" . $cookie_id . "', " . $proConDifference . ")";
+        $up1 = "INSERT INTO " . $prefix . "supportvotes (request, userID, vote) VALUES (" . $requestID . ", '" . $cookie_id . "', " . $proConDifference . ")";
         $up2 = mysql_query($up1);
         if ($up2 != FALSE) {
-            $up1 = "UPDATE " . $prefix . "supportRequests SET pro = pro+" . $sqlPro . ", contra = contra+" . $sqlCon . " WHERE id = " . $requestID;
+            $up1 = "UPDATE " . $prefix . "supportrequests SET pro = pro+" . $sqlPro . ", contra = contra+" . $sqlCon . " WHERE id = " . $requestID;
             $up2 = mysql_query($up1);
             // TOP-USER-LISTE AKTUALISIEREN ANFANG
             if ($sql3['visibilityLevel'] == 0) { // nur öffentliche Posts zählen
-                $up1 = "INSERT INTO " . $prefix . "supportUsers (userID, votes) VALUES ('" . $cookie_id . "', 1) ON DUPLICATE KEY UPDATE votes = votes+1, points = (replies*10+fastReplies*25+thanksReceived*5+votes*1)";
+                $up1 = "INSERT INTO " . $prefix . "supportusers (userID, votes) VALUES ('" . $cookie_id . "', 1) ON DUPLICATE KEY UPDATE votes = votes+1, points = (replies*10+fastReplies*25+thanksReceived*5+votes*1)";
                 $up2 = mysql_query($up1);
             }
             // TOP-USER-LISTE AKTUALISIEREN ENDE
@@ -275,7 +275,7 @@ $entryNumber .= ')';
     <?php } ?>
     <h1><?php echo _('Kommentare zu dieser Anfrage'); ?></h1>
     <?php
-    $comments1 = "SELECT a.id, a.deleted, a.userID, a.text, a.zeit, a.likes, b.username, b.status FROM " . $prefix . "supportComments AS a JOIN " . $prefix . "users AS b ON a.userID = b.ids WHERE a.requestID = " . $requestID . " ORDER BY a.zeit ASC";
+    $comments1 = "SELECT a.id, a.deleted, a.userID, a.text, a.zeit, a.likes, b.username, b.status FROM " . $prefix . "supportcomments AS a JOIN " . $prefix . "users AS b ON a.userID = b.ids WHERE a.requestID = " . $requestID . " ORDER BY a.zeit ASC";
     $comments2 = mysql_query($comments1);
     $commentsTotal = mysql_num_rows($comments2);
     if ($commentsTotal == 0) {

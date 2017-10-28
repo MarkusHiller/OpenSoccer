@@ -32,7 +32,7 @@ if (isset($_POST['connectAction']) && isset($_POST['user1ID']) && isset($_POST['
     else {
         throw new Exception('Unknown connect option: '.$_POST['connectAction']);
     }
-	$multiChanges1 = "INSERT INTO ".$prefix."multiChanges (helfer, zeit, user1, user2, type) VALUES ('".$cookie_id."', ".time().", '".$tempUser1ID."', '".$tempUser2ID."', '".$multiChangesType."')";
+	$multiChanges1 = "INSERT INTO ".$prefix."multichanges (helfer, zeit, user1, user2, type) VALUES ('".$cookie_id."', ".time().", '".$tempUser1ID."', '".$tempUser2ID."', '".$multiChangesType."')";
 	$multiChanges2 = mysql_query($multiChanges1);
 	// ANDERE HELFER INFORMIEREN ANFANG
 	$markNotice .= '<a href="/manager.php?id='.$tempUser1ID.'">'._('User 1').'</a> + <a href="/manager.php?id='.$tempUser2ID.'">'._('User 2').'</a><br /><br />'._('[Nachricht vom System]');
@@ -67,7 +67,7 @@ if (isset($_GET['user1']) && isset($_GET['user2'])) {
 		$user2ID = $sql3['ids'];
 	}
 	// USER IN DB SUCHEN ENDE
-	$user1 = "SELECT user, ip, zeit, userAgent FROM ".$prefix."loginLog WHERE user = '".$user1ID."' OR user = '".$user2ID."' ORDER BY zeit DESC LIMIT 0, 100";
+	$user1 = "SELECT user, ip, zeit, userAgent FROM ".$prefix."loginlog WHERE user = '".$user1ID."' OR user = '".$user2ID."' ORDER BY zeit DESC LIMIT 0, 100";
 	$user1 = mysql_query($user1);
 	$bothIPs = array();
 	$user1IPs = array();

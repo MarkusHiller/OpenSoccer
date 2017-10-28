@@ -37,7 +37,7 @@ else {
 	$changeLockUnit = 60;
 	$changeLockUnitStr = _('Minuten');
 }
-$letzteAenderung1 = "SELECT MAX(zeit) FROM ".$prefix."vNameChanges WHERE team = '".$showTeam."' AND sperre = 1";
+$letzteAenderung1 = "SELECT MAX(zeit) FROM ".$prefix."vnamechanges WHERE team = '".$showTeam."' AND sperre = 1";
 $letzteAenderung2 = mysql_query($letzteAenderung1);
 if (mysql_num_rows($letzteAenderung2) == 0) {
 	$letzteAenderungVor = time();
@@ -75,7 +75,7 @@ if (isset($_POST['kuerzel1']) && isset($_POST['kuerzel2']) && isset($_POST['stad
 				else {
 					$neuerName = $stadt.' '.$kuerzel2;
 				}
-				$sperrListe1 = "SELECT zusatz FROM ".$prefix."vNameOriginals WHERE stadt = '".$stadt."'";
+				$sperrListe1 = "SELECT zusatz FROM ".$prefix."vnameoriginals WHERE stadt = '".$stadt."'";
 				$sperrListe2 = mysql_query($sperrListe1);
 				$sperrListe = array();
 				while ($sperrListe3 = mysql_fetch_assoc($sperrListe2)) {
@@ -91,7 +91,7 @@ if (isset($_POST['kuerzel1']) && isset($_POST['kuerzel2']) && isset($_POST['stad
 						addInfoBox(_('Dieser Name ist leider schon vergeben. Bitte versuche es noch einmal mit einem anderen Namen.'));
 					}
 					else {
-						$sql3 = "INSERT INTO ".$prefix."vNameChanges (team, zeit, vonName, zuName) VALUES ('".$showTeam."', ".time().", '".$showTeamName."', '".$neuerName."')";
+						$sql3 = "INSERT INTO ".$prefix."vnamechanges (team, zeit, vonName, zuName) VALUES ('".$showTeam."', ".time().", '".$showTeamName."', '".$neuerName."')";
 						$sql4 = mysql_query($sql3) or reportError(mysql_error(), $sql3);
 						$sql3 = "UPDATE ".$prefix."pokalsieger SET sieger = '".$neuerName."' WHERE sieger = '".$showTeamName."'";
 						$sql4 = mysql_query($sql3) or reportError(mysql_error(), $sql3);
@@ -147,7 +147,7 @@ $sql1 = "SELECT name FROM ".$prefix."ligen WHERE ids = '".$showTeamLiga."'";
 $sql2 = mysql_query($sql1);
 $sql3 = mysql_fetch_assoc($sql2);
 $land = mysql_real_escape_string(trim(strip_tags(substr($sql3['name'], 0, -2))));
-$sql4 = "SELECT name FROM ".$prefix."vNamePool WHERE land = '".$land."' ORDER BY name ASC";
+$sql4 = "SELECT name FROM ".$prefix."vnamepool WHERE land = '".$land."' ORDER BY name ASC";
 $sql5 = mysql_query($sql4);
 while ($sql6 = mysql_fetch_assoc($sql5)) {
 	echo '<option>'.$sql6['name'].'</option>';

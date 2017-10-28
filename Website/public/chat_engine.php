@@ -54,7 +54,7 @@ function nachricht_erzeugen($user, $nachricht) {
 		}
 	}
 	$reportDate = date('Y-m-d');
-	$sql1 = "SELECT COUNT(*) FROM ".$prefix."chatroomReportedUsers WHERE user = '".$user."' AND datum = '".$reportDate."' AND sperrRelevant = 1";
+	$sql1 = "SELECT COUNT(*) FROM ".$prefix."chatroomreportedusers WHERE user = '".$user."' AND datum = '".$reportDate."' AND sperrRelevant = 1";
 	$sql2 = mysql_query($sql1);
 	$sperrRequests += mysql_result($sql2, 0);
 	if ($sperrRequests < 3) {
@@ -81,10 +81,10 @@ function nachricht_erzeugen($user, $nachricht) {
 					else {
 						$sperrRelevant = 0;
 					}
-					$sql1 = "INSERT INTO ".$prefix."chatroomReportedUsers (user, reporter, datum, protokoll, sperrRelevant) VALUES ('".$getReportedUserID4."', '".$user."', '".$reportDate."', '".mysql_real_escape_string($reportText)."', ".$sperrRelevant.")";
+					$sql1 = "INSERT INTO ".$prefix."chatroomreportedusers (user, reporter, datum, protokoll, sperrRelevant) VALUES ('".$getReportedUserID4."', '".$user."', '".$reportDate."', '".mysql_real_escape_string($reportText)."', ".$sperrRelevant.")";
 					mysql_query($sql1);
 					if (mysql_affected_rows() > 0) { // groesser 0 damit -1 als Fehler ignoriert wird
-						$sql1 = "SELECT COUNT(*) FROM ".$prefix."chatroomReportedUsers WHERE user = '".$getReportedUserID4."' AND datum = '".$reportDate."' AND sperrRelevant = 1";
+						$sql1 = "SELECT COUNT(*) FROM ".$prefix."chatroomreportedusers WHERE user = '".$getReportedUserID4."' AND datum = '".$reportDate."' AND sperrRelevant = 1";
 						$sql2 = mysql_query($sql1);
 						$sql3 = mysql_result($sql2, 0);
 						if ($sql3 < 3) {
