@@ -221,7 +221,15 @@
                             <input type="submit" value="Anbieten zur Leihgabe" onclick="return {$onWatchClick}" />
                         </p>
 					</form>
-				{/if}
+                {/if}
+            {else}
+            <form action="/transfermarkt_aktion.php" method="post" accept-charset="utf-8">
+                <p>
+                    <input type="hidden" name="spieler" value="{$ids}" />
+                    <input type="hidden" name="abbrechen" value="Ja" />
+                    <input type="submit" value="Spieler vom Transfermarkt nehmen" onclick="return {$onWatchClick}" />
+                </p>
+            </form>
 			{/if}
 		{/if}
 	{else}
