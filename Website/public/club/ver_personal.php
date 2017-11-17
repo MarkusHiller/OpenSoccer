@@ -247,7 +247,7 @@ if (isset($_POST['scout']) && $cookie_id != CONFIG_DEMO_USER) {
 		$ch1 = "UPDATE ".$prefix."personal_changes SET zeit = ".time()." WHERE team = '".$cookie_team."' AND personal = 'Scout' AND zeit < ".$timeout;
 		$ch2 = mysql_query($ch1);
 		if (mysql_affected_rows() > 0) {
-            $upd1 = "UPDATE ".$prefix."scouts SET level = ".$temp." WHERE ids = '".$cookie_team."'";
+            $upd1 = "UPDATE ".$prefix."scouts SET level = ".$temp." WHERE team_ids = '".$cookie_team."'";
             $upd2 = mysql_query($upd1);
             $_SESSION['scout'] = $temp;
             $cookie_scout = $temp;
